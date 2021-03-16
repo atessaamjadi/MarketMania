@@ -3,19 +3,34 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		43885C7D26013C500002EE45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885C7C26013C500002EE45 /* AppDelegate.swift */; };
 		43885C7F26013C500002EE45 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885C7E26013C500002EE45 /* SceneDelegate.swift */; };
-		43885C8126013C500002EE45 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885C8026013C500002EE45 /* ViewController.swift */; };
-		43885C8426013C500002EE45 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43885C8226013C500002EE45 /* Main.storyboard */; };
 		43885C8726013C500002EE45 /* MarketMania.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43885C8526013C500002EE45 /* MarketMania.xcdatamodeld */; };
 		43885C8926013C520002EE45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43885C8826013C520002EE45 /* Assets.xcassets */; };
 		43885C8C26013C520002EE45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43885C8A26013C520002EE45 /* LaunchScreen.storyboard */; };
 		43885C9726013C520002EE45 /* MarketManiaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885C9626013C520002EE45 /* MarketManiaTests.swift */; };
 		43885CA226013C520002EE45 /* MarketManiaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CA126013C520002EE45 /* MarketManiaUITests.swift */; };
+		43885CBC260141650002EE45 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CB8260141650002EE45 /* TabBarVC.swift */; };
+		43885CC7260144B10002EE45 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43885CC6260144B10002EE45 /* GoogleService-Info.plist */; };
+		43885CE7260146DD0002EE45 /* AuthInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CE3260146DC0002EE45 /* AuthInputView.swift */; };
+		43885CE8260146DD0002EE45 /* SignUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CE4260146DD0002EE45 /* SignUpVC.swift */; };
+		43885CE9260146DD0002EE45 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CE5260146DD0002EE45 /* LoginVC.swift */; };
+		43885CF6260148000002EE45 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CF2260147FF0002EE45 /* Colors.swift */; };
+		43885CF7260148000002EE45 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CF3260147FF0002EE45 /* Extensions.swift */; };
+		43885CF8260148000002EE45 /* ParentClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CF4260148000002EE45 /* ParentClasses.swift */; };
+		43885CF9260148000002EE45 /* FirebaseUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CF5260148000002EE45 /* FirebaseUtils.swift */; };
+		43885D05260148980002EE45 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885D04260148980002EE45 /* User.swift */; };
+		43885D0D26014A620002EE45 /* HomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885D0C26014A620002EE45 /* HomeVC.swift */; };
+		43885D1226014AB50002EE45 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885D1126014AB50002EE45 /* SearchVC.swift */; };
+		43885D1726014ABD0002EE45 /* SocialVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885D1626014ABD0002EE45 /* SocialVC.swift */; };
+		43885D1C26014AC30002EE45 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885D1B26014AC30002EE45 /* AccountVC.swift */; };
+		65026A3B1642E69A70E739C3 /* Pods_MarketManiaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8171A198AE89F8EC55AA3D6D /* Pods_MarketManiaTests.framework */; };
+		94B5A6B83D062670979734AB /* Pods_MarketMania.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF7D043E7A4ACA1A9C82757 /* Pods_MarketMania.framework */; };
+		C984D416CA6458F13BA8F18E /* Pods_MarketMania_MarketManiaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C189EAB4CF70D74A266F5BF6 /* Pods_MarketMania_MarketManiaUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,8 +54,6 @@
 		43885C7926013C500002EE45 /* MarketMania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarketMania.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43885C7C26013C500002EE45 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43885C7E26013C500002EE45 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		43885C8026013C500002EE45 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		43885C8326013C500002EE45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		43885C8626013C500002EE45 /* MarketMania.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = MarketMania.xcdatamodel; sourceTree = "<group>"; };
 		43885C8826013C520002EE45 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		43885C8B26013C520002EE45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -51,6 +64,29 @@
 		43885C9D26013C520002EE45 /* MarketManiaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketManiaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43885CA126013C520002EE45 /* MarketManiaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketManiaUITests.swift; sourceTree = "<group>"; };
 		43885CA326013C520002EE45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		43885CB8260141650002EE45 /* TabBarVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
+		43885CC6260144B10002EE45 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		43885CE3260146DC0002EE45 /* AuthInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthInputView.swift; sourceTree = "<group>"; };
+		43885CE4260146DD0002EE45 /* SignUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpVC.swift; sourceTree = "<group>"; };
+		43885CE5260146DD0002EE45 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		43885CF2260147FF0002EE45 /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		43885CF3260147FF0002EE45 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		43885CF4260148000002EE45 /* ParentClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParentClasses.swift; sourceTree = "<group>"; };
+		43885CF5260148000002EE45 /* FirebaseUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseUtils.swift; sourceTree = "<group>"; };
+		43885D04260148980002EE45 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		43885D0C26014A620002EE45 /* HomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeVC.swift; sourceTree = "<group>"; };
+		43885D1126014AB50002EE45 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		43885D1626014ABD0002EE45 /* SocialVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialVC.swift; sourceTree = "<group>"; };
+		43885D1B26014AC30002EE45 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		5AF7D043E7A4ACA1A9C82757 /* Pods_MarketMania.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarketMania.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		672ED60D9AD5FC07395A8B11 /* Pods-MarketManiaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketManiaTests.release.xcconfig"; path = "Target Support Files/Pods-MarketManiaTests/Pods-MarketManiaTests.release.xcconfig"; sourceTree = "<group>"; };
+		8171A198AE89F8EC55AA3D6D /* Pods_MarketManiaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarketManiaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A14E7CFDDDA6AA3CB13E4BC2 /* Pods-MarketMania-MarketManiaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania-MarketManiaUITests.debug.xcconfig"; path = "Target Support Files/Pods-MarketMania-MarketManiaUITests/Pods-MarketMania-MarketManiaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		B1FB9843286AB6FCB34BAE44 /* Pods-MarketManiaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketManiaTests.debug.xcconfig"; path = "Target Support Files/Pods-MarketManiaTests/Pods-MarketManiaTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C189EAB4CF70D74A266F5BF6 /* Pods_MarketMania_MarketManiaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarketMania_MarketManiaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EDB79E7A02636C307A3D136E /* Pods-MarketMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania.release.xcconfig"; path = "Target Support Files/Pods-MarketMania/Pods-MarketMania.release.xcconfig"; sourceTree = "<group>"; };
+		F72701D1DD60AA031F3838E7 /* Pods-MarketMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania.debug.xcconfig"; path = "Target Support Files/Pods-MarketMania/Pods-MarketMania.debug.xcconfig"; sourceTree = "<group>"; };
+		F9B37A84618AEA0E139BC447 /* Pods-MarketMania-MarketManiaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania-MarketManiaUITests.release.xcconfig"; path = "Target Support Files/Pods-MarketMania-MarketManiaUITests/Pods-MarketMania-MarketManiaUITests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94B5A6B83D062670979734AB /* Pods_MarketMania.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +102,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65026A3B1642E69A70E739C3 /* Pods_MarketManiaTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C984D416CA6458F13BA8F18E /* Pods_MarketMania_MarketManiaUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +124,8 @@
 				43885C9526013C520002EE45 /* MarketManiaTests */,
 				43885CA026013C520002EE45 /* MarketManiaUITests */,
 				43885C7A26013C500002EE45 /* Products */,
+				F8754BA641596808AA7F3666 /* Pods */,
+				6CEB88F2FF674FA4F99648E6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -103,12 +144,15 @@
 			children = (
 				43885C7C26013C500002EE45 /* AppDelegate.swift */,
 				43885C7E26013C500002EE45 /* SceneDelegate.swift */,
-				43885C8026013C500002EE45 /* ViewController.swift */,
-				43885C8226013C500002EE45 /* Main.storyboard */,
+				43885CEE2601471E0002EE45 /* Auth */,
+				43885D2026014D620002EE45 /* Main */,
+				43885D2426014D7D0002EE45 /* Models */,
+				43885CFD260148200002EE45 /* Supporting Files */,
 				43885C8826013C520002EE45 /* Assets.xcassets */,
 				43885C8A26013C520002EE45 /* LaunchScreen.storyboard */,
 				43885C8D26013C520002EE45 /* Info.plist */,
 				43885C8526013C500002EE45 /* MarketMania.xcdatamodeld */,
+				43885CC6260144B10002EE45 /* GoogleService-Info.plist */,
 			);
 			path = MarketMania;
 			sourceTree = "<group>";
@@ -131,6 +175,70 @@
 			path = MarketManiaUITests;
 			sourceTree = "<group>";
 		};
+		43885CEE2601471E0002EE45 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				43885CE3260146DC0002EE45 /* AuthInputView.swift */,
+				43885CE5260146DD0002EE45 /* LoginVC.swift */,
+				43885CE4260146DD0002EE45 /* SignUpVC.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		43885CFD260148200002EE45 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				43885CF2260147FF0002EE45 /* Colors.swift */,
+				43885CF3260147FF0002EE45 /* Extensions.swift */,
+				43885CF5260148000002EE45 /* FirebaseUtils.swift */,
+				43885CF4260148000002EE45 /* ParentClasses.swift */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43885D2026014D620002EE45 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				43885CB8260141650002EE45 /* TabBarVC.swift */,
+				43885D0C26014A620002EE45 /* HomeVC.swift */,
+				43885D1126014AB50002EE45 /* SearchVC.swift */,
+				43885D1626014ABD0002EE45 /* SocialVC.swift */,
+				43885D1B26014AC30002EE45 /* AccountVC.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		43885D2426014D7D0002EE45 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				43885D04260148980002EE45 /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6CEB88F2FF674FA4F99648E6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5AF7D043E7A4ACA1A9C82757 /* Pods_MarketMania.framework */,
+				C189EAB4CF70D74A266F5BF6 /* Pods_MarketMania_MarketManiaUITests.framework */,
+				8171A198AE89F8EC55AA3D6D /* Pods_MarketManiaTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F8754BA641596808AA7F3666 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F72701D1DD60AA031F3838E7 /* Pods-MarketMania.debug.xcconfig */,
+				EDB79E7A02636C307A3D136E /* Pods-MarketMania.release.xcconfig */,
+				A14E7CFDDDA6AA3CB13E4BC2 /* Pods-MarketMania-MarketManiaUITests.debug.xcconfig */,
+				F9B37A84618AEA0E139BC447 /* Pods-MarketMania-MarketManiaUITests.release.xcconfig */,
+				B1FB9843286AB6FCB34BAE44 /* Pods-MarketManiaTests.debug.xcconfig */,
+				672ED60D9AD5FC07395A8B11 /* Pods-MarketManiaTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -138,9 +246,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43885CA626013C520002EE45 /* Build configuration list for PBXNativeTarget "MarketMania" */;
 			buildPhases = (
+				2D9C7F1704CEB376CCC621EB /* [CP] Check Pods Manifest.lock */,
 				43885C7526013C500002EE45 /* Sources */,
 				43885C7626013C500002EE45 /* Frameworks */,
 				43885C7726013C500002EE45 /* Resources */,
+				FB882724D908A7058F872D89 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -155,6 +265,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43885CA926013C520002EE45 /* Build configuration list for PBXNativeTarget "MarketManiaTests" */;
 			buildPhases = (
+				B5C9EA705681B2D2D592A316 /* [CP] Check Pods Manifest.lock */,
 				43885C8E26013C520002EE45 /* Sources */,
 				43885C8F26013C520002EE45 /* Frameworks */,
 				43885C9026013C520002EE45 /* Resources */,
@@ -173,9 +284,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 43885CAC26013C520002EE45 /* Build configuration list for PBXNativeTarget "MarketManiaUITests" */;
 			buildPhases = (
+				8C544999174F78480113DFC3 /* [CP] Check Pods Manifest.lock */,
 				43885C9926013C520002EE45 /* Sources */,
 				43885C9A26013C520002EE45 /* Frameworks */,
 				43885C9B26013C520002EE45 /* Resources */,
+				6441235A68BCF43CCD8514EA /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -236,7 +349,7 @@
 			files = (
 				43885C8C26013C520002EE45 /* LaunchScreen.storyboard in Resources */,
 				43885C8926013C520002EE45 /* Assets.xcassets in Resources */,
-				43885C8426013C500002EE45 /* Main.storyboard in Resources */,
+				43885CC7260144B10002EE45 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -256,14 +369,129 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2D9C7F1704CEB376CCC621EB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MarketMania-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6441235A68BCF43CCD8514EA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MarketMania-MarketManiaUITests/Pods-MarketMania-MarketManiaUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MarketMania-MarketManiaUITests/Pods-MarketMania-MarketManiaUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MarketMania-MarketManiaUITests/Pods-MarketMania-MarketManiaUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C544999174F78480113DFC3 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MarketMania-MarketManiaUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B5C9EA705681B2D2D592A316 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MarketManiaTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FB882724D908A7058F872D89 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MarketMania/Pods-MarketMania-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MarketMania/Pods-MarketMania-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MarketMania/Pods-MarketMania-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		43885C7526013C500002EE45 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43885C8126013C500002EE45 /* ViewController.swift in Sources */,
+				43885D1C26014AC30002EE45 /* AccountVC.swift in Sources */,
+				43885D05260148980002EE45 /* User.swift in Sources */,
+				43885CF9260148000002EE45 /* FirebaseUtils.swift in Sources */,
 				43885C7D26013C500002EE45 /* AppDelegate.swift in Sources */,
+				43885CF6260148000002EE45 /* Colors.swift in Sources */,
+				43885D0D26014A620002EE45 /* HomeVC.swift in Sources */,
+				43885CBC260141650002EE45 /* TabBarVC.swift in Sources */,
+				43885D1226014AB50002EE45 /* SearchVC.swift in Sources */,
+				43885CE9260146DD0002EE45 /* LoginVC.swift in Sources */,
+				43885CE7260146DD0002EE45 /* AuthInputView.swift in Sources */,
+				43885CF7260148000002EE45 /* Extensions.swift in Sources */,
+				43885CF8260148000002EE45 /* ParentClasses.swift in Sources */,
 				43885C8726013C500002EE45 /* MarketMania.xcdatamodeld in Sources */,
+				43885CE8260146DD0002EE45 /* SignUpVC.swift in Sources */,
+				43885D1726014ABD0002EE45 /* SocialVC.swift in Sources */,
 				43885C7F26013C500002EE45 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -300,14 +528,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		43885C8226013C500002EE45 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				43885C8326013C500002EE45 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		43885C8A26013C520002EE45 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -437,6 +657,7 @@
 		};
 		43885CA726013C520002EE45 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F72701D1DD60AA031F3838E7 /* Pods-MarketMania.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -456,6 +677,7 @@
 		};
 		43885CA826013C520002EE45 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDB79E7A02636C307A3D136E /* Pods-MarketMania.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -475,6 +697,7 @@
 		};
 		43885CAA26013C520002EE45 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B1FB9843286AB6FCB34BAE44 /* Pods-MarketManiaTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -497,6 +720,7 @@
 		};
 		43885CAB26013C520002EE45 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 672ED60D9AD5FC07395A8B11 /* Pods-MarketManiaTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -519,6 +743,7 @@
 		};
 		43885CAD26013C520002EE45 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A14E7CFDDDA6AA3CB13E4BC2 /* Pods-MarketMania-MarketManiaUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -539,6 +764,7 @@
 		};
 		43885CAE26013C520002EE45 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9B37A84618AEA0E139BC447 /* Pods-MarketMania-MarketManiaUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
