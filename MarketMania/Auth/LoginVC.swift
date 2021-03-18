@@ -101,7 +101,7 @@ class LoginVC: UIViewController {
     
     let backgroundImageView: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage(named: "auth_background")
+        iv.image = UIImage(named: "MMBackground")
         iv.contentMode = .scaleAspectFill
         return iv
     }()
@@ -159,9 +159,9 @@ class LoginVC: UIViewController {
         containerView.heightAnchor.constraint(equalToConstant: 489).isActive = true
         containerView.anchorCenterSuperview()
         
-        titleLabel.anchor(containerView.topAnchor, left: containerView.leftAnchor, bottom: nil, right: containerView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 60)
+        titleLabel.anchor(containerView.topAnchor, left: containerView.leftAnchor, bottom: nil, right: containerView.rightAnchor, topConstant: -50, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 60)
         
-        inputBackgroundView.anchor(titleLabel.bottomAnchor, left: containerView.leftAnchor, bottom: nil, right: containerView.rightAnchor, topConstant: 54, leftConstant: 20, bottomConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 314)
+        inputBackgroundView.anchor(titleLabel.bottomAnchor, left: containerView.leftAnchor, bottom: nil, right: containerView.rightAnchor, topConstant: 130, leftConstant: 20, bottomConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 314)
         
         emailInputView.anchor(inputBackgroundView.topAnchor, left: nil, bottom: nil, right: nil, topConstant: 30, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 280, heightConstant: 26)
         emailInputView.anchorCenterXToSuperview()
