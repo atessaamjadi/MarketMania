@@ -58,15 +58,19 @@ class HomeVC: UIViewController {
         return cv
     }()
     
-    let collectionView2: UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        //layout.scrollDirection = .vertical
-        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .white
-        cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        return cv
-    }()
+    
+//TODO adding this second collection view for watchlist and make customizable cells
+    
+    
+//    let collectionView2: UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        //layout.scrollDirection = .vertical
+//        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
+//        cv.backgroundColor = .white
+//        cv.translatesAutoresizingMaskIntoConstraints = false
+//        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+//        return cv
+//    }()
     
     let topMovesLabel: UILabel = {
         let label = UILabel()
@@ -78,7 +82,6 @@ class HomeVC: UIViewController {
     
     
     func setUpViews() {
-        //self.view.backgroundColor = .red
         
         view.addSubview(scrollView)
 
@@ -86,8 +89,6 @@ class HomeVC: UIViewController {
         
         scrollView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
        
-        
-        
         
         //make the collection view only the height of one cell
         collectionView1.heightAnchor.constraint(equalTo: collectionView1.widthAnchor, multiplier: 0.4).isActive = true
