@@ -22,7 +22,8 @@ class HomeVC: UIViewController {
         collectionView1.delegate = self
         collectionView1.dataSource = self
         
-        getStocks(symbols: ["AAPL", "MO"])
+        //getStocks(symbols: ["AAPL", "MO"])
+        getWinners()
     }
     
     //
