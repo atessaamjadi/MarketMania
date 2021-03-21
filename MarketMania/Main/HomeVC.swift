@@ -22,7 +22,7 @@ class HomeVC: UIViewController {
         collectionView1.delegate = self
         collectionView1.dataSource = self
         
-        TOPS(symbols: ["This function is here to test stock data retrieval"])
+        getStocks(symbols: ["AAPL", "MO"])
     }
     
     //

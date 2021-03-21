@@ -16,6 +16,7 @@ struct User {
     let phoneNum: String
     let address: String
     let payment: [String: String]
+    let stockList: [Stock]
     
     init(uid: String, dictionary: [String: Any]) {
         self.uid = uid
@@ -25,6 +26,20 @@ struct User {
         self.phoneNum = dictionary["phoneNum"] as? String ?? ""
         self.address = dictionary["address"] as? String ?? ""
         self.payment = dictionary["payment"] as? [String: String] ?? ["":""]
+        
+        self.stockList = dictionary["stocks"] as? [Stock] ?? []
+    }
+    
+    func buyStock() -> Bool {
+        return false
+    }
+    
+    func sellStock() -> Bool {
+        return false
+    }
+    
+    func getStocks() -> [Stock] {
+        return stockList
     }
 
 }

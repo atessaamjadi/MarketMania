@@ -7,24 +7,21 @@
 import Foundation
 
 class StockBasicInfo {
-    let name: String
-    let price: Double
+    let ticker: String
 
-    init(name: String, price: Double) {
-        self.name = name
-        self.price = price
+    init(ticker: String) {
+        self.ticker = ticker
     }
 
     func toString() -> String {
-        var str: String = "name: " + self.name
-        str += "\nprice: " + String(self.price) + "\n"
-        return str
+        return "ticker: " + self.ticker + "\n"
     }
 }
 
-class StockDetailInfo: StockBasicInfo {
+class Stock: StockBasicInfo {
 
-    let ticker: String
+    let name: String
+    let price: Double
     let high: Double
     let low: Double
     let high_52: Double
@@ -34,8 +31,9 @@ class StockDetailInfo: StockBasicInfo {
     let marketCap: CLong
     let peRatio: Double
 
-    init(name: String, price: Double, dictionary: [String: Any]) {
-        self.ticker = dictionary["ticker"] as? String ?? ""
+    init(ticker: String, dictionary: [String: Any]) {
+        self.price = dictionary["price"] as? Double ?? 0.0
+        self.name = dictionary["name"] as? String ?? ""
         self.high = dictionary["high"] as? Double ?? 0.0
         self.low = dictionary["low"] as? Double ?? 0.0
         self.high_52 = dictionary["high_52"] as? Double ?? 0.0
@@ -44,14 +42,14 @@ class StockDetailInfo: StockBasicInfo {
         self.avgVolume = dictionary["avgVolume"] as? Int ?? 0
         self.marketCap = dictionary["marketCap"] as? CLong ?? 0
         self.peRatio = dictionary["peRatio"] as? Double ?? 0.0
-        super.init(name: name, price: price)
+        super.init(ticker: ticker)
     }
 
     init?(json: [String: Any]) {
-        let name: String = json["companyName"] as? String ?? ""
-        let price: Double = json["latestPrice"] as? Double ?? 0.0
-
-        self.ticker = json["symbol"] as? String ?? ""
+        let ticker: String = json["symbol"] as? String ?? ""
+        
+        self.price = json["latestPrice"] as? Double ?? 0.0
+        self.name = json["companyName"] as? String ?? ""
         self.high = json["high"] as? Double ?? 0.0
         self.low = json["low"] as? Double ?? 0.0
         self.high_52 = json["week52High"] as? Double ?? 0.0
@@ -61,12 +59,13 @@ class StockDetailInfo: StockBasicInfo {
         self.marketCap = json["marketCap"] as? CLong ?? 0
         self.peRatio = json["peRatio"] as? Double ?? 0.0
 
-        super.init(name: name, price: price)
+        super.init(ticker: ticker)
     }
 
     override func toString() -> String {
         var str: String = super.toString()
-        str += "ticker: " + self.ticker
+        str += "name: " + self.ticker
+        str += "\nprice: " + String(price)
         str += "\nhigh: " + String(high)
         str += "\nlow: " + String(low)
         str += "\n52high: " + String(high_52)
@@ -77,4 +76,29 @@ class StockDetailInfo: StockBasicInfo {
         str += "\npeRatio: " + String(peRatio) + "\n"
         return str
     }
+}
+
+class UserStock: StockBasicInfo {
+    
+    var numShares: Double
+    var avgPrice: Double
+    var marketVal: Double // float?
+    var totReturns: Double
+    var totPercentDelta: Double
+    
+    init(ticker: String, price: Double = 0.0, dictionary: [String: Any]) {
+        
+        numShares = dictionary["numShares"] as? Double ?? 0.0
+        avgPrice = dictionary["avgPrice"] as? Double ?? 0.0
+        marketVal = dictionary["marketVal"] as? Double ?? 0.0
+        totReturns = dictionary["totReturns"] as? Double ?? 0.0
+        totPercentDelta = dictionary["totPercentDelta"] as? Double ?? 0.0
+        
+        super.init(ticker: ticker)
+    }
+     
+    func updateShares(sharesDelta: Double) {
+        // TODO: update all stock info based on new shares added/removed
+    }
+    
 }
