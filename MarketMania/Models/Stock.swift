@@ -20,6 +20,7 @@ struct Stock: Codable {
     let avgTotalVolume: Int?
     let marketCap: CLong?
     let peRatio: Double?
+    let changePercent: Double?
 
 }
 

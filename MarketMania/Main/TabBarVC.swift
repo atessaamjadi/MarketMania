@@ -21,6 +21,15 @@ class TabBarVC: UITabBarController {
             }
         }
         
+        // pop up a loading screen modal until all the necessary data is loaded
+//        DispatchQueue.main.async {
+//            let loadScreenVC = LoadVC()
+//            loadScreenVC.modalPresentationStyle = .fullScreen
+//            self.present(loadScreenVC, animated: false, completion: {
+//                self.setUpViewControllers()
+//            })
+//        }
+        
         setUpViewControllers()
     }
     
