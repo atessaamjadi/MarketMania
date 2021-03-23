@@ -13,35 +13,42 @@ struct User {
     let email: String
     let firstName: String
     let lastName: String
-    let phoneNum: String
-    let address: String
-    let payment: [String: String]
-    let stockList: [Stock]
+    let watchList: [Stock]
+    let friends: [User]
+    let stats: UserStats
+    let lounges: [Lounge]
+    
     
     init(uid: String, dictionary: [String: Any]) {
         self.uid = uid
         self.email = dictionary["email"] as? String ?? ""
         self.firstName = dictionary["firstName"] as? String ?? ""
         self.lastName = dictionary["lastName"] as? String ?? ""
-        self.phoneNum = dictionary["phoneNum"] as? String ?? ""
-        self.address = dictionary["address"] as? String ?? ""
-        self.payment = dictionary["payment"] as? [String: String] ?? ["":""]
-        
-        self.stockList = dictionary["stocks"] as? [Stock] ?? []
+        self.watchList = dictionary["stocks"] as? [Stock] ?? []
+        self.friends = dictionary["friends"] as? [User] ?? []
+        self.stats = dictionary["stats"] as? UserStats ?? UserStats(startAmmount: 50000)//starting dollar ammount
+        self.lounges = dictionary["lounges"] as? [Lounge] ?? []
     }
     
-    func buyStock() -> Bool {
+    func joinLounge(lounge: Lounge) -> Bool {
         return false
     }
     
-    func sellStock() -> Bool {
+    func leaveLounge(lounge: Lounge) -> Bool {
         return false
     }
     
-    func getStocks() -> [Stock] {
-        return stockList
+    func addToWatchList(stock: Stock) -> Bool {
+        return false
     }
-
+    
+    func changePassword(pass: String) -> Bool {
+        return false
+    }
+    
+    func addFriend(user: User) -> Bool  {
+        return false
+    }
 }
 
 

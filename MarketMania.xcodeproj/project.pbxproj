@@ -31,6 +31,10 @@
 		65026A3B1642E69A70E739C3 /* Pods_MarketManiaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8171A198AE89F8EC55AA3D6D /* Pods_MarketManiaTests.framework */; };
 		94B5A6B83D062670979734AB /* Pods_MarketMania.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF7D043E7A4ACA1A9C82757 /* Pods_MarketMania.framework */; };
 		C984D416CA6458F13BA8F18E /* Pods_MarketMania_MarketManiaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C189EAB4CF70D74A266F5BF6 /* Pods_MarketMania_MarketManiaUITests.framework */; };
+		FA8391E2260A61C70058AA6A /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8391E1260A61C70058AA6A /* Stock.swift */; };
+		FA8391E7260A61D30058AA6A /* IEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8391E6260A61D30058AA6A /* IEX.swift */; };
+		FA839201260A6DE30058AA6A /* UserStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA839200260A6DE30058AA6A /* UserStats.swift */; };
+		FA839206260A6E1A0058AA6A /* Lounge.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA839205260A6E1A0058AA6A /* Lounge.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +91,10 @@
 		EDB79E7A02636C307A3D136E /* Pods-MarketMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania.release.xcconfig"; path = "Target Support Files/Pods-MarketMania/Pods-MarketMania.release.xcconfig"; sourceTree = "<group>"; };
 		F72701D1DD60AA031F3838E7 /* Pods-MarketMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania.debug.xcconfig"; path = "Target Support Files/Pods-MarketMania/Pods-MarketMania.debug.xcconfig"; sourceTree = "<group>"; };
 		F9B37A84618AEA0E139BC447 /* Pods-MarketMania-MarketManiaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania-MarketManiaUITests.release.xcconfig"; path = "Target Support Files/Pods-MarketMania-MarketManiaUITests/Pods-MarketMania-MarketManiaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FA8391E1260A61C70058AA6A /* Stock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
+		FA8391E6260A61D30058AA6A /* IEX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IEX.swift; sourceTree = "<group>"; };
+		FA839200260A6DE30058AA6A /* UserStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStats.swift; sourceTree = "<group>"; };
+		FA839205260A6E1A0058AA6A /* Lounge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lounge.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +196,7 @@
 		43885CFD260148200002EE45 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				FA8391E6260A61D30058AA6A /* IEX.swift */,
 				43885CF2260147FF0002EE45 /* Colors.swift */,
 				43885CF3260147FF0002EE45 /* Extensions.swift */,
 				43885CF5260148000002EE45 /* FirebaseUtils.swift */,
@@ -211,7 +220,10 @@
 		43885D2426014D7D0002EE45 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				FA8391E1260A61C70058AA6A /* Stock.swift */,
 				43885D04260148980002EE45 /* User.swift */,
+				FA839200260A6DE30058AA6A /* UserStats.swift */,
+				FA839205260A6E1A0058AA6A /* Lounge.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -478,8 +490,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				43885D1C26014AC30002EE45 /* AccountVC.swift in Sources */,
+				FA839206260A6E1A0058AA6A /* Lounge.swift in Sources */,
+				FA8391E2260A61C70058AA6A /* Stock.swift in Sources */,
 				43885D05260148980002EE45 /* User.swift in Sources */,
 				43885CF9260148000002EE45 /* FirebaseUtils.swift in Sources */,
+				FA8391E7260A61D30058AA6A /* IEX.swift in Sources */,
 				43885C7D26013C500002EE45 /* AppDelegate.swift in Sources */,
 				43885CF6260148000002EE45 /* Colors.swift in Sources */,
 				43885D0D26014A620002EE45 /* HomeVC.swift in Sources */,
@@ -487,6 +502,7 @@
 				43885D1226014AB50002EE45 /* SearchVC.swift in Sources */,
 				43885CE9260146DD0002EE45 /* LoginVC.swift in Sources */,
 				43885CE7260146DD0002EE45 /* AuthInputView.swift in Sources */,
+				FA839201260A6DE30058AA6A /* UserStats.swift in Sources */,
 				43885CF7260148000002EE45 /* Extensions.swift in Sources */,
 				43885CF8260148000002EE45 /* ParentClasses.swift in Sources */,
 				43885C8726013C500002EE45 /* MarketMania.xcdatamodeld in Sources */,

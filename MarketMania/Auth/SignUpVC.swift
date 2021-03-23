@@ -47,8 +47,6 @@ class SignUpVC: UIViewController {
         guard let password = passwordInputView.input.text else {return}
         guard let firstName = firstNameInputView.input.text else {return}
         guard let lastName = lastNameInputView.input.text else {return}
-        guard let phoneNum = phoneNumInputView.input.text else {return}
-        guard let address = addressInputView.input.text else {return}
         
         
         Auth.auth().createUser(withEmail: email, password: password) { (data, err) in
@@ -71,7 +69,8 @@ class SignUpVC: UIViewController {
             }
             
             guard let currentUserID = Auth.auth().currentUser?.uid else {return}
-            let values = ["firstName": firstName, "lastName": lastName, "email": email, "phoneNum":phoneNum, "address":address]
+        
+            let values = ["firstName": firstName, "lastName": lastName, "email": email]
             
             Database.database().reference().child("Users").child(currentUserID).setValue(values, withCompletionBlock: { (err, ref) in
                 if let err = err {
@@ -133,13 +132,11 @@ class SignUpVC: UIViewController {
     
     let firstNameInputView = AuthInputView(placeholder: "First name", keyboardType: .namePhonePad, isPassword: false)
     let lastNameInputView = AuthInputView(placeholder: "Last name", keyboardType: .namePhonePad, isPassword: false)
-    let phoneNumInputView = AuthInputView(placeholder: "Phone Number", keyboardType: .numberPad, isPassword: false)
-    let addressInputView = AuthInputView(placeholder: "Address", keyboardType: .namePhonePad, isPassword: false)
     let emailInputView = AuthInputView(placeholder: "Email", keyboardType: .emailAddress, isPassword: false)
     let passwordInputView = AuthInputView(placeholder: "Password", keyboardType: .default, isPassword: true)
     
     lazy var inputStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [firstNameInputView, lastNameInputView,phoneNumInputView,addressInputView, emailInputView, passwordInputView])
+        let sv = UIStackView(arrangedSubviews: [firstNameInputView, lastNameInputView, emailInputView, passwordInputView])
         sv.axis = .vertical
         sv.distribution = .equalSpacing
         return sv
