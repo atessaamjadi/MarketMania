@@ -18,8 +18,7 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.titleView = welcomeLabel
-        
+       
         setUpViews()
         
         collectionView1.delegate = self
@@ -31,6 +30,12 @@ class HomeVC: UIViewController {
         // run async function that reloads view once data is fetched
         
         //getStocks(symbols: ["AAPL", "MO"])
+    }
+    
+    //hide the navigation bar with "Home" title
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
     //
@@ -59,6 +64,13 @@ class HomeVC: UIViewController {
         label.textAlignment = .center
         return label
         
+    }()
+    
+    let tempSarcasticLabel: UILabel = {
+        let label = UILabel()
+        label.add(text: "Ready to lose more $ ?", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .gray)
+        label.textAlignment = .center
+        return label
     }()
     
     let topMovesLabel: UILabel = {
@@ -117,10 +129,11 @@ class HomeVC: UIViewController {
         
 //        VIEWS WITHOUT SCROLL VIEW
 
-        view.addSubviews(views: [welcomeLabel, topMovesLabel, collectionView1, watchListLabel, collectionView2])
+        view.addSubviews(views: [tempSarcasticLabel, welcomeLabel, topMovesLabel, collectionView1, watchListLabel, collectionView2])
 
-        //welcome label anchors before it begave navigation title
-        welcomeLabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 20, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        welcomeLabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 30, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        tempSarcasticLabel.anchor(welcomeLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 10, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
         topMovesLabel.anchor(nil, left: view.leftAnchor, bottom: collectionView1.topAnchor, right: nil, topConstant: 0, leftConstant: 10, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
@@ -223,9 +236,9 @@ class MoverCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
         
-        stack.addArrangedSubview(tickerLabel)
-        stack.addArrangedSubview(nameLabel)
-        stack.addArrangedSubview(moveLabel)
+//        stack.addArrangedSubview(tickerLabel)
+//        stack.addArrangedSubview(nameLabel)
+//        stack.addArrangedSubview(moveLabel)
         
         return stack
     }
@@ -259,9 +272,9 @@ class watchListCell: UICollectionViewCell {
     
     func setUpViews() {
         
-        contentView.addSubview(tempLabel)
+//        contentView.addSubview(tempLabel)
         
-        tempLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, topConstant: 5, leftConstant: 5, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//        tempLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, topConstant: 5, leftConstant: 5, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
       
        

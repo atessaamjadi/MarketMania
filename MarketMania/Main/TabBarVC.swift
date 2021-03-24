@@ -39,7 +39,7 @@ class TabBarVC: UITabBarController {
         
         let controllersCustomer = [add(vc: HomeVC(), name: "Home", icon: UIImage(named: "home_icon")!),
                                    add(vc: SearchVC(), name: "Search", icon: UIImage(named: "search_icon")!),
-                                   add(vc: SocialVC(), name: "Social", icon: UIImage(named: "social_icon")!),
+                                   add(vc: SocialVC(), name: "Trade", icon: UIImage(named: "social_icon")!),
                                    add(vc: AccountVC(), name: "Account", icon: UIImage(named: "account_icon")!)]
         // Add all view controllers
         self.viewControllers = controllersCustomer
