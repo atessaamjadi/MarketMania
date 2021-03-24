@@ -18,6 +18,8 @@ class HomeVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.navigationItem.titleView = welcomeLabel
+        
         setUpViews()
         
         collectionView1.delegate = self
@@ -117,6 +119,7 @@ class HomeVC: UIViewController {
 
         view.addSubviews(views: [welcomeLabel, topMovesLabel, collectionView1, watchListLabel, collectionView2])
 
+        //welcome label anchors before it begave navigation title
         welcomeLabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 20, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
 
         topMovesLabel.anchor(nil, left: view.leftAnchor, bottom: collectionView1.topAnchor, right: nil, topConstant: 0, leftConstant: 10, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)

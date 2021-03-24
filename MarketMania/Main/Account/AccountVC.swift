@@ -103,7 +103,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         
         self.navigationItem.titleView = titleLabel
 
-        self.cv.backgroundColor = .white
+        self.cv.backgroundColor = .menu_white
         self.cv.dataSource = self
         self.cv.delegate = self
 

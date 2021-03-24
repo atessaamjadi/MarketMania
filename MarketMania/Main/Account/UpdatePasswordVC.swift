@@ -29,7 +29,7 @@ class UpdatePasswordVC: UIViewController, UICollectionViewDataSource, UICollecti
     override func viewDidLoad() {
            super.viewDidLoad()
 
-           self.cv.backgroundColor = .white
+           self.cv.backgroundColor = .menu_white
            self.cv.dataSource = self
            self.cv.delegate = self
 

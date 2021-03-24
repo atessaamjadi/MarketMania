@@ -21,6 +21,7 @@ class SearchVC: UIViewController {
         
         collectionView2.delegate = self
         collectionView2.dataSource = self
+
         
         setUpViews()
     }
@@ -33,6 +34,16 @@ class SearchVC: UIViewController {
     // MARK: UI Setup
     //
     
+    let searchBar: UISearchBar = {
+        let sb = UISearchBar()
+        sb.searchBarStyle = UISearchBar.Style.prominent
+        sb.placeholder = " Search..."
+        sb.sizeToFit()
+        sb.isTranslucent = false
+        sb.backgroundColor = .menu_white
+        
+        return sb
+    }()
     
     let exploreLabel: UILabel = {
         let label = UILabel()
@@ -84,9 +95,11 @@ class SearchVC: UIViewController {
     
     func setUpViews() {
         
-        view.addSubviews(views: [exploreLabel, mostPopularLabel, collectionView1, sectorsLabel, collectionView2])
+        view.addSubviews(views: [searchBar, exploreLabel, mostPopularLabel, collectionView1, sectorsLabel, collectionView2])
         
-        exploreLabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: mostPopularLabel.topAnchor, right: nil, topConstant: view.frame.height/7, leftConstant: 10, bottomConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        searchBar.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: exploreLabel.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        exploreLabel.anchor(searchBar.bottomAnchor, left: view.leftAnchor, bottom: mostPopularLabel.topAnchor, right: nil, topConstant: view.frame.height/7, leftConstant: 10, bottomConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         mostPopularLabel.anchor(exploreLabel.bottomAnchor, left: view.leftAnchor, bottom: collectionView1.topAnchor, right: nil, topConstant: 0, leftConstant: 10, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
