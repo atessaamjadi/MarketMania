@@ -30,6 +30,11 @@
 		43885D1C26014AC30002EE45 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885D1B26014AC30002EE45 /* AccountVC.swift */; };
 		65026A3B1642E69A70E739C3 /* Pods_MarketManiaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8171A198AE89F8EC55AA3D6D /* Pods_MarketManiaTests.framework */; };
 		94B5A6B83D062670979734AB /* Pods_MarketMania.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF7D043E7A4ACA1A9C82757 /* Pods_MarketMania.framework */; };
+		ADCE1B86260AC06A00B6CDB0 /* SimpleTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1B85260AC06A00B6CDB0 /* SimpleTextCell.swift */; };
+		ADCE1B8F260AC1C000B6CDB0 /* UpdatePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1B8E260AC1C000B6CDB0 /* UpdatePasswordVC.swift */; };
+		ADCE1BA9260AC21500B6CDB0 /* SimpleTextInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1BA8260AC21500B6CDB0 /* SimpleTextInputCell.swift */; };
+		ADCE1BAE260AC23300B6CDB0 /* ModifyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1BAD260AC23300B6CDB0 /* ModifyAccount.swift */; };
+		ADCE1BC8260AC38100B6CDB0 /* InformationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1BC7260AC38100B6CDB0 /* InformationViewCell.swift */; };
 		C984D416CA6458F13BA8F18E /* Pods_MarketMania_MarketManiaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C189EAB4CF70D74A266F5BF6 /* Pods_MarketMania_MarketManiaUITests.framework */; };
 		FA8391E2260A61C70058AA6A /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8391E1260A61C70058AA6A /* Stock.swift */; };
 		FA8391E7260A61D30058AA6A /* IEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8391E6260A61D30058AA6A /* IEX.swift */; };
@@ -86,6 +91,11 @@
 		672ED60D9AD5FC07395A8B11 /* Pods-MarketManiaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketManiaTests.release.xcconfig"; path = "Target Support Files/Pods-MarketManiaTests/Pods-MarketManiaTests.release.xcconfig"; sourceTree = "<group>"; };
 		8171A198AE89F8EC55AA3D6D /* Pods_MarketManiaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarketManiaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A14E7CFDDDA6AA3CB13E4BC2 /* Pods-MarketMania-MarketManiaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania-MarketManiaUITests.debug.xcconfig"; path = "Target Support Files/Pods-MarketMania-MarketManiaUITests/Pods-MarketMania-MarketManiaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		ADCE1B85260AC06A00B6CDB0 /* SimpleTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTextCell.swift; sourceTree = "<group>"; };
+		ADCE1B8E260AC1C000B6CDB0 /* UpdatePasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePasswordVC.swift; sourceTree = "<group>"; };
+		ADCE1BA8260AC21500B6CDB0 /* SimpleTextInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTextInputCell.swift; sourceTree = "<group>"; };
+		ADCE1BAD260AC23300B6CDB0 /* ModifyAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyAccount.swift; sourceTree = "<group>"; };
+		ADCE1BC7260AC38100B6CDB0 /* InformationViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewCell.swift; sourceTree = "<group>"; };
 		B1FB9843286AB6FCB34BAE44 /* Pods-MarketManiaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketManiaTests.debug.xcconfig"; path = "Target Support Files/Pods-MarketManiaTests/Pods-MarketManiaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C189EAB4CF70D74A266F5BF6 /* Pods_MarketMania_MarketManiaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarketMania_MarketManiaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EDB79E7A02636C307A3D136E /* Pods-MarketMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania.release.xcconfig"; path = "Target Support Files/Pods-MarketMania/Pods-MarketMania.release.xcconfig"; sourceTree = "<group>"; };
@@ -212,7 +222,7 @@
 				43885D0C26014A620002EE45 /* HomeVC.swift */,
 				43885D1126014AB50002EE45 /* SearchVC.swift */,
 				43885D1626014ABD0002EE45 /* SocialVC.swift */,
-				43885D1B26014AC30002EE45 /* AccountVC.swift */,
+				ADCE1B8A260AC0AA00B6CDB0 /* Account */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -236,6 +246,19 @@
 				8171A198AE89F8EC55AA3D6D /* Pods_MarketManiaTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ADCE1B8A260AC0AA00B6CDB0 /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				ADCE1B85260AC06A00B6CDB0 /* SimpleTextCell.swift */,
+				43885D1B26014AC30002EE45 /* AccountVC.swift */,
+				ADCE1B8E260AC1C000B6CDB0 /* UpdatePasswordVC.swift */,
+				ADCE1BA8260AC21500B6CDB0 /* SimpleTextInputCell.swift */,
+				ADCE1BC7260AC38100B6CDB0 /* InformationViewCell.swift */,
+				ADCE1BAD260AC23300B6CDB0 /* ModifyAccount.swift */,
+			);
+			path = Account;
 			sourceTree = "<group>";
 		};
 		F8754BA641596808AA7F3666 /* Pods */ = {
@@ -492,7 +515,10 @@
 				43885D1C26014AC30002EE45 /* AccountVC.swift in Sources */,
 				FA839206260A6E1A0058AA6A /* Lounge.swift in Sources */,
 				FA8391E2260A61C70058AA6A /* Stock.swift in Sources */,
+				ADCE1BAE260AC23300B6CDB0 /* ModifyAccount.swift in Sources */,
 				43885D05260148980002EE45 /* User.swift in Sources */,
+				ADCE1B8F260AC1C000B6CDB0 /* UpdatePasswordVC.swift in Sources */,
+				ADCE1BA9260AC21500B6CDB0 /* SimpleTextInputCell.swift in Sources */,
 				43885CF9260148000002EE45 /* FirebaseUtils.swift in Sources */,
 				FA8391E7260A61D30058AA6A /* IEX.swift in Sources */,
 				43885C7D26013C500002EE45 /* AppDelegate.swift in Sources */,
@@ -505,6 +531,8 @@
 				FA839201260A6DE30058AA6A /* UserStats.swift in Sources */,
 				43885CF7260148000002EE45 /* Extensions.swift in Sources */,
 				43885CF8260148000002EE45 /* ParentClasses.swift in Sources */,
+				ADCE1B86260AC06A00B6CDB0 /* SimpleTextCell.swift in Sources */,
+				ADCE1BC8260AC38100B6CDB0 /* InformationViewCell.swift in Sources */,
 				43885C8726013C500002EE45 /* MarketMania.xcdatamodeld in Sources */,
 				43885CE8260146DD0002EE45 /* SignUpVC.swift in Sources */,
 				43885D1726014ABD0002EE45 /* SocialVC.swift in Sources */,
