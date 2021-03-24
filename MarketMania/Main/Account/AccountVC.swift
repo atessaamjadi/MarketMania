@@ -103,7 +103,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         
         self.navigationItem.titleView = titleLabel
 
-        self.cv.backgroundColor = .black
+        self.cv.backgroundColor = .white
         self.cv.dataSource = self
         self.cv.delegate = self
 
@@ -142,7 +142,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             // update password
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "Update Password"
-            cell.contentView.backgroundColor = .white
+            cell.contentView.backgroundColor = .systemTeal
             cell.textLabel.textColor = .black
             return cell
         }
@@ -150,7 +150,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         else if (indexPath.row == 2) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "Update User Info"
-            cell.contentView.backgroundColor = .white
+            cell.contentView.backgroundColor = .systemTeal
             cell.textLabel.textColor = .black
 
             return cell
@@ -160,7 +160,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         else if (indexPath.row == 3){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "View Achievements"
-            cell.contentView.backgroundColor = .white
+            cell.contentView.backgroundColor = .systemTeal
             cell.textLabel.textColor = .black
 
             return cell
@@ -172,7 +172,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             cell.textLabel.textColor = .black
             cell.textLabel.textAlignment = .center
             cell.textLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: -10).isActive = true
-            cell.contentView.backgroundColor = .white
+            cell.contentView.backgroundColor = .systemTeal
             return cell
         }
     }
