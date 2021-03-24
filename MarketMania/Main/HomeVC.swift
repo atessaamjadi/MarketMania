@@ -45,12 +45,15 @@ class HomeVC: UIViewController {
 //        let sv = UIScrollView()
 //        sv.translatesAutoresizingMaskIntoConstraints = false
 //        //sv.backgroundColor = .white
+//
+//        //make scroll view scollable
+//        sv.contentSize = CGSize(width: sv.bounds.width, height: 800)
 //        return sv
 //    }()
     
     let welcomeLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Welcome back...", font: UIFont.boldSystemFont(ofSize: 25.0), textColor: .black)
+        label.add(text: "Welcome back...", font: UIFont.boldSystemFont(ofSize: 25.0), textColor: .darkGray)
         label.textAlignment = .center
         return label
         
@@ -58,7 +61,7 @@ class HomeVC: UIViewController {
     
     let topMovesLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Top Moves", font: UIFont(name: "PingFangHK-Regular", size: 13)!, textColor: .gray)
+        label.add(text: "Top Moves", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .gray)
         label.textAlignment = .center
         return label
     }()
@@ -79,7 +82,7 @@ class HomeVC: UIViewController {
     
     let watchListLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Watchlist", font: UIFont(name: "PingFangHK-Regular", size: 13)!, textColor: .gray)
+        label.add(text: "Watchlist", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .gray)
         label.textAlignment = .center
         return label
     }()
@@ -102,27 +105,31 @@ class HomeVC: UIViewController {
         
 //        view.addSubview(scrollView)
 //
-//        scrollView.addSubviews(views: [welcomeLabel, collectionView1, topMovesLabel])
+//        scrollView.addSubviews(views: [welcomeLabel, topMovesLabel, collectionView1, watchListLabel ,collectionView2])
 //
-//        scrollView.anchor(view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//        self.scrollView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20).isActive = true;
+//       self.scrollView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true;
+//       self.scrollView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20).isActive = true;
+//       self.scrollView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: -20).isActive = true;
         
         
+//        VIEWS WITHOUT SCROLL VIEW
+
         view.addSubviews(views: [welcomeLabel, topMovesLabel, collectionView1, watchListLabel, collectionView2])
-        
+
         welcomeLabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 20, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-        
-        topMovesLabel.anchor(nil, left: view.leftAnchor, bottom: collectionView1.topAnchor, right: nil, topConstant: 0, leftConstant: 20, bottomConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-        
+
+        topMovesLabel.anchor(nil, left: view.leftAnchor, bottom: collectionView1.topAnchor, right: nil, topConstant: 0, leftConstant: 20, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+
         //make the collection view only the height of one cell
         collectionView1.heightAnchor.constraint(equalTo: collectionView1.widthAnchor, multiplier: 0.4).isActive = true
-        
+
         collectionView1.anchor(view.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: view.frame.height/2.5, leftConstant: 20, bottomConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
 
-        
-        watchListLabel.anchor(collectionView1.bottomAnchor, left: view.leftAnchor, bottom: collectionView2.topAnchor, right: nil, topConstant: 20, leftConstant: 20, bottomConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
-        
-        collectionView2.anchor(watchListLabel.bottomAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, topConstant: 20, leftConstant: 20, bottomConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
-       
+        watchListLabel.anchor(collectionView1.bottomAnchor, left: view.leftAnchor, bottom: collectionView2.topAnchor, right: nil, topConstant: 20, leftConstant: 20, bottomConstant: 5, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+
+        collectionView2.anchor(watchListLabel.bottomAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 20, bottomConstant: 0, rightConstant: 20, widthConstant: 0, heightConstant: 0)
+
     }
 }
 
@@ -143,7 +150,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
     //        print(winners.count)
     //        return winners.count
             
-            //return 10
+            return 10
         }
         
         return 6
@@ -192,7 +199,7 @@ class MoverCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        backgroundColor = .blue
+        backgroundColor = .systemBlue
         
         let stack: UIStackView = setUpViews()
         self.contentView.addSubview(stack)
@@ -225,6 +232,7 @@ class MoverCell: UICollectionViewCell {
     }
 }
 
+//cells for watchlist
 class watchListCell: UICollectionViewCell {
 
     required init?(coder: NSCoder) {
@@ -234,7 +242,7 @@ class watchListCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .purple
+        backgroundColor = .systemTeal
         
         setUpViews()
     }
