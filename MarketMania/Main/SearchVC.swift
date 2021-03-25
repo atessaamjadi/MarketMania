@@ -30,6 +30,15 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar
         
+        getMostActive { response in
+            // UI updates are only allowed in main queue
+            DispatchQueue.main.async {
+                //print("winners", response)
+                self.popularStocks = response
+                self.collectionView1.reloadData()
+            }
+        }
+        
         setUpViews()
     }
     
@@ -45,7 +54,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     var dummyData = ["A", "AB", "ABC", "ABCD"]
     var activeSearch: Bool = false
     var filtered: [String] = []
-    
+    var popularStocks: [Stock] = []
     
     
     var searchBar: UISearchBar = {
@@ -234,13 +243,13 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == collectionView1.self {
+        if (collectionView == collectionView1.self && popularStocks.count != 0) {
             
             //**** Commented out for now to see UI
     //        print(winners.count)
     //        return winners.count
             
-            return 10
+            return popularStocks.count
         }
         
         return 21
@@ -248,14 +257,22 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if collectionView == collectionView1.self {
+        if (collectionView == collectionView1.self && popularStocks.count != 0) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mostPopularCell", for: indexPath) as! mostPopularCell
+            
+            let stock = popularStocks[indexPath.row]
+            
+            cell.tickerLabel.text = stock.symbol
+            cell.nameLabel.text = stock.companyName
+            cell.moveLabel.text = String((stock.changePercent ?? 0.0))
+
+            
             return cell
         }
         
         //**** Commented out for now to see UI
-        //let stock = winners[indexPath.row]
-        
+//        let stock = winners[indexPath.row]
+//
 //        cell.tickerLabel.text = stock.symbol
 //        cell.nameLabel.text = stock.companyName
 //        cell.moveLabel.text = String((stock.changePercent ?? 0.0))
@@ -268,21 +285,59 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
 
 class mostPopularCell: UICollectionViewCell {
     
+    let tickerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "PlaceHolder"
+        return label
+    }()
+    
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "subtext placeholder"
+        return label
+    }()
+    
+    let moveLabel: UILabel = {
+        let label = UILabel()
+        label.text = "move %"
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: .zero)
+        
+        backgroundColor = .systemBlue
+        
+        let stack: UIStackView = setUpViews()
+        self.contentView.addSubview(stack)
+        
+        NSLayoutConstraint.activate([
+            stack.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            stack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            stack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            stack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+        ])
+        
+        self.contentView.layer.cornerRadius = 5
+    }
+    
+    func setUpViews() -> UIStackView {
+        let stack = UIStackView()
+        
+        stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        stack.addArrangedSubview(tickerLabel)
+        stack.addArrangedSubview(nameLabel)
+        stack.addArrangedSubview(moveLabel)
+        
+        return stack
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        
-        backgroundColor = .systemGreen
-        
-        setUpViews()
-    }
-    
-    func setUpViews() {
-        
-    }
 }
 
 class sectorCell: UICollectionViewCell {
