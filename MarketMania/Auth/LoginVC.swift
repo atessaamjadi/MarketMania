@@ -46,7 +46,7 @@ class LoginVC: UIViewController {
 
             if(Auth.auth().currentUser?.uid != nil) {
                 print("Successfully signed in user with id: " + (Auth.auth().currentUser?.uid)!)
-                fetchUser()
+                fetchUser{}
             } else{
                 let alert = UIAlertController(title: "Error!", message: "Fill out all of the boxes before signing in.", preferredStyle: .alert)
                 

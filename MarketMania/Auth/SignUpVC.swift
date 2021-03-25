@@ -74,7 +74,7 @@ class SignUpVC: UIViewController {
                 }
 
                 print("Successfully signed in user with id: " + (Auth.auth().currentUser?.uid)!)
-                fetchUser()
+                fetchUser{}
                 
                 
                 let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC

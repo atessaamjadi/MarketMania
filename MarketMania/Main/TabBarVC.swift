@@ -21,8 +21,13 @@ class TabBarVC: UITabBarController {
                 loginVC.modalPresentationStyle = .fullScreen
                 self.present(loginVC, animated: false, completion: nil)
             }
-        }else{
-            fetchUser()
+        }else{  //TODO - Make a loading screen to remove this, also big performace issue here
+            fetchUser {
+                self.view.window?.resignKey()
+                let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
+                tabBarVC.setUpViewControllers()
+                
+            }
         }
         
         // pop up a loading screen modal until all the necessary data is loaded

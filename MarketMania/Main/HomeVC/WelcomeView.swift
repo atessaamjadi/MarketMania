@@ -24,7 +24,7 @@ class WelcomeView: UICollectionViewCell {
     
     let welcomeLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Welcome back...", font: UIFont.boldSystemFont(ofSize: 25.0), textColor: .darkGray)
+        label.add(text: "Welcome back " + (globalCurrentUser?.firstName ?? ""), font: UIFont.boldSystemFont(ofSize: 25.0), textColor: .darkGray)
         label.textAlignment = .center
         return label
         
