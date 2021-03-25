@@ -107,51 +107,67 @@ class MoverCell: UICollectionViewCell {
     
     let tickerLabel: UILabel = {
         let label = UILabel()
-        label.text = "PlaceHolder"
+        label.add(text: "Placeholder", font: UIFont(name: "PingFangHK-Regular", size: 18)!, textColor: .black)
+        label.textAlignment = .center
         return label
     }()
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "subtext placeholder"
+        label.add(text: "Subtext placeholder", font: UIFont(name: "PingFangHK-Regular", size: 8)!, textColor: .black)
+        label.textAlignment = .center
         return label
     }()
     
     let moveLabel: UILabel = {
         let label = UILabel()
-        label.text = "move %"
+        label.add(text: "Move %", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
+        label.textAlignment = .center
         return label
     }()
     
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        backgroundColor = .systemBlue
+        backgroundColor = .systemGray4
         
-        let stack: UIStackView = setUpViews()
-        self.contentView.addSubview(stack)
+        setUpViews()
         
-        NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            stack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            stack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            stack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
-        ])
-        
-        self.contentView.layer.cornerRadius = 5
+//        let stack: UIStackView = setUpViews()
+//        self.contentView.addSubview(stack)
+//
+//        NSLayoutConstraint.activate([
+//            stack.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+//            stack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+//            stack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+//            stack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+//        ])
+//
+//        self.contentView.layer.cornerRadius = 5
     }
     
-    func setUpViews() -> UIStackView {
-        let stack = UIStackView()
+    func setUpViews() {
         
-        stack.axis = .vertical
-        stack.translatesAutoresizingMaskIntoConstraints = false
+        contentView.addSubviews(views: [tickerLabel, nameLabel, moveLabel])
         
-        stack.addArrangedSubview(tickerLabel)
-        stack.addArrangedSubview(nameLabel)
-        stack.addArrangedSubview(moveLabel)
+        tickerLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        return stack
+        nameLabel.anchor(tickerLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        moveLabel.anchor(nameLabel.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        
+        
+//        let stack = UIStackView()
+//
+//        stack.axis = .vertical
+//        stack.translatesAutoresizingMaskIntoConstraints = false
+//
+//        stack.addArrangedSubview(tickerLabel)
+//        stack.addArrangedSubview(nameLabel)
+//        stack.addArrangedSubview(moveLabel)
+//
+//        return stack
     }
     
     required init?(coder: NSCoder) {

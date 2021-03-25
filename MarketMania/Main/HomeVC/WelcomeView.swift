@@ -32,7 +32,7 @@ class WelcomeView: UICollectionViewCell {
     
     let tempSarcasticLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Ready to lose more $ ?", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .gray)
+        label.add(text: "Ready to lose more $ ?", font: UIFont(name: "PingFangHK-Regular", size: 18)!, textColor: .gray)
         label.textAlignment = .center
         return label
     }()
