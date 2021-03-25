@@ -30,6 +30,10 @@ struct User {
         self.lounges = dictionary["lounges"] as? [Lounge] ?? []
     }
     
+    func getUserStats() -> UserStats {
+        return self.stats
+    }
+    
     func joinLounge(lounge: Lounge) -> Bool {
         return false
     }

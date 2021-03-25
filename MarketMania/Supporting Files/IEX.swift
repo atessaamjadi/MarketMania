@@ -17,7 +17,7 @@ let isTest = false // set to true if you want to use real data, false to use san
  *
  * @return: Array of stock objects stock objects with all their fields filled out
  */
-func getStocks(symbols: [String]) -> [Stock] {
+func getStocks(symbols: [String], completion: ([Stock]) -> Void) -> Void {
     
     let baseURL: String = "https://sandbox.iexapis.com/stable"
     let tok: String = tpk
@@ -60,9 +60,8 @@ func getStocks(symbols: [String]) -> [Stock] {
         task.resume()
     }
     
-    // TODO: callback here
-    
-    return ret
+    // pass returned stock array to callback/completion function
+    completion(ret)
 }
 
 func getWinners(completion: @escaping ([Stock]) -> Void) -> Void {
