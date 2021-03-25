@@ -310,7 +310,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "9E98AA4D-05C1-429C-BE32-D5BA2D19229D"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "MarketMania/Supporting Files/GlobalFunctions.swift"
@@ -350,10 +350,10 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "49"
                   endingLineNumber = "49"
-                  offsetFromSymbolStart = "1889">
+                  offsetFromSymbolStart = "1949">
                </Location>
                <Location
-                  uuid = "D5AA3B81-F661-412C-A0EF-7FCCD074126B - dbe2b5708b6bb409"
+                  uuid = "D5AA3B81-F661-412C-A0EF-7FCCD074126B - dbe2b5708b6bb42e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -363,9 +363,9 @@
                   urlString = "file:///Users/alex/Documents/GitHub/MarketMania/MarketMania/Auth/LoginVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "49"
-                  endingLineNumber = "49"
-                  offsetFromSymbolStart = "4">
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "75">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -380,13 +380,13 @@
             filePath = "MarketMania/Auth/SignUpVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "handleSignUp()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B217EDB5-0C6A-4DF3-9F81-C5CA257B5B1A - ccee5a118238b42f"
+                  uuid = "B217EDB5-0C6A-4DF3-9F81-C5CA257B5B1A - ccee5a118238b5ce"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
@@ -396,9 +396,9 @@
                   urlString = "file:///Users/alex/Documents/GitHub/MarketMania/MarketMania/Auth/SignUpVC.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "1246">
+                  startingLineNumber = "76"
+                  endingLineNumber = "76"
+                  offsetFromSymbolStart = "1300">
                </Location>
                <Location
                   uuid = "B217EDB5-0C6A-4DF3-9F81-C5CA257B5B1A - 5fc474fcb92918f9"
@@ -413,7 +413,7 @@
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "77"
                   endingLineNumber = "77"
-                  offsetFromSymbolStart = "4">
+                  offsetFromSymbolStart = "75">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -448,6 +448,102 @@
             endingLineNumber = "26"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "291F6E80-6C07-43EA-AFD0-3ED1BD6F97A0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MarketMania/Supporting Files/GlobalFunctions.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "fetchUser(completion:)"
+            landmarkType = "9">
+            <Locations>
+               <Location
+                  uuid = "291F6E80-6C07-43EA-AFD0-3ED1BD6F97A0 - f15c122ee870760f"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MarketMania.fetchUser(completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "MarketMania"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alex/Documents/GitHub/MarketMania/MarketMania/Supporting%20Files/GlobalFunctions.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "409">
+               </Location>
+               <Location
+                  uuid = "291F6E80-6C07-43EA-AFD0-3ED1BD6F97A0 - 455ff2e17cf4a611"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.FIRDataSnapshot) -&gt; () in MarketMania.fetchUser(completion: () -&gt; ()) -&gt; ()"
+                  moduleName = "MarketMania"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alex/Documents/GitHub/MarketMania/MarketMania/Supporting%20Files/GlobalFunctions.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "20"
+                  endingLineNumber = "20"
+                  offsetFromSymbolStart = "258">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A32C85D1-FCDE-4399-BC55-71D9F6059B1D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MarketMania/Main/TabBarVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "25"
+            endingLineNumber = "25"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A32C85D1-FCDE-4399-BC55-71D9F6059B1D - 8bab071dda4d491b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "MarketMania.TabBarVC.viewDidLoad() -&gt; ()"
+                  moduleName = "MarketMania"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alex/Documents/GitHub/MarketMania/MarketMania/Main/TabBarVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "756">
+               </Location>
+               <Location
+                  uuid = "A32C85D1-FCDE-4399-BC55-71D9F6059B1D - 7c81e7725982f3ef"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; () in MarketMania.TabBarVC.viewDidLoad() -&gt; ()"
+                  moduleName = "MarketMania"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alex/Documents/GitHub/MarketMania/MarketMania/Main/TabBarVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "75">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

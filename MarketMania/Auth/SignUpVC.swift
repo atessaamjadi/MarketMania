@@ -34,7 +34,6 @@ class SignUpVC: UIViewController {
         guard let firstName = firstNameInputView.input.text else {return}
         guard let lastName = lastNameInputView.input.text else {return}
         
-        
         Auth.auth().createUser(withEmail: email, password: password) { (data, err) in
             if let err = err {
                 print("Registration error: " + err.localizedDescription)
@@ -74,7 +73,11 @@ class SignUpVC: UIViewController {
                 }
 
                 print("Successfully signed in user with id: " + (Auth.auth().currentUser?.uid)!)
-                fetchUser{}
+                fetchUser{
+                    self.view.window?.resignKey()
+                    let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
+                    tabBarVC.setUpViewControllers()
+                }
                 
                 
                 let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
