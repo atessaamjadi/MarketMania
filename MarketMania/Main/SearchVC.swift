@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SearchVC: UIViewController {
+class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
     //
     // MARK: View Lifecycle
@@ -22,8 +22,13 @@ class SearchVC: UIViewController {
         collectionView2.delegate = self
         collectionView2.dataSource = self
         
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        // self.tableView.register(UINib.init(nibName: "UITableViewCell", bundle: nil), forCellReuseIdentifier: "UITableViewCell")
+        
+        searchBar.delegate = self
         self.navigationItem.titleView = searchBar
-
         
         setUpViews()
     }
@@ -35,8 +40,15 @@ class SearchVC: UIViewController {
     //
     // MARK: UI Setup
     //
+
     
-    let searchBar: UISearchBar = {
+    var dummyData = ["A", "AB", "ABC", "ABCD"]
+    var activeSearch: Bool = false
+    var filtered: [String] = []
+    
+    
+    
+    var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.searchBarStyle = UISearchBar.Style.prominent
         sb.placeholder = " Search..."
@@ -44,6 +56,9 @@ class SearchVC: UIViewController {
         sb.isTranslucent = false
         return sb
     }()
+    
+    let tableView = UITableView(frame: .zero, style: .plain)
+        
     
     let exploreLabel: UILabel = {
         let label = UILabel()
@@ -93,9 +108,89 @@ class SearchVC: UIViewController {
         return cv
     }()
     
+    
+    // search bar functions
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.becomeFirstResponder()
+        searchBar.setShowsCancelButton(true, animated: true)
+        activeSearch = true
+        
+        tableView.isHidden = false
+        
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: false)
+        activeSearch = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: false)
+        activeSearch = false
+        
+        tableView.isHidden = true
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: false)
+        
+        activeSearch = false
+        
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        filtered = dummyData.filter({ (text) -> Bool in
+            let tmp: NSString = text as NSString
+            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+            return range.location != NSNotFound
+        })
+        
+        if (filtered.count == 0) {
+            activeSearch = false
+        } else {
+            activeSearch = true
+        }
+        
+        self.tableView.reloadData()
+        
+        
+        
+        print("yuh!")
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if (activeSearch) {
+            return filtered.count
+        } else {
+            return dummyData.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
+        if (activeSearch) {
+            cell.textLabel?.text = filtered[indexPath.row]
+        } else {
+            cell.textLabel?.text = dummyData[indexPath.row]
+        }
+        
+        return cell
+    }
+    
+    
+    
     func setUpViews() {
         
-        view.addSubviews(views: [exploreLabel, mostPopularLabel, collectionView1, sectorsLabel, collectionView2])
+        view.addSubviews(views: [tableView, exploreLabel, mostPopularLabel, collectionView1, sectorsLabel, collectionView2])
+        
         
         //search bar anchor before it became the navigation title view
 //        searchBar.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: exploreLabel.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 0)
@@ -111,6 +206,10 @@ class SearchVC: UIViewController {
         sectorsLabel.anchor(collectionView1.bottomAnchor, left: view.leftAnchor, bottom: collectionView2.topAnchor, right: nil, topConstant: 20, leftConstant: 10, bottomConstant: 5, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         collectionView2.anchor(sectorsLabel.bottomAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 10, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        
+        tableView.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.safeAreaLayoutGuide.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.safeAreaLayoutGuide.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        tableView.isHidden = true
+        view.bringSubviewToFront(tableView)
 
     }
 }
