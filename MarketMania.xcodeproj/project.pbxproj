@@ -39,6 +39,7 @@
 		ADCE1BAE260AC23300B6CDB0 /* ModifyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1BAD260AC23300B6CDB0 /* ModifyAccount.swift */; };
 		ADCE1BC8260AC38100B6CDB0 /* InformationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1BC7260AC38100B6CDB0 /* InformationViewCell.swift */; };
 		C984D416CA6458F13BA8F18E /* Pods_MarketMania_MarketManiaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C189EAB4CF70D74A266F5BF6 /* Pods_MarketMania_MarketManiaUITests.framework */; };
+		FA530745260C3302005734C1 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA530744260C3302005734C1 /* GlobalFunctions.swift */; };
 		FA8391E2260A61C70058AA6A /* Stock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8391E1260A61C70058AA6A /* Stock.swift */; };
 		FA8391E7260A61D30058AA6A /* IEX.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8391E6260A61D30058AA6A /* IEX.swift */; };
 		FA839201260A6DE30058AA6A /* UserStats.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA839200260A6DE30058AA6A /* UserStats.swift */; };
@@ -107,6 +108,7 @@
 		EDB79E7A02636C307A3D136E /* Pods-MarketMania.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania.release.xcconfig"; path = "Target Support Files/Pods-MarketMania/Pods-MarketMania.release.xcconfig"; sourceTree = "<group>"; };
 		F72701D1DD60AA031F3838E7 /* Pods-MarketMania.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania.debug.xcconfig"; path = "Target Support Files/Pods-MarketMania/Pods-MarketMania.debug.xcconfig"; sourceTree = "<group>"; };
 		F9B37A84618AEA0E139BC447 /* Pods-MarketMania-MarketManiaUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania-MarketManiaUITests.release.xcconfig"; path = "Target Support Files/Pods-MarketMania-MarketManiaUITests/Pods-MarketMania-MarketManiaUITests.release.xcconfig"; sourceTree = "<group>"; };
+		FA530744260C3302005734C1 /* GlobalFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunctions.swift; sourceTree = "<group>"; };
 		FA8391E1260A61C70058AA6A /* Stock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Stock.swift; sourceTree = "<group>"; };
 		FA8391E6260A61D30058AA6A /* IEX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IEX.swift; sourceTree = "<group>"; };
 		FA839200260A6DE30058AA6A /* UserStats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserStats.swift; sourceTree = "<group>"; };
@@ -228,6 +230,7 @@
 				43885CF3260147FF0002EE45 /* Extensions.swift */,
 				43885CF5260148000002EE45 /* FirebaseUtils.swift */,
 				43885CF4260148000002EE45 /* ParentClasses.swift */,
+				FA530744260C3302005734C1 /* GlobalFunctions.swift */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -543,6 +546,7 @@
 				43885C7D26013C500002EE45 /* AppDelegate.swift in Sources */,
 				43885CF6260148000002EE45 /* Colors.swift in Sources */,
 				43885D0D26014A620002EE45 /* HomeVC.swift in Sources */,
+				FA530745260C3302005734C1 /* GlobalFunctions.swift in Sources */,
 				43885CBC260141650002EE45 /* TabBarVC.swift in Sources */,
 				43885D1226014AB50002EE45 /* SearchVC.swift in Sources */,
 				43885CE9260146DD0002EE45 /* LoginVC.swift in Sources */,

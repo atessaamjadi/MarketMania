@@ -38,6 +38,7 @@ class ModifyAccount:  UIViewController, UICollectionViewDataSource, UICollection
 
         self.cv.register(SimpleTextInputCell.self, forCellWithReuseIdentifier: "InputCell")
         self.cv.register(SimpleTextCell.self, forCellWithReuseIdentifier: "TextCell")
+
     }
 
 
@@ -48,14 +49,14 @@ class ModifyAccount:  UIViewController, UICollectionViewDataSource, UICollection
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return 4
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let placeHolders = ["First Name", "Last Name", "Address", "Email", "Phone Number"]
+        let placeHolders = ["First Name", "Last Name", "Email"]
         
-        if (indexPath.row == 5) {
+        if (indexPath.row == 3) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TextCell", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "Submit"
             cell.textLabel.textColor = .black
@@ -76,8 +77,7 @@ class ModifyAccount:  UIViewController, UICollectionViewDataSource, UICollection
 
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if (indexPath.row == 5) {
+        if (indexPath.row == 3) {
             saveItems()
             
             // reset UI
@@ -93,15 +93,11 @@ class ModifyAccount:  UIViewController, UICollectionViewDataSource, UICollection
         if (firstName == ""){firstName = globalCurrentUser?.firstName}
         var lastName = (self.cv.cellForItem(at: [0,1]) as! SimpleTextInputCell).textInput.text
         if (lastName == ""){lastName = globalCurrentUser?.lastName}
-        var address = (self.cv.cellForItem(at: [0,2]) as! SimpleTextInputCell).textInput.text
-        //if (address == ""){address = globalCurrentUser?.address}
-        var email = (self.cv.cellForItem(at: [0,3]) as! SimpleTextInputCell).textInput.text
+        var email = (self.cv.cellForItem(at: [0,2]) as! SimpleTextInputCell).textInput.text
         if (email == ""){email = globalCurrentUser?.email}
-        var phone = (self.cv.cellForItem(at: [0,4]) as! SimpleTextInputCell).textInput.text
-        //if (phone == ""){phone = globalCurrentUser?.phoneNum}
         
         guard let currentUserID = Auth.auth().currentUser?.uid else {return}
-        let values = ["firstName": firstName!, "lastName": lastName!, "email": email!, "phoneNum":phone!, "address": address!]
+        let values = ["firstName": firstName!, "lastName": lastName!, "email": email!]
         
 
         Database.database().reference().child("Users").child(currentUserID).updateChildValues(values)

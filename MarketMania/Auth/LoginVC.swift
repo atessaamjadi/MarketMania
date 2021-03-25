@@ -33,20 +33,6 @@ class LoginVC: UIViewController {
         self.present(signUpVC, animated: true, completion: nil)
     }
     
-    func fetchCurrentUser() {
-        
-        // Checks that there is a current user with an ID
-        guard let currentUserID = Auth.auth().currentUser?.uid else {return}
-        
-        // Retrieves user info from Firebase
-        Database.database().reference().child("Users").child(currentUserID).observeSingleEvent(of: .value) { (snapshot) in
-            
-            // Creates dictionary of user information, instatiates new User object
-            guard let userDict = snapshot.value as? [String: Any] else {return}
-            globalCurrentUser = User(uid: currentUserID, dictionary: userDict)
-        }
-    }
-    
     @objc func handleSignIn() {
         
         guard let email = emailInputView.input.text else {return}
@@ -59,8 +45,8 @@ class LoginVC: UIViewController {
             }
 
             if(Auth.auth().currentUser?.uid != nil) {
-            print("Successfully signed in user with id: " + (Auth.auth().currentUser?.uid)!)
-                self.fetchCurrentUser()
+                print("Successfully signed in user with id: " + (Auth.auth().currentUser?.uid)!)
+                fetchUser()
             } else{
                 let alert = UIAlertController(title: "Error!", message: "Fill out all of the boxes before signing in.", preferredStyle: .alert)
                 
@@ -73,14 +59,7 @@ class LoginVC: UIViewController {
                     alert.dismiss(animated: true, completion: nil)
                 }
             }
-            
-            Auth.auth().currentUser?.getIDTokenResult(completion:  {(result, error) in guard let claims = result else{
-                return
-            }
-            if (((claims.claims["worker"] as? NSNumber)?.boolValue) == true){
-                print("here")
-            }
-            })
+
             
             let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
 
