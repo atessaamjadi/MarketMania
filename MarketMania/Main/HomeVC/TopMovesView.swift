@@ -9,12 +9,24 @@ import UIKit
 
 class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    var winners: [Stock] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpViews()
         
         collectionView1.delegate = self
         collectionView1.dataSource = self
+        
+        // run async function that reloads view once data is fetched
+        getWinners { response in
+            // UI updates are only allowed in main queue
+            DispatchQueue.main.async {
+                print("winners", response)
+                self.winners = response
+                self.collectionView1.reloadData()
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,11 +67,11 @@ class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollection
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        //**** Commented out for now to see UI
-//        print(winners.count)
-//        return winners.count
+        if (winners.count != 0){
+            return winners.count
+        }
         
-        return 10
+        return 6
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -72,6 +84,15 @@ class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollection
 //        cell.moveLabel.text = String((stock.changePercent ?? 0.0))
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mover", for: indexPath) as! MoverCell
+              
+        if (winners.count != 0) {
+            let stock = winners[indexPath.row]
+
+            cell.tickerLabel.text = stock.symbol
+            cell.nameLabel.text = stock.companyName
+            cell.moveLabel.text = String((stock.changePercent ?? 0.0))
+        }
+
         return cell
     }
     
@@ -126,9 +147,9 @@ class MoverCell: UICollectionViewCell {
         stack.axis = .vertical
         stack.translatesAutoresizingMaskIntoConstraints = false
         
-//        stack.addArrangedSubview(tickerLabel)
-//        stack.addArrangedSubview(nameLabel)
-//        stack.addArrangedSubview(moveLabel)
+        stack.addArrangedSubview(tickerLabel)
+        stack.addArrangedSubview(nameLabel)
+        stack.addArrangedSubview(moveLabel)
         
         return stack
     }

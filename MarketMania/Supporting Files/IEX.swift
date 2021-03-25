@@ -60,22 +60,24 @@ func getStocks(symbols: [String]) -> [Stock] {
         task.resume()
     }
     
+    // TODO: callback here
+    
     return ret
 }
 
-func getWinners() -> [Stock] {
-    return getMovers(type: "gainers")
+func getWinners(completion: @escaping ([Stock]) -> Void) -> Void {
+    return getMovers(type: "gainers", completion: completion)
 }
 
-func getLosers() -> [Stock] {
-    return getMovers(type: "losers")
+func getLosers(completion: @escaping ([Stock]) -> Void) -> Void {
+    return getMovers(type: "losers", completion: completion)
 }
 
-func getMostActive() -> [Stock] {
-    return getMovers(type: "mostactive")
+func getMostActive(completion: @escaping ([Stock]) -> Void) -> Void {
+    return getMovers(type: "mostactive", completion: completion)
 }
 
-private func getMovers(type: String) -> [Stock] {
+private func getMovers(type: String, completion: @escaping ([Stock]) -> Void) -> Void {
     let baseURL: String = "https://sandbox.iexapis.com/stable"
     let tok: String = tpk
     var ret: [Stock] = []
@@ -111,11 +113,11 @@ private func getMovers(type: String) -> [Stock] {
             let decoder = JSONDecoder()
             ret = try decoder.decode([Stock].self, from: data)
             
-            print(ret)
+            completion(ret) // this passes the value set in ret ([Stock]) to the callback arg ([Stock])
         } catch let error {
             print("Error decoding JSON: " + error.localizedDescription)
         }
     })
     task.resume()
-    return ret
+    
 }

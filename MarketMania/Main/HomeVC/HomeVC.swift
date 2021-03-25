@@ -13,7 +13,6 @@ class HomeVC: UIViewController {
     // MARK: View Lifecycle
     //
     
-    var winners: [Stock] = []
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +22,6 @@ class HomeVC: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        
-        // run async function that reloads view once data is fetched
         
         //getStocks(symbols: ["AAPL", "MO"])
     }
