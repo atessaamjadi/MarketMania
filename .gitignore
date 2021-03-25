@@ -1,7 +1,4 @@
 
-MarketMania.xcworkspace/xcuserdata/alex.xcuserdatad/UserInterfaceState.xcuserstate
-MarketMania.xcworkspace/xcuserdata/alex.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
-MarketMania.xcworkspace/xcuserdata/alex.xcuserdatad/UserInterfaceState.xcuserstate
-MarketMania.xcworkspace/xcuserdata/alex.xcuserdatad/UserInterfaceState.xcuserstate
-MarketMania.xcworkspace/xcuserdata/alex.xcuserdatad/xcdebugger/Breakpoints_v2.xcbkptlist
-Pods/Pods.xcodeproj/xcuserdata/alex.xcuserdatad/xcschemes/xcschememanagement.plist
+*.xcuserstate
+*.xcbkptlist
+*.plist
