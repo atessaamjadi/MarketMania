@@ -143,23 +143,32 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
-        filtered = dummyData.filter({ (text) -> Bool in
-            let tmp: NSString = text as NSString
-            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-            return range.location != NSNotFound
-        })
+        if searchText.isEmpty == false {
+            filtered = dummyData.filter { name in return name.lowercased().contains(searchText.lowercased())}
+        }
+        else {
+            filtered = dummyData
+        }
+        
+//        filtered = dummyData.filter({ (text) -> Bool in
+//            let tmp: NSString = text as NSString
+//            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+//            return range.location != NSNotFound
+//        })
         
         if (filtered.count == 0) {
-            activeSearch = false
+            if (searchText.isEmpty == true) {
+                activeSearch = false
+            }
+            else {
+                filtered = []
+                activeSearch = true
+            }
         } else {
             activeSearch = true
         }
         
         self.tableView.reloadData()
-        
-        
-        
-        print("yuh!")
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
