@@ -39,12 +39,36 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
             }
         }
         
+        // fill sector labels
+        sectorLabels = getSectorLabels()
+        
+        
         setUpViews()
     }
     
     //
     // MARK: Functions
     //
+    
+    func getSectorLabels() -> [String] {
+        let url = Bundle.main.url(forResource: "Stock_Sectors", withExtension: "json")
+        
+        guard let jsonData = url else {return ["Shid"]}
+        guard let data = try? Data(contentsOf: jsonData) else {return["shitFuck"]}
+        guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]
+            else {return["SHITFUCK"]}
+        
+        var ret: [String] = []
+        let sectors = json["sectors"] as? [[String: Any]]
+        for sector in sectors as? [[String: String]] ?? [["name": "error"]]{
+            if let name = sector["name"] {
+                ret.append(name)
+                //print(name)
+            }
+        }
+        
+        return ret
+    }
     
     //
     // MARK: UI Setup
@@ -55,6 +79,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     var activeSearch: Bool = false
     var filtered: [String] = []
     var popularStocks: [Stock] = []
+    var sectorLabels: [String] = []
     
     
     var searchBar: UISearchBar = {
@@ -244,15 +269,14 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if (collectionView == collectionView1.self && popularStocks.count != 0) {
-            
-            //**** Commented out for now to see UI
-    //        print(winners.count)
-    //        return winners.count
-            
             return popularStocks.count
+        } else if (collectionView == collectionView2.self && sectorLabels.count != 0) {
+            return sectorLabels.count
+        } else {
+            return 6
         }
         
-        return 21
+        //return 21
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -267,6 +291,10 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
             cell.moveLabel.text = String((stock.changePercent ?? 0.0))
 
             
+            return cell
+        } else if (collectionView == collectionView2.self && sectorLabels.count != 0) {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectorCell", for: indexPath) as! sectorCell
+            cell.sectorLabel.text = sectorLabels[indexPath.row]
             return cell
         }
         
@@ -342,6 +370,12 @@ class mostPopularCell: UICollectionViewCell {
 
 class sectorCell: UICollectionViewCell {
     
+    let sectorLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Sector"
+        return label
+    }()
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -352,9 +386,31 @@ class sectorCell: UICollectionViewCell {
         backgroundColor = .systemTeal
         
         setUpViews()
+        
+    }
+    
+    func setupStack() -> UIStackView {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        
+        stack.addArrangedSubview(sectorLabel)
+        // add img
+        
+        return stack
     }
     
     func setUpViews() {
+        let stack: UIStackView = setupStack()
+        self.contentView.addSubview(stack)
         
+        NSLayoutConstraint.activate([
+            stack.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+            stack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            stack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+            stack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+        ])
+        
+        self.contentView.layer.cornerRadius = 5
     }
 }

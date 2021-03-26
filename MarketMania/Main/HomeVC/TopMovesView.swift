@@ -22,7 +22,7 @@ class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollection
         getWinners { response in
             // UI updates are only allowed in main queue
             DispatchQueue.main.async {
-                print("winners", response)
+                //print("winners", response)
                 self.winners = response
                 self.collectionView1.reloadData()
             }
