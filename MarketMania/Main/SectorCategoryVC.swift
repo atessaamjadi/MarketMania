@@ -19,12 +19,14 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        navigationItem.titleView = sectorCategoryLabel
+        
 
     }
     
     let sectorCategoryLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "TECH FOR NOW", font: UIFont.boldSystemFont(ofSize: 25.0), textColor: .black)
+        label.add(text: "TECH FOR NOW", font: UIFont(name: "Verdana-BoldItalic", size: 20)!, textColor: .black)
         label.textAlignment = .center
         return label
         
@@ -36,6 +38,8 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         sb.placeholder = " Search..."
         sb.sizeToFit()
         sb.isTranslucent = false
+        sb.backgroundColor = .black
+        
         return sb
     }()
     
@@ -44,7 +48,7 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .menu_white
+        //cv.backgroundColor = .menu_white
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         // register cells
@@ -56,15 +60,17 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
 
     func setUpViews() {
         
-        view.backgroundColor = .menu_white
+        //view.backgroundColor = .menu_white
         
-        view.addSubviews(views: [sectorCategoryLabel, searchBar, collectionView])
+        view.addSubviews(views: [searchBar, collectionView])
         
-        sectorCategoryLabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        //sectorCategoryLabel is navigation title right now
         
-        searchBar.anchor(sectorCategoryLabel.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//        sectorCategoryLabel.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        collectionView.anchor(searchBar.bottomAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, topConstant: 10, leftConstant: 5, bottomConstant: 0, rightConstant: 5, widthConstant: 0, heightConstant: 0)
+        searchBar.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        collectionView.anchor(searchBar.bottomAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
 
     }
     
@@ -93,7 +99,7 @@ class SectorCategoryCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemTeal
+        backgroundColor = .systemGray5
         
         setUpViews()
     }
@@ -138,15 +144,15 @@ class SectorCategoryCell: UICollectionViewCell {
         
         contentView.addSubviews(views: [nameLabel, dashLabel,currentPriceLabel, percentChangeLabel,priceChangeLabel])
         
-        nameLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: dashLabel.leftAnchor, topConstant: 20, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        nameLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: dashLabel.leftAnchor, topConstant: 20, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         dashLabel.anchor(contentView.topAnchor, left: nameLabel.rightAnchor, bottom: nil, right: currentPriceLabel.leftAnchor, topConstant: 20, leftConstant: 2, bottomConstant: 0, rightConstant: 2, widthConstant: 0, heightConstant: 0)
         
         currentPriceLabel.anchor(contentView.topAnchor, left: dashLabel.rightAnchor, bottom: nil, right: nil, topConstant: 20, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        percentChangeLabel.anchor(contentView.topAnchor, left: nil, bottom: priceChangeLabel.topAnchor, right: contentView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 2, widthConstant: 0, heightConstant: 0)
+        percentChangeLabel.anchor(contentView.topAnchor, left: nil, bottom: priceChangeLabel.topAnchor, right: contentView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
-        priceChangeLabel.anchor(percentChangeLabel.bottomAnchor, left: nil, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 5, rightConstant: 2, widthConstant: 0, heightConstant: 0)
+        priceChangeLabel.anchor(percentChangeLabel.bottomAnchor, left: nil, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 5, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
       
        

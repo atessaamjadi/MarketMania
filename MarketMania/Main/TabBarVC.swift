@@ -59,7 +59,7 @@ class TabBarVC: UITabBarController {
     func add(vc: UIViewController, name: String, icon: UIImage) -> UINavigationController {
         vc.tabBarItem = UITabBarItem(title: name, image: icon.withRenderingMode(.alwaysTemplate), selectedImage: nil)
         vc.title = name
-        vc.view.backgroundColor = .menu_white
+        vc.view.backgroundColor = .black
         vc.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         return UINavigationController(rootViewController: vc)
     }

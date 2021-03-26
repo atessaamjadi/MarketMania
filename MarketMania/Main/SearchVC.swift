@@ -84,9 +84,17 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.searchBarStyle = UISearchBar.Style.prominent
-        sb.placeholder = " Search..."
+        sb.placeholder = "Search..."
+        
+        //change color of "Search..."
+        var searchTextField: UITextField? = sb.value(forKey: "searchField") as? UITextField
+           if searchTextField!.responds(to: #selector(getter: UITextField.attributedPlaceholder)) {
+            let attributeDict = [NSAttributedString.Key.foregroundColor: UIColor.black]
+               searchTextField!.attributedPlaceholder = NSAttributedString(string: "Search", attributes: attributeDict)
+           }
+        
         sb.sizeToFit()
-        sb.isTranslucent = false
+        sb.isTranslucent = true
         return sb
     }()
     
@@ -95,7 +103,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     let exploreLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Explore", font: UIFont.boldSystemFont(ofSize: 25.0), textColor: .darkGray)
+        label.add(text: "Explore", font: UIFont(name: "PingFangHK-Semibold", size: 25)!, textColor: .systemGray2)
         label.textAlignment = .center
         return label
         
@@ -103,7 +111,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     let mostPopularLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Most popular", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .gray)
+        label.add(text: "Most popular", font: UIFont(name: "PingFangHK-Medium", size: 15)!, textColor: .white)
         label.textAlignment = .center
         return label
     }()
@@ -123,7 +131,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     let sectorsLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Sectors", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .gray)
+        label.add(text: "Sectors", font: UIFont(name: "PingFangHK-Medium", size: 15)!, textColor: .white)
         label.textAlignment = .center
         return label
     }()
@@ -133,7 +141,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .menu_white
+        //cv.backgroundColor = .menu_white
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         // register cells
@@ -412,7 +420,7 @@ class sectorCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemGray3
+        backgroundColor = .systemGray2
         
         setUpViews()
         
@@ -443,6 +451,6 @@ class sectorCell: UICollectionViewCell {
 //        self.contentView.layer.cornerRadius = 5
         
         contentView.addSubview(sectorLabel)
-        sectorLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        sectorLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
     }
 }

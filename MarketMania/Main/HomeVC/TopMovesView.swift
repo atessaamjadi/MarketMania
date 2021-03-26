@@ -35,7 +35,7 @@ class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollection
     
     let topMovesLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Today's Winners", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .gray)
+        label.add(text: "Today's Winners", font: UIFont(name: "PingFangHK-Medium", size: 15)!, textColor: .white)
         label.textAlignment = .center
         return label
     }()
