@@ -1,0 +1,240 @@
+{
+    "sectors": [
+        {
+           "name":"Information"
+        },
+       {
+          "name":"Commercial Services"
+       },
+       {
+          "name":"Retail Trade"
+       },
+       {
+          "name":"Distribution Services"
+       },
+       {
+          "name":"Process Industries"
+       },
+       {
+          "name":"Professional, Scientific, and Technical Services"
+       },
+       {
+          "name":"Wholesale Trade"
+       },
+       {
+          "name":"Administrative and Support and Waste Management and Remediation Services"
+       },
+       {
+          "name":"Technology Services"
+       },
+       {
+          "name":"Educational Services"
+       },
+       {
+          "name":"Consumer Durables"
+       },
+       {
+          "name":"Government"
+       },
+       {
+          "name":"Real Estate and Rental and Leasing"
+       },
+       {
+          "name":"Consumer Non-Durables"
+       },
+       {
+          "name":"Communications"
+       },
+       {
+          "name":"Health Services"
+       },
+       {
+          "name":"Finance"
+       },
+       {
+          "name":"Producer Manufacturing"
+       },
+       {
+          "name":"Manufacturing"
+       },
+       {
+          "name":"Health Care and Social Assistance"
+       },
+       {
+          "name":"Transportation"
+       },
+       {
+          "name":"Agriculture, Forestry, Fishing and Hunting"
+       },
+       {
+          "name":"Accommodation and Food Services"
+       },
+       {
+          "name":"Energy Minerals"
+       },
+       {
+          "name":"Health Technology"
+       },
+       {
+          "name":"Construction"
+       },
+       {
+          "name":"Public Administration"
+       },
+       {
+          "name":"Arts, Entertainment, and Recreation"
+       },
+       {
+          "name":"Mining, Quarrying, and Oil and Gas Extraction"
+       },
+       {
+          "name":"Consumer Services"
+       },
+       {
+          "name":"Finance and Insurance"
+       },
+       {
+          "name":"Utilities"
+       },
+       {
+          "name":"Management of Companies and Enterprises"
+       },
+       {
+          "name":"Non-Energy Minerals"
+       },
+       {
+          "name":"Electronic Technology"
+       },
+       {
+          "name":"Transportation and Warehousing"
+       },
+       {
+          "name":"Industrial Services"
+       },
+       {
+           "name":"Other Services (except Public Administration)"
+       },
+       {
+          "name":"Miscellaneous"
+       }
+    ],
+    "origSectors": [
+        {
+           "name":"Other Services (except Public Administration)"
+        },
+        {
+           "name":"Commercial Services"
+        },
+        {
+           "name":"Retail Trade"
+        },
+        {
+           "name":"Distribution Services"
+        },
+        {
+           "name":"Process Industries"
+        },
+        {
+           "name":"Professional, Scientific, and Technical Services"
+        },
+        {
+           "name":"Wholesale Trade"
+        },
+        {
+           "name":"Administrative and Support and Waste Management and Remediation Services"
+        },
+        {
+           "name":"Technology Services"
+        },
+        {
+           "name":"Educational Services"
+        },
+        {
+           "name":"Consumer Durables"
+        },
+        {
+           "name":"Miscellaneous"
+        },
+        {
+           "name":"Government"
+        },
+        {
+           "name":"Real Estate and Rental and Leasing"
+        },
+        {
+           "name":"Consumer Non-Durables"
+        },
+        {
+           "name":"Communications"
+        },
+        {
+           "name":"Health Services"
+        },
+        {
+           "name":"Finance"
+        },
+        {
+           "name":"Producer Manufacturing"
+        },
+        {
+           "name":"Manufacturing"
+        },
+        {
+           "name":"Information"
+        },
+        {
+           "name":"Health Care and Social Assistance"
+        },
+        {
+           "name":"Transportation"
+        },
+        {
+           "name":"Agriculture, Forestry, Fishing and Hunting"
+        },
+        {
+           "name":"Accommodation and Food Services"
+        },
+        {
+           "name":"Energy Minerals"
+        },
+        {
+           "name":"Health Technology"
+        },
+        {
+           "name":"Construction"
+        },
+        {
+           "name":"Public Administration"
+        },
+        {
+           "name":"Arts, Entertainment, and Recreation"
+        },
+        {
+           "name":"Mining, Quarrying, and Oil and Gas Extraction"
+        },
+        {
+           "name":"Consumer Services"
+        },
+        {
+           "name":"Finance and Insurance"
+        },
+        {
+           "name":"Utilities"
+        },
+        {
+           "name":"Management of Companies and Enterprises"
+        },
+        {
+           "name":"Non-Energy Minerals"
+        },
+        {
+           "name":"Electronic Technology"
+        },
+        {
+           "name":"Transportation and Warehousing"
+        },
+        {
+           "name":"Industrial Services"
+        }
+     ]
+}

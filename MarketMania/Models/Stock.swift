@@ -21,7 +21,10 @@ struct Stock: Codable {
     let marketCap: CLong?
     let peRatio: Double?
     let changePercent: Double?
+}
 
+struct Sector: Codable {
+    let name: String?
 }
 
 //extension UserStock {
