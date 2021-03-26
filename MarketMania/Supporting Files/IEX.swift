@@ -10,7 +10,14 @@ import Foundation
 // not urgent since this is the public sandbox key.
 // Do not put any other key in this variable
 let tpk: String = "Tpk_03bc85510ff64107800ae53bbfafa504" // test public key
+let pk: String = ""
+let tok: String = tpk
+
 let isTest = false // set to true if you want to use real data, false to use sandbox data
+
+let testURL: String = "https://sandbox.iexapis.com/stable"
+let productionURL: String = ""
+let baseURL: String = testURL
 
 /**
  * Pass as array of symbols. Case does not matter. AAPL == aApl == aapl
@@ -18,16 +25,6 @@ let isTest = false // set to true if you want to use real data, false to use san
  * @return: Array of stock objects stock objects with all their fields filled out
  */
 func getStocks(symbols: [String], completion: ([Stock]) -> Void) -> Void {
-    
-    let baseURL: String = "https://sandbox.iexapis.com/stable"
-    let tok: String = tpk
-    
-    if (!isTest) {
-//        baseURL =
-//        tok = tpk
-    } else {
-        // TODO: set base url to live api, and use production key in tok
-    }
     
     let session = URLSession.shared
     var ret: [Stock] = []
@@ -65,32 +62,39 @@ func getStocks(symbols: [String], completion: ([Stock]) -> Void) -> Void {
 }
 
 func getWinners(completion: @escaping ([Stock]) -> Void) -> Void {
-    return getMovers(type: "gainers", completion: completion)
+    let urlString: String = baseURL + "/stock/market/list/gainers?token=" + tok
+    return getListOfStocks(urlString: urlString, completion: completion)
 }
 
 func getLosers(completion: @escaping ([Stock]) -> Void) -> Void {
-    return getMovers(type: "losers", completion: completion)
+    let urlString: String = baseURL + "/stock/market/list/losers?token=" + tok
+    return getListOfStocks(urlString: urlString, completion: completion)
 }
 
 func getMostActive(completion: @escaping ([Stock]) -> Void) -> Void {
-    return getMovers(type: "mostactive", completion: completion)
+    let urlString: String = baseURL + "/stock/market/list/mostactive?token=" + tok
+    return getListOfStocks(urlString: urlString, completion: completion)
 }
 
-private func getMovers(type: String, completion: @escaping ([Stock]) -> Void) -> Void {
-    let baseURL: String = "https://sandbox.iexapis.com/stable"
-    let tok: String = tpk
+/**
+ Valid Types: sector, tag, list
+ */
+func getCollection(type: String, completion: @escaping ([Stock]) -> Void) -> Void {
+    guard (type == "sector" || type == "tag" || type == "list") else {
+        return
+    }
+    let urlString: String = baseURL + "/stock/market/collection/" + type + "?token=" + tok
+    return getListOfStocks(urlString: urlString, completion: completion)
+}
+
+/**
+ Returns a list  of less than or equal to 10 stocks through the completion handler's arg (@escaping ([Stock]))
+ */
+private func getListOfStocks(urlString: String, completion: @escaping ([Stock]) -> Void) -> Void {
     var ret: [Stock] = []
     
-    if (!isTest) {
-//        baseURL = "https://sandbox.iexapis.com/stable"
-//        tok = tpk
-    } else {
-        // TODO: set base url to live api, and use production key in tok
-    }
-    
     let session = URLSession.shared
-    
-    let url = URL(string: baseURL + "/stock/market/list/" + type + "?token=" + tok)!
+    let url = URL(string: urlString)!
     let req = URLRequest(url: url)
     
     let task = session.dataTask(with: req as URLRequest, completionHandler: {
@@ -105,9 +109,6 @@ private func getMovers(type: String, completion: @escaping ([Stock]) -> Void) ->
             return
         }
         
-        print("DATA: ")
-        print(data)
-        
         do {
             let decoder = JSONDecoder()
             ret = try decoder.decode([Stock].self, from: data)
@@ -118,5 +119,5 @@ private func getMovers(type: String, completion: @escaping ([Stock]) -> Void) ->
         }
     })
     task.resume()
-    
 }
+

@@ -16,8 +16,6 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-
     }
     
     let sectorCategoryLabel: UILabel = {
