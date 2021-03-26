@@ -2,7 +2,7 @@
 //  AccountVC.swift
 //  MarketMania
 //
-//  Created by Thor Larson on 3/16/21.
+//  Created by Mitch Alley on 3/16/21.
 //
 
 /*import UIKit
@@ -206,7 +206,9 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         }
         
         if (indexPath.row == 3) {
-            // update payment
+            // update Achievements
+            //let vc = ViewAchievementsVC()
+            //navigationController?.pushViewController(vc, animated: true)
         }
             
         // logout

@@ -2,7 +2,7 @@
 //  SignUpVC.swift
 //  BadgerBytes
 //
-//  Created by Thor Larson on 2/18/21.
+//  Created by Mitch Alley on 2/18/21.
 //
 import UIKit
 import Firebase
@@ -32,7 +32,7 @@ class ModifyAccount:  UIViewController, UICollectionViewDataSource, UICollection
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.cv.backgroundColor = .white
+        self.cv.backgroundColor = .black
         self.cv.dataSource = self
         self.cv.delegate = self
 

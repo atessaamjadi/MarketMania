@@ -2,7 +2,7 @@
 //  UpdatePasswordVC.swift
 //  BadgerBytes
 //
-//  Created by Connor Hanson on 2/23/21.
+//  Created by Mitch Alley on 2/23/21.
 //
 
 import Firebase
@@ -29,7 +29,7 @@ class UpdatePasswordVC: UIViewController, UICollectionViewDataSource, UICollecti
     override func viewDidLoad() {
            super.viewDidLoad()
 
-           self.cv.backgroundColor = .menu_white
+           self.cv.backgroundColor = .black
            self.cv.dataSource = self
            self.cv.delegate = self
 
