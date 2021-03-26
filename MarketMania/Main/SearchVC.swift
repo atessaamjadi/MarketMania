@@ -42,7 +42,6 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         // fill sector labels
         sectorLabels = getSectorLabels()
         
-        
         setUpViews()
     }
     
@@ -114,7 +113,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .menu_white
+        cv.backgroundColor = .systemBlue
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         // register cells
@@ -389,9 +388,13 @@ class sectorCell: UICollectionViewCell {
     
     let sectorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Sector"
+        label.add(text: "Sector", font: UIFont.boldSystemFont(ofSize: 12.0), textColor: .black)
+        label.textAlignment = .center
+        label.numberOfLines = 5
         return label
     }()
+    
+    //add image
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -400,34 +403,37 @@ class sectorCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemTeal
+        backgroundColor = .systemGray3
         
         setUpViews()
         
     }
     
-    func setupStack() -> UIStackView {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        stack.addArrangedSubview(sectorLabel)
-        // add img
-        
-        return stack
-    }
+//    func setupStack() -> UIStackView {
+//        let stack = UIStackView()
+//        stack.axis = .vertical
+//        stack.translatesAutoresizingMaskIntoConstraints = false
+//
+//        stack.addArrangedSubview(sectorLabel)
+//        // add img
+//
+//        return stack
+//    }
     
     func setUpViews() {
-        let stack: UIStackView = setupStack()
-        self.contentView.addSubview(stack)
+//        let stack: UIStackView = setupStack()
+//        self.contentView.addSubview(stack)
+//
+//        NSLayoutConstraint.activate([
+//            stack.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+//            stack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+//            stack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+//            stack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+//        ])
+//
+//        self.contentView.layer.cornerRadius = 5
         
-        NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            stack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            stack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            stack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
-        ])
-        
-        self.contentView.layer.cornerRadius = 5
+        contentView.addSubview(sectorLabel)
+        sectorLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
 }

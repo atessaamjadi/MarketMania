@@ -79,7 +79,7 @@ class watchListCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemTeal
+        backgroundColor = .systemGray2
         
         setUpViews()
     }
