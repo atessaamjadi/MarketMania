@@ -42,7 +42,6 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         // fill sector labels
         sectorLabels = getSectorLabels()
         
-        
         setUpViews()
     }
     
@@ -85,18 +84,31 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.searchBarStyle = UISearchBar.Style.prominent
-        sb.placeholder = " Search..."
+        sb.placeholder = "Search..."
+        
+        //change color of "Search..."
+        var searchTextField: UITextField? = sb.value(forKey: "searchField") as? UITextField
+           if searchTextField!.responds(to: #selector(getter: UITextField.attributedPlaceholder)) {
+            let attributeDict = [NSAttributedString.Key.foregroundColor: UIColor.black]
+               searchTextField!.attributedPlaceholder = NSAttributedString(string: "Search", attributes: attributeDict)
+           }
+        
         sb.sizeToFit()
-        sb.isTranslucent = false
+        sb.isTranslucent = true
         return sb
     }()
     
-    let tableView = UITableView(frame: .zero, style: .plain)
+    let tableView: UITableView = {
+        let tb = UITableView()
+        tb.backgroundColor = .black
+        return tb
         
+    }()
+    
     
     let exploreLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Explore", font: UIFont.boldSystemFont(ofSize: 25.0), textColor: .darkGray)
+        label.add(text: "Explore", font: UIFont(name: "PingFangHK-Semibold", size: 25)!, textColor: .systemGray2)
         label.textAlignment = .center
         return label
         
@@ -104,7 +116,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     let mostPopularLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Most popular", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .gray)
+        label.add(text: "Most popular", font: UIFont(name: "PingFangHK-Medium", size: 15)!, textColor: .white)
         label.textAlignment = .center
         return label
     }()
@@ -114,7 +126,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .menu_white
+        cv.backgroundColor = .systemBlue
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         // register cells
@@ -124,7 +136,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     let sectorsLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Sectors", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .gray)
+        label.add(text: "Sectors", font: UIFont(name: "PingFangHK-Medium", size: 15)!, textColor: .white)
         label.textAlignment = .center
         return label
     }()
@@ -134,7 +146,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .menu_white
+        //cv.backgroundColor = .menu_white
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         // register cells
@@ -225,6 +237,12 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
             cell.textLabel?.text = dummyData[indexPath.row]
         }
         
+        //make search table view cells black with white text
+        cell.backgroundColor = .black
+        cell.textLabel?.textColor = .white
+        cell.layer.borderColor = UIColor.gray.cgColor
+        cell.layer.borderWidth = 0.2
+        
         return cell
     }
     
@@ -309,6 +327,15 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         return cell
        
     }
+    
+    //allows each sector cell change view to it's category collection view (SectorCategoryVC)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == collectionView2.self {
+            let controller = SectorCategoryVC()
+            controller.selectedIndex = indexPath.row
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
 }
 
 class mostPopularCell: UICollectionViewCell {
@@ -389,9 +416,13 @@ class sectorCell: UICollectionViewCell {
     
     let sectorLabel: UILabel = {
         let label = UILabel()
-        label.text = "Sector"
+        label.add(text: "Sector", font: UIFont.boldSystemFont(ofSize: 12.0), textColor: .black)
+        label.textAlignment = .center
+        label.numberOfLines = 5
         return label
     }()
+    
+    //add image
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -400,34 +431,37 @@ class sectorCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemTeal
+        backgroundColor = .systemGray2
         
         setUpViews()
         
     }
     
-    func setupStack() -> UIStackView {
-        let stack = UIStackView()
-        stack.axis = .vertical
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        
-        stack.addArrangedSubview(sectorLabel)
-        // add img
-        
-        return stack
-    }
+//    func setupStack() -> UIStackView {
+//        let stack = UIStackView()
+//        stack.axis = .vertical
+//        stack.translatesAutoresizingMaskIntoConstraints = false
+//
+//        stack.addArrangedSubview(sectorLabel)
+//        // add img
+//
+//        return stack
+//    }
     
     func setUpViews() {
-        let stack: UIStackView = setupStack()
-        self.contentView.addSubview(stack)
+//        let stack: UIStackView = setupStack()
+//        self.contentView.addSubview(stack)
+//
+//        NSLayoutConstraint.activate([
+//            stack.topAnchor.constraint(equalTo: self.contentView.topAnchor),
+//            stack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+//            stack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
+//            stack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+//        ])
+//
+//        self.contentView.layer.cornerRadius = 5
         
-        NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: self.contentView.topAnchor),
-            stack.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            stack.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor),
-            stack.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
-        ])
-        
-        self.contentView.layer.cornerRadius = 5
+        contentView.addSubview(sectorLabel)
+        sectorLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
     }
 }

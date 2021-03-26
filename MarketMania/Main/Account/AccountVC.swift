@@ -93,7 +93,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     
     let titleLabel: UILabel = {
         let lbl = UILabel()
-        lbl.add(text: "Account", font: UIFont(name: "PingFangHK-Regular", size: 21)!, textColor: .black)
+        lbl.add(text: "Account", font: UIFont(name: "Verdana-BoldItalic", size: 20)!, textColor: .black)
         lbl.textAlignment = .center
         return lbl
     }()
@@ -103,7 +103,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         
         self.navigationItem.titleView = titleLabel
 
-        self.cv.backgroundColor = .menu_white
+        //self.cv.backgroundColor = .menu_white
         self.cv.dataSource = self
         self.cv.delegate = self
 
@@ -142,7 +142,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             // update password
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "Update Password"
-            cell.contentView.backgroundColor = .systemTeal
+            cell.contentView.backgroundColor = .white
             cell.textLabel.textColor = .black
             return cell
         }
@@ -150,7 +150,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         else if (indexPath.row == 2) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "Update User Info"
-            cell.contentView.backgroundColor = .systemTeal
+            cell.contentView.backgroundColor = .white
             cell.textLabel.textColor = .black
 
             return cell
@@ -160,7 +160,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         else if (indexPath.row == 3){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "View Achievements"
-            cell.contentView.backgroundColor = .systemTeal
+            cell.contentView.backgroundColor = .white
             cell.textLabel.textColor = .black
 
             return cell
@@ -172,7 +172,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             cell.textLabel.textColor = .black
             cell.textLabel.textAlignment = .center
             cell.textLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: -10).isActive = true
-            cell.contentView.backgroundColor = .systemTeal
+            cell.contentView.backgroundColor = .systemRed
             return cell
         }
     }
@@ -224,6 +224,10 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         if (indexPath.row == 0) {
             return CGSize(width: collectionView.bounds.size.width - 16, height: 120)
         }
+        if (indexPath.row == 4) {
+            return CGSize(width: collectionView.bounds.size.width - 16, height: 30)
+        }
+        
             return CGSize(width: collectionView.bounds.size.width - 16, height: 40)
 
     }
@@ -242,6 +246,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     public func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         insetForSectionAt section: Int) -> UIEdgeInsets {
+        
         return UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
     }
 }

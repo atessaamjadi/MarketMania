@@ -24,7 +24,7 @@ class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     let watchListLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Watchlist", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .gray)
+        label.add(text: "Watchlist", font: UIFont(name: "PingFangHK-Medium", size: 15)!, textColor: .white)
         label.textAlignment = .center
         return label
     }()
@@ -34,7 +34,7 @@ class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .menu_white
+        //cv.backgroundColor = .menu_white
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         // register cells
@@ -79,7 +79,7 @@ class watchListCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = .systemTeal
+        backgroundColor = .systemGray2
         
         setUpViews()
     }
