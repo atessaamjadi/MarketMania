@@ -53,10 +53,10 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     func getSectorLabels() -> [String] {
         let url = Bundle.main.url(forResource: "Stock_Sectors", withExtension: "json")
         
-        guard let jsonData = url else {return ["Shid"]}
-        guard let data = try? Data(contentsOf: jsonData) else {return["shitFuck"]}
+        guard let jsonData = url else {return ["Error retrieving JSON data"]}
+        guard let data = try? Data(contentsOf: jsonData) else {return["Error transforming json"]}
         guard let json = try? JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]
-            else {return["SHITFUCK"]}
+            else {return["Error serializing JSON object"]}
         
         var ret: [String] = []
         let sectors = json["sectors"] as? [[String: Any]]
