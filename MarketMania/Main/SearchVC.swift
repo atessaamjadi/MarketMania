@@ -98,8 +98,13 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         return sb
     }()
     
-    let tableView = UITableView(frame: .zero, style: .plain)
+    let tableView: UITableView = {
+        let tb = UITableView()
+        tb.backgroundColor = .black
+        return tb
         
+    }()
+    
     
     let exploreLabel: UILabel = {
         let label = UILabel()
@@ -231,6 +236,12 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         } else {
             cell.textLabel?.text = dummyData[indexPath.row]
         }
+        
+        //make search table view cells black with white text
+        cell.backgroundColor = .black
+        cell.textLabel?.textColor = .white
+        cell.layer.borderColor = UIColor.gray.cgColor
+        cell.layer.borderWidth = 0.2
         
         return cell
     }
