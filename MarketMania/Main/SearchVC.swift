@@ -308,6 +308,15 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         return cell
        
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == collectionView2.self {
+            let controller = SectorCategoryVC()
+            controller.selectedIndex = indexPath.row
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+    }
 }
 
 class mostPopularCell: UICollectionViewCell {

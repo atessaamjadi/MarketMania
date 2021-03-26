@@ -9,6 +9,8 @@ import UIKit
 
 class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    var selectedIndex: Int?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
