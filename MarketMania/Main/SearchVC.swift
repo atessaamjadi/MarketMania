@@ -309,7 +309,7 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
        
     }
     
-    
+    //allows each sector cell change view to it's category collection view (SectorCategoryVC)
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == collectionView2.self {
             let controller = SectorCategoryVC()
