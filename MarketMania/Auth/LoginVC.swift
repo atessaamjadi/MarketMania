@@ -52,16 +52,13 @@ class LoginVC: UIViewController {
                     tabBarVC.setUpViewControllers()
                 }
             } else{
-                let alert = UIAlertController(title: "Error!", message: "Fill out all of the boxes before signing in.", preferredStyle: .alert)
+                let alert = UIAlertController(title: "Error!", message: "Incorrect username or password, please try again.", preferredStyle: .alert)
                 
                 self.present(alert, animated: true, completion: nil)
                 
                 alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
 
-                let when = DispatchTime.now() + 4
-                DispatchQueue.main.asyncAfter(deadline: when){
-                    alert.dismiss(animated: true, completion: nil)
-                }
+                
             }
 
             
