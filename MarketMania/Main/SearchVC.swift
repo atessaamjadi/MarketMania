@@ -16,6 +16,11 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.view.backgroundColor = UIColor(hex: "272C37")
+        
+        self.navigationController?.navigationBar.barTintColor = .red
+
+        
         collectionView1.delegate = self
         collectionView1.dataSource = self
         
@@ -83,6 +88,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     var searchBar: UISearchBar = {
         let sb = UISearchBar()
+        sb.backgroundColor = .clear
         sb.searchBarStyle = UISearchBar.Style.prominent
         sb.placeholder = "Search..."
         
@@ -100,15 +106,14 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     let tableView: UITableView = {
         let tb = UITableView()
-        tb.backgroundColor = .black
+        tb.backgroundColor = UIColor(hex: "272C37")
         return tb
         
     }()
     
-    
     let exploreLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Explore", font: UIFont(name: "PingFangHK-Semibold", size: 25)!, textColor: .systemGray2)
+        label.add(text: "Explore", font: UIFont(boldWithSize: 25), textColor: .white)
         label.textAlignment = .center
         return label
         
@@ -126,7 +131,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .systemBlue
+        cv.backgroundColor = .clear
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         // register cells
@@ -148,7 +153,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         //cv.backgroundColor = .menu_white
         cv.translatesAutoresizingMaskIntoConstraints = false
-        
+        cv.backgroundColor = .clear
         // register cells
         cv.register(sectorCell.self, forCellWithReuseIdentifier: "sectorCell")
         return cv
@@ -238,9 +243,9 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         }
         
         //make search table view cells black with white text
-        cell.backgroundColor = .black
+        cell.backgroundColor = UIColor(hex: "3A3E50")
         cell.textLabel?.textColor = .white
-        cell.layer.borderColor = UIColor.gray.cgColor
+        cell.layer.borderColor = UIColor(hex: "686B75").cgColor
         cell.layer.borderWidth = 0.2
         
         return cell
@@ -306,7 +311,7 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
             
             cell.tickerLabel.text = stock.symbol
             cell.nameLabel.text = stock.companyName
-            cell.moveLabel.text = String((stock.changePercent ?? 0.0))
+            cell.moveLabel.text = String((stock.changePercent ?? 0.0)) + "%"
 
             
             return cell
@@ -342,22 +347,22 @@ class mostPopularCell: UICollectionViewCell {
     
     let tickerLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Placeholder", font: UIFont(name: "PingFangHK-Regular", size: 18)!, textColor: .black)
-        label.textAlignment = .center
+        label.add(text: "Placeholder", font: UIFont(boldWithSize: 18), textColor: .white)
+        label.textAlignment = .left
         return label
     }()
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Subtext placeholder", font: UIFont(name: "PingFangHK-Regular", size: 11)!, textColor: .black)
-        label.textAlignment = .center
+        label.add(text: "Subtext placeholder", font: UIFont(regularWithSize: 11), textColor: .white)
+        label.textAlignment = .left
         label.numberOfLines = 2
         return label
     }()
     
     let moveLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Move %", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
+        label.add(text: "Move %", font: UIFont(boldWithSize: 26), textColor: .white)
         label.textAlignment = .center
         return label
     }()
@@ -365,7 +370,9 @@ class mostPopularCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        backgroundColor = .systemGray4
+        backgroundColor = UIColor(hex: "3A3E50")
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = 5
         
         setUpViews()
         
@@ -386,11 +393,11 @@ class mostPopularCell: UICollectionViewCell {
         
         contentView.addSubviews(views: [tickerLabel, nameLabel, moveLabel])
         
-        tickerLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 20, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        tickerLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 20, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        nameLabel.anchor(nil, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        nameLabel.anchor(tickerLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 5, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        moveLabel.anchor(nameLabel.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 12, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        moveLabel.anchor(nil, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         
         
@@ -416,7 +423,7 @@ class sectorCell: UICollectionViewCell {
     
     let sectorLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Sector", font: UIFont.boldSystemFont(ofSize: 12.0), textColor: .black)
+        label.add(text: "Sector", font: UIFont(boldWithSize: 12), textColor: .white)
         label.textAlignment = .center
         label.numberOfLines = 5
         return label
@@ -430,8 +437,10 @@ class sectorCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        backgroundColor = .systemGray2
+                
+        backgroundColor = UIColor(hex: "3A3E50")
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = 5
         
         setUpViews()
         

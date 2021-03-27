@@ -24,7 +24,7 @@ class WelcomeView: UICollectionViewCell {
     
     let welcomeLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Welcome back ", font: UIFont(name: "Verdana-Bold", size: 30)!, textColor: .white)
+        label.add(text: "Welcome back ", font: UIFont(boldWithSize: 33), textColor: .white)
         label.textAlignment = .left
         label.numberOfLines = 1
         return label
@@ -40,7 +40,7 @@ class WelcomeView: UICollectionViewCell {
     
     let tempSarcasticLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Ready to lose more $ ?", font: UIFont(name: "PingFangHK-Semibold", size: 18)!, textColor: .systemGray3)
+        label.add(text: "Ready to lose more $ ?", font: UIFont(regularWithSize: 20), textColor: UIColor(hex: "686B75"))
         label.textAlignment = .center
         return label
     }()
@@ -49,11 +49,11 @@ class WelcomeView: UICollectionViewCell {
         
         contentView.addSubviews(views: [welcomeLabel, userNameLabel, tempSarcasticLabel])
         
-        welcomeLabel.anchor(contentView.safeAreaLayoutGuide.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 15, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        welcomeLabel.anchor(contentView.safeAreaLayoutGuide.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 35, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        userNameLabel.anchor(welcomeLabel.bottomAnchor, left: contentView.leftAnchor, bottom: tempSarcasticLabel.topAnchor, right: nil, topConstant: 0, leftConstant: 20, bottomConstant: 25, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+//        userNameLabel.anchor(welcomeLabel.bottomAnchor, left: contentView.leftAnchor, bottom: tempSarcasticLabel.topAnchor, right: nil, topConstant: 0, leftConstant: 20, bottomConstant: 25, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        tempSarcasticLabel.anchor(userNameLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        tempSarcasticLabel.anchor(welcomeLabel.bottomAnchor, left: welcomeLabel.leftAnchor, bottom: nil, right: nil, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
        
     }
     

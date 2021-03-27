@@ -24,7 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window?.rootViewController = TabBarVC()
         
         window?.makeKeyAndVisible()
-        
+                
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

@@ -47,6 +47,7 @@ class TabBarVC: UITabBarController {
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
         button.addTarget(self, action: #selector(test), for: .touchDown)
+        button.tintColor = UIColor(hex: "5566D1")
         
         buyButton = UIButton(type: .custom)
         buyButton.frame = CGRect(x: 0, y:0, width: 75, height: 75)
@@ -59,6 +60,9 @@ class TabBarVC: UITabBarController {
         buyButton.contentHorizontalAlignment = .fill
         buyButton.addTarget(self, action: #selector(buyFunc), for: .touchDown)
         buyButton.alpha = 0
+        buyButton.tintColor = UIColor(hex: "5566D1")
+        
+
         
         sellButton = UIButton(type: .custom)
         sellButton.frame = CGRect(x: 0, y:0, width: 75, height: 75)
@@ -71,6 +75,7 @@ class TabBarVC: UITabBarController {
         sellButton.contentHorizontalAlignment = .fill
         sellButton.addTarget(self, action: #selector(sellFunc), for: .touchDown)
         sellButton.alpha = 0
+        sellButton.tintColor = UIColor(hex: "5566D1")
         
         self.view.addSubview(buyButton)
         self.view.addSubview(sellButton)
@@ -134,13 +139,22 @@ class TabBarVC: UITabBarController {
         // Add all view controllers
         self.viewControllers = controllersCustomer
         self.selectedIndex = 0
-
+        
+        self.tabBar.layer.masksToBounds = true
+        self.tabBar.barTintColor = UIColor(hex: "202534")
+        self.tabBar.tintColor = .white
+        self.tabBar.layer.cornerRadius = 20
+        self.tabBar.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
+        self.tabBar.unselectedItemTintColor = UIColor(hex: "686B75")
+        self.tabBar.isTranslucent = true
+        self.tabBar.backgroundColor = .clear
+    
     }
     
     func add(vc: UIViewController, name: String, icon: UIImage) -> UINavigationController {
         vc.tabBarItem = UITabBarItem(title: name, image: icon.withRenderingMode(.alwaysTemplate), selectedImage: nil)
         vc.title = name
-        vc.view.backgroundColor = .black
+        vc.view.backgroundColor = UIColor(hex: "272C37")
         vc.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         return UINavigationController(rootViewController: vc)
     }
