@@ -79,11 +79,15 @@ func getMostActive(completion: @escaping ([Stock]) -> Void) -> Void {
 /**
  Valid Types: sector, tag, list
  */
-func getCollection(type: String, completion: @escaping ([Stock]) -> Void) -> Void {
+func getCollection(type: String, collectionName: String, completion: @escaping ([Stock]) -> Void) -> Void {
     guard (type == "sector" || type == "tag" || type == "list") else {
         return
     }
-    let urlString: String = baseURL + "/stock/market/collection/" + type + "?token=" + tok
+    
+    // TODO: Must URL Encode collectionName
+    
+    let urlString: String = baseURL + "/stock/market/collection/" + type + "?collectionName=" +
+        collectionName + "&token=" + tok
     return getListOfStocks(urlString: urlString, completion: completion)
 }
 
@@ -112,7 +116,7 @@ private func getListOfStocks(urlString: String, completion: @escaping ([Stock]) 
         do {
             let decoder = JSONDecoder()
             ret = try decoder.decode([Stock].self, from: data)
-            
+            print(ret)
             completion(ret) // this passes the value set in ret ([Stock]) to the callback arg ([Stock])
         } catch let error {
             print("Error decoding JSON: " + error.localizedDescription)

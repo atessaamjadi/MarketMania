@@ -16,7 +16,7 @@
 		43885C8726013C500002EE45 /* MarketMania.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 43885C8526013C500002EE45 /* MarketMania.xcdatamodeld */; };
 		43885C8926013C520002EE45 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43885C8826013C520002EE45 /* Assets.xcassets */; };
 		43885C8C26013C520002EE45 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43885C8A26013C520002EE45 /* LaunchScreen.storyboard */; };
-		43885C9726013C520002EE45 /* MarketManiaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885C9626013C520002EE45 /* MarketManiaTests.swift */; };
+		43885C9726013C520002EE45 /* IEXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885C9626013C520002EE45 /* IEXTests.swift */; };
 		43885CA226013C520002EE45 /* MarketManiaUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CA126013C520002EE45 /* MarketManiaUITests.swift */; };
 		43885CBC260141650002EE45 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885CB8260141650002EE45 /* TabBarVC.swift */; };
 		43885CC7260144B10002EE45 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 43885CC6260144B10002EE45 /* GoogleService-Info.plist */; };
@@ -78,7 +78,7 @@
 		43885C8B26013C520002EE45 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		43885C8D26013C520002EE45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43885C9226013C520002EE45 /* MarketManiaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketManiaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		43885C9626013C520002EE45 /* MarketManiaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketManiaTests.swift; sourceTree = "<group>"; };
+		43885C9626013C520002EE45 /* IEXTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IEXTests.swift; sourceTree = "<group>"; };
 		43885C9826013C520002EE45 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43885C9D26013C520002EE45 /* MarketManiaUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarketManiaUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		43885CA126013C520002EE45 /* MarketManiaUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketManiaUITests.swift; sourceTree = "<group>"; };
@@ -201,7 +201,7 @@
 		43885C9526013C520002EE45 /* MarketManiaTests */ = {
 			isa = PBXGroup;
 			children = (
-				43885C9626013C520002EE45 /* MarketManiaTests.swift */,
+				43885C9626013C520002EE45 /* IEXTests.swift */,
 				43885C9826013C520002EE45 /* Info.plist */,
 			);
 			path = MarketManiaTests;
@@ -576,7 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43885C9726013C520002EE45 /* MarketManiaTests.swift in Sources */,
+				43885C9726013C520002EE45 /* IEXTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
