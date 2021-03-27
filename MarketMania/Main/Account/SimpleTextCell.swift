@@ -2,7 +2,7 @@
 //  SimpleTextCell.swift
 //  BadgerBytes
 //
-//  Created by Connor Hanson on 2/23/21.
+//  Created by Mitch Alley on 2/23/21.
 //
 
 import UIKit

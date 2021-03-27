@@ -2,7 +2,7 @@
 //  UpdatePasswordVC.swift
 //  BadgerBytes
 //
-//  Created by Connor Hanson on 2/23/21.
+//  Created by Mitch Alley on 2/23/21.
 //
 
 import Firebase
@@ -29,7 +29,7 @@ class UpdatePasswordVC: UIViewController, UICollectionViewDataSource, UICollecti
     override func viewDidLoad() {
            super.viewDidLoad()
 
-           self.cv.backgroundColor = .menu_white
+           self.cv.backgroundColor = .black
            self.cv.dataSource = self
            self.cv.delegate = self
 
@@ -121,9 +121,21 @@ class UpdatePasswordVC: UIViewController, UICollectionViewDataSource, UICollecti
             print(3)
             
             if (processPasswordChange()) {
+                let alert = UIAlertController(title: "Success!", message: "Your password has been successfully changed.", preferredStyle: .alert)
+                
+                self.present(alert, animated: true, completion: nil)
+                
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+
                 
             } else {
                 // send user an error message to try again
+                let alert = UIAlertController(title: "Error!", message: "Unable to change password, please try again.", preferredStyle: .alert)
+                
+                self.present(alert, animated: true, completion: nil)
+                
+                alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+                
             }
             
         }

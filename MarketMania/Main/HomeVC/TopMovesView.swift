@@ -35,7 +35,7 @@ class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollection
     
     let topMovesLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Today's Winners", font: UIFont(name: "PingFangHK-Medium", size: 15)!, textColor: .white)
+        label.add(text: "Today's Winners", font: UIFont(boldWithSize: 17), textColor: .white)
         label.textAlignment = .center
         return label
     }()
@@ -45,7 +45,7 @@ class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollection
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = .systemTeal
+        cv.backgroundColor = .clear
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         // register cells
@@ -88,9 +88,9 @@ class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollection
         if (winners.count != 0) {
             let stock = winners[indexPath.row]
 
-            cell.tickerLabel.text = stock.symbol
+            cell.tickerLabel.text = "\(stock.symbol!)"
             cell.nameLabel.text = stock.companyName
-            cell.moveLabel.text = String((stock.changePercent ?? 0.0))
+            cell.moveLabel.text = String((stock.changePercent ?? 0.0)) + "%"
         }
 
         return cell
@@ -107,22 +107,22 @@ class MoverCell: UICollectionViewCell {
     
     let tickerLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Placeholder", font: UIFont(name: "PingFangHK-Regular", size: 18)!, textColor: .black)
-        label.textAlignment = .center
+        label.add(text: "Placeholder", font: UIFont(boldWithSize: 18), textColor: .white)
+        label.textAlignment = .left
         return label
     }()
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Subtext placeholder", font: UIFont(name: "PingFangHK-Regular", size: 11)!, textColor: .black)
-        label.textAlignment = .center
+        label.add(text: "Subtext placeholder", font: UIFont(regularWithSize: 11), textColor: .white)
+        label.textAlignment = .left
         label.numberOfLines = 2
         return label
     }()
     
     let moveLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Move %", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
+        label.add(text: "Move %", font: UIFont(regularWithSize: 30), textColor: UIColor(hex: "7ABE60"))
         label.textAlignment = .center
         return label
     }()
@@ -130,7 +130,9 @@ class MoverCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        backgroundColor = .systemGray4
+        self.backgroundColor = UIColor(hex: "3A3E50")
+        self.layer.masksToBounds = true
+        self.layer.cornerRadius = 5
         
         setUpViews()
         
@@ -151,12 +153,11 @@ class MoverCell: UICollectionViewCell {
         
         contentView.addSubviews(views: [tickerLabel, nameLabel, moveLabel])
         
-        tickerLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 20, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        tickerLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 20, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        nameLabel.anchor(nil, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        nameLabel.anchor(tickerLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 5, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        moveLabel.anchor(nameLabel.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
-        
+        moveLabel.anchor(nil, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
         
 //        let stack = UIStackView()

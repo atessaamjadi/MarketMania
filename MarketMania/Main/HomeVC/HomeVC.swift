@@ -13,6 +13,7 @@ class HomeVC: UIViewController {
     // MARK: View Lifecycle
     //
     
+
  
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,7 +46,7 @@ class HomeVC: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        //cv.backgroundColor = .menu_white
+        cv.backgroundColor = UIColor(hex: "272C37")
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         // register cells
