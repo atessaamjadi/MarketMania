@@ -10,6 +10,8 @@ import UIKit
 class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     var selectedIndex: Int?
+    var selectedSector: String?
+    var sectorStocks: [Stock] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,7 +21,16 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        sectorCategoryLabel.text = selectedSector
         navigationItem.titleView = sectorCategoryLabel
+        
+        getCollection(type: "sector", collectionName: selectedSector ?? "", completion: {
+            response in
+            DispatchQueue.main.async {
+                self.sectorStocks = response
+                self.collectionView.reloadData()
+            }
+        })
         
 
     }
@@ -75,12 +86,25 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if (sectorStocks.count != 0) {
+            return sectorStocks.count
+        }
         
         return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectorCategoryCell", for: indexPath) as! SectorCategoryCell
+        
+        guard sectorStocks.count != 0 else {return cell}
+        
+        let stock = sectorStocks[indexPath.row]
+        
+        cell.nameLabel.text = stock.symbol
+        cell.currentPriceLabel.text = String(stock.latestPrice ?? 0.0)
+        cell.percentChangeLabel.text = String(stock.changePercent ?? 0.0)
+        cell.priceChangeLabel.text = String((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0))
+        
         return cell
     }
     

@@ -14,6 +14,8 @@ struct Stock: Codable {
     let latestPrice: Double?
     let high: Double?
     let low: Double?
+    let open: Double?
+    let close: Double?
     let week52High: Double?
     let week52Low: Double?
     let volume: Int?
@@ -23,9 +25,10 @@ struct Stock: Codable {
     let changePercent: Double?
 }
 
-struct Sector: Codable {
-    let name: String?
-}
+// is this used?
+//struct Sector: Codable {
+//    let name: String ?? ""
+//}
 
 //extension UserStock {
 //

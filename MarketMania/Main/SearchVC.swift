@@ -338,6 +338,7 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         if collectionView == collectionView2.self {
             let controller = SectorCategoryVC()
             controller.selectedIndex = indexPath.row
+            controller.selectedSector = sectorLabels[indexPath.row]
             self.navigationController?.pushViewController(controller, animated: true)
         }
     }
