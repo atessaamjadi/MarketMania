@@ -77,7 +77,7 @@ func getStocks(symbols: [String], completion: @escaping ([Stock]) -> Void) -> Vo
             urlString += stock
         }
         urlString += "&types=quote&token=" + tok
-        getListOfStocks(urlString: urlString, completion: completion)
+        getBatchOfStocks(urlString: urlString, completion: completion)
         // get many
     } else {
         // error
@@ -148,5 +148,46 @@ private func getListOfStocks(urlString: String, completion: @escaping ([Stock]) 
         }
     })
     task.resume()
+}
+
+private func getBatchOfStocks(urlString: String, completion: @escaping ([Stock]) -> Void) -> Void {
+    
+    let session = URLSession.shared
+    let url = URL(string: urlString)!
+    let req = URLRequest(url: url)
+    
+    let task = session.dataTask(with: req as URLRequest, completionHandler: {
+        data, response, error in
+        
+        guard error == nil else {
+            print(error!.localizedDescription)
+            return
+        }
+        
+        guard let data = data else {
+            return
+        }
+        
+        do {
+
+            let decoder = JSONDecoder()
+            var ret: [Stock] = []
+            
+            // structure of batch -> array:[["quote": Stock], ...]
+            let batch: [[String: Stock]] = (try decoder.decode(StockBatch.self, from: data)).array
+            print("BATCH:", batch)
+            
+            for dictionary in batch {
+                ret.append(dictionary["quote"]!)
+            }
+            completion(ret)
+
+        } catch let error {
+            print("Error decoding JSON Batch: " + error.localizedDescription)
+        }
+    })
+    task.resume()
+
+    
 }
 
