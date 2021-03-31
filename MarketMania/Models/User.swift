@@ -45,50 +45,94 @@ struct User {
      
      @param symbol: A single stock symbol (eg: AAPL, FB). Case Insensitive
      @param numShares: any Double > 0.0
+     
+     @return amount of money left in balance after transaction
+     TODO: Add error return to completion handlers
      */
-    func buyStock(symbol: String, numShares: Double) {
-        getStocks(symbols: [symbol], completion: { stockList in // only one item in stocklist
+    func buyStock(symbol: String, numShares: Double, completion: @escaping (Error?, Double) -> Void) -> Void {
+        getStocks(symbols: [symbol], completion: { stockList in // only one item in stocklist (for now)
             let stock = stockList[0]
             let buyPrice: Double = stock.latestPrice ?? 0.0
             
-            guard buyPrice != 0.0 else {return}
-            
-            // TODO, check if user has enough balance
-            
-            // after stock data is fetched, get price and update DB
-            // example db structure: Portfolio -> AAPL -> 235434567 -> values
-            self.ref.child("Portfolio").child(symbol as String).child(String(Date().timeIntervalSinceReferenceDate)).setValue([
-                "buyPrice": buyPrice,
-                "shares": numShares
-            ], withCompletionBlock: { (error:Error?, ref:DatabaseReference) in
-                if let error = error {
-                    print("Buy data could not be saved: \(error)")
-                } else {
-                    // create a 'receipt' if stock purchase is successful
-                    self.ref.child("History").child(String(Date().timeIntervalSinceReferenceDate)).setValue([
-                        "symbol": symbol,
-                        "buyPrice": buyPrice,
-                        "shares": numShares,
-                        "action": "BUY"
-                    ])
-                    
-                    // update user values
-                    self.updateCashBalance(delta: -1 * numShares * buyPrice)
+            print("BUYING", stockList)
+            guard buyPrice != 0.0 else {
+                completion(PurchaseError.insufficientFunds, 0.0) // TODO: update to more appropriate error
+                return
+            }
+            guard uid != "" else {
+                completion(DBError.noUID, 0.0)
+                return
+            }
+                        
+            self.updateCashBalance(delta: -1 * numShares * buyPrice, completion: {
+                updatedBalance in
+                
+                // check if sufficient balance
+                guard updatedBalance >= 0 else {
+                    print("Unable to purchase shares, not enough money in account")
+                    completion(PurchaseError.insufficientFunds, updatedBalance)
+                    return
+                }
+                
+                // now check if stock exists in portfolio
+                self.ref.child("Portfolio").child(stock.symbol!).getData { (error, snapshot) in
+                    if let error = error {
+                        print("Error fetching portfolio data: \(error)")
+                        completion(PurchaseError.unexpected(code: 500), -1.0)
+                        return
+                    } else if snapshot.exists() {
+                        
+                        //
+                        // TODO: My averaging math is fucky here but idrk why
+                        //
+                        
+                        // and get values and add to it
+                        let dict = snapshot.value as? NSDictionary
+                        let dataAvgPrice: Double = dict?["avgPrice"] as! Double
+                        let dataShares: Double = dict?["shares"] as! Double
+                        
+                        let totVal: Double = (dataAvgPrice * dataShares) + buyPrice
+                        let totShares: Double = (dataShares + numShares)
+                        
+                        self.ref.child("Portfolio").child(stock.symbol!).setValue([
+                            "avgPrice": totVal / totShares,
+                            "shares": totShares
+                        ])
+                        
+                        completion(nil, updatedBalance)
+                    } else {
+                        // item not yet in portfolio
+                        self.ref.child("Portfolio").child(stock.symbol!).setValue([
+                            "avgPrice": buyPrice,
+                            "shares": numShares
+                        ])
+                        completion(nil, updatedBalance)
+                    }
                 }
             })
         })
     }
     
-    func updateCashBalance(delta: Double) -> Void {
+    // returns updated cash balance in completion handler
+    func updateCashBalance(delta: Double, completion: @escaping (Double) -> Void) -> Void {
         // get current cash balance
         self.ref.child("cashbalance").getData(completion: { (error, snapshot) in
+            
+            if let error = error {
+                print("error updating cash balance: \(error)")
+                completion(0.0)
+                return
+            }
+            
             var balance: Double = snapshot.value as? Double ?? -1.0
-            guard balance != 1.0 else {return}
+            guard balance != -1.0 else {return}
             
             balance += delta
             
             // update DB value
             self.ref.child("cashbalance").setValue(balance)
+            completion(balance)
+            print("cash updated")
         })
     }
     

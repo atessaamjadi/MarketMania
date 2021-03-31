@@ -17,8 +17,9 @@ class UserTests: XCTestCase {
 
     override func setUpWithError() throws {
         let exp = expectation(description: "login")
+        self.ref = Database.database().reference()
         
-        Auth.auth().signIn(withEmail: "test@test.com", password: "test1234") { authResult, error in
+        Auth.auth().signIn(withEmail: "usertests@test.com", password: "test1234") { authResult, error in
             if let error = error {
                 assertionFailure("Failure to login: \(error)")
             }
@@ -26,7 +27,11 @@ class UserTests: XCTestCase {
             if (Auth.auth().currentUser?.uid != nil) {
                 self.uid = Auth.auth().currentUser?.uid ?? "error"
                 print("UUID: ", self.uid)
-                exp.fulfill()
+                self.ref.child(self.uid).child("cashbalance").setValue(0, withCompletionBlock: { (error, dbref) in
+                    exp.fulfill()
+                })
+                
+                
             } else {
                 assertionFailure("Failure to login")
             }
@@ -34,7 +39,6 @@ class UserTests: XCTestCase {
         
         waitForExpectations(timeout: 5)
         self.user = User(uid: self.uid, dictionary: ["": ""]) // user with empty dict
-        self.ref = Database.database().reference()
         
     }
 
@@ -51,7 +55,14 @@ class UserTests: XCTestCase {
     }
 
     func testUserBuyStock() throws {
-        user?.buyStock(symbol: "AAPL", numShares: 2)
+        let exp = expectation(description: "buy stock")
+        user?.buyStock(symbol: "AAPL", numShares: 2, completion: { error, moneySpent in
+            if let error = error {
+                assertionFailure("Failed to buy singular stock: \(error)")
+            }
+            exp.fulfill()
+        })
+        waitForExpectations(timeout: 10)
         
         // check that buy is correctly recorded in DB
         
