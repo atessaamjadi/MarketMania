@@ -25,31 +25,126 @@ struct Stock: Codable {
     let changePercent: Double?
 }
 
-// is this used?
-//struct Sector: Codable {
-//    let name: String ?? ""
+//struct PurchasedStock {
+//    private let symbol: String
+//    private let purchasePrice: Double
+//    private let purchaseTime: Date
+//    private let dateString: String
+//    private var numShares: Double
+//    
+//    init(symbol: String, price: Double, numShares: Double) {
+//        self.symbol = symbol
+//        self.purchasePrice = price
+//        self.numShares = numShares
+//
+//        // setup date components
+//        let dateFormatter: DateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "yyyy-MMM-dd HH:mm:ss"
+//        self.purchaseTime = Date()
+//        self.dateString = dateFormatter.string(from: self.purchaseTime)
+//    }
+//    
+//    func getSymbol() -> String {return self.symbol}
+//    func getPurchasePrice() -> Double {return self.purchasePrice}
+//    func getPurchaseTimeString() -> String {return self.dateString}
+//    func getPurchaseTime() -> Date {return self.purchaseTime}
+//    func getNumShares() -> Double {return self.numShares}
+//    
+//    mutating func removeShares(numSold: Double) -> Double {
+//        // sold all in this order
+//        guard numSold < numShares else {
+//            let numChanged = numShares
+//            numShares = 0
+//            return numChanged
+//        }
+//        
+//        // some are left over
+//        numShares -= numSold
+//        return numSold
+//    }
 //}
-
-//extension UserStock {
 //
-//    var numShares: Double
-//    var avgPrice: Double
-//    var marketVal: Double // float?
-//    var totReturns: Double
-//    var totPercentDelta: Double
-//
-//    init(ticker: String, price: Double = 0.0, dictionary: [String: Any]) {
-//
-//        numShares = dictionary["numShares"] as? Double ?? 0.0
-//        avgPrice = dictionary["avgPrice"] as? Double ?? 0.0
-//        marketVal = dictionary["marketVal"] as? Double ?? 0.0
-//        totReturns = dictionary["totReturns"] as? Double ?? 0.0
-//        totPercentDelta = dictionary["totPercentDelta"] as? Double ?? 0.0
-//
-//        super.init(ticker: ticker)
+//// collection of purchased stocks by symbol name
+//class StockCollection {
+//    private let symbol: String
+//    private var stocks: [PurchasedStock]
+//    private var numShares: Double
+//    private var marketValue: Double
+//    
+//    init(symbol: String) {
+//        self.symbol = symbol
+//        self.stocks = []
+//        self.numShares = 0.0
+//        self.marketValue = 0.0
 //    }
-//
-//    func updateShares(sharesDelta: Double) {
-//        // TODO: update all stock info based on new shares added/removed
+//    
+//    // init with a list of stocks to be added to collection
+//    init(symbol: String, stocks: [PurchasedStock]) {
+//        self.symbol = symbol
+//        self.stocks = stocks
+//        self.numShares = 0.0
+//        self.marketValue = 0.0
+//        
+//        for stock in stocks {
+//            self.numShares += stock.getNumShares()
+//            self.marketValue += stock.getPurchasePrice() * stock.getNumShares()
+//        }
 //    }
+//    
+//    func getAveragePrice() -> Double {
+//        return self.marketValue / self.numShares
+//    }
+//    
+//    func getCollection() -> [PurchasedStock] {return self.stocks}
+//    func getName() -> String {return self.symbol}
+//    func isEmpty() -> Bool {return stocks.isEmpty}
+//    
+//    // remove in FIFO
+//    // fixme
+//    func removeFromCollection(numToRemove: Double) -> Double? {
+//        
+////        var removedStocks: [PurchasedStock] = []
+////
+////        guard numRemoved > 0 else {return []}
+////        guard (numRemoved <= stocks.count) else {
+////            removedStocks = self.stocks
+////            self.stocks = []
+////            return removedStocks
+////        } // remove all
+////
+////        // pop last n stocks off end of collection
+////        for _ in 1...numRemoved {
+////            removedStocks.append(self.stocks.popLast()!)
+////        }
+////
+////        return removedStocks
+//        
+//        var removedStocks: [PurchasedStock] = []
+//        var numRemoved: Double = 0.0
+//        var salePrice: Double = 0.0
+//        var leftToSell: Double = numToRemove
+//        
+//        guard numToRemove > 0 else {return nil}
+//        guard numToRemove < self.numShares else {return nil}
+//        
+//        while (leftToSell > 0) {
+//            var stock: PurchasedStock = self.stocks.last!
+//            let numSold: Double = stock.removeShares(numSold: leftToSell)
+//            
+//            leftToSell -= numSold
+//            salePrice += (stock.getPurchasePrice() * numSold)
+//        }
+//        
+//    }
+//    
+//    func addToCollection(numAdded: Double, price: Double) -> Bool {
+//        guard numAdded > 0 else {return false}
+//        
+//        let newStock = PurchasedStock(symbol: self.symbol, price: price, numShares: numAdded)
+//        self.stocks.insert(newStock, at: 0)
+//        self.marketValue += (numAdded * price)
+//        self.numShares += numAdded
+//        return true
+//    }
+//    
 //}

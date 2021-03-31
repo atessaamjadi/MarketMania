@@ -26,6 +26,24 @@ class IEXTests: XCTestCase {
     // MARK: IEX TESTING
     //
     
+    func testIEXGetSeveralStocks() throws {
+        let expectation = self.expectation(description: "completionHandler")
+        
+        getStocks(symbols: ["AAPL", "FB"], completion: { resp in
+            self.stocks = resp
+            expectation.fulfill()
+        })
+        
+        waitForExpectations(timeout: 5, handler: {
+            error in
+            if let error = error {
+                XCTFail("timeout errored: \(error)")
+            }
+        })
+        
+        XCTAssertNotEqual(self.stocks.count, 0)
+    }
+    
     func testIEXGetWinners() throws {
         
         // similar to a semaphore

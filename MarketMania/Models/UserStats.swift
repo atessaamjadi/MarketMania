@@ -15,7 +15,7 @@ struct UserStats {
     let balanceHistory: [Float]
     
     init(startAmmount: Float) {
-        self.balance = startAmmount   //Starting balance can be changed
+        self.balance = startAmmount   //Starting balance can be changed with a static constant in User.swift
         self.fundsAvailable = startAmmount
         self.stocks = []
         self.percentGain = 0.0
@@ -42,8 +42,4 @@ struct UserStats {
     func sellStock(stock: Stock) -> Stock {
         return stock
     }
-    
-    
-    
-    
 }
