@@ -11,18 +11,18 @@ import Foundation
 struct Stock: Codable {
     let symbol: String?
     let companyName: String?
-    let latestPrice: Double?
-    let high: Double?
-    let low: Double?
-    let open: Double?
-    let close: Double?
-    let week52High: Double?
-    let week52Low: Double?
+    let latestPrice: Float?
+    let high: Float?
+    let low: Float?
+    let open: Float?
+    let close: Float?
+    let week52High: Float?
+    let week52Low: Float?
     let volume: Int?
     let avgTotalVolume: Int?
     let marketCap: CLong?
-    let peRatio: Double?
-    let changePercent: Double?
+    let peRatio: Float?
+    let changePercent: Float?
 }
 
 // credit: https://swiftsenpai.com/swift/decode-dynamic-keys-json/
