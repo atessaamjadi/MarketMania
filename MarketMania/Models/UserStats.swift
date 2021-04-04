@@ -26,11 +26,17 @@ extension User {
      TODO: Add error return to completion handlers
      */
     func buyStock(symbol: String, numShares: Float, completion: @escaping (Error?, Float) -> Void) -> Void {
-        getStocks(symbols: [symbol], completion: { stockList in // only one item in stocklist (for now)
+        getStocks(symbols: [symbol], completion: { stockList in // only one item in stocklist
+            
+            guard stockList.count == 1 else {
+                completion(PurchaseError.unexpected(code: 500), 0.0)
+                return
+            }
+            
             let stock = stockList[0]
             let buyPrice: Float = stock.latestPrice ?? 0.0
             
-            print("BUYING", stockList)
+            //print("BUYING", stockList)
             guard buyPrice != 0.0 else {
                 completion(PurchaseError.insufficientFunds, 0.0) // TODO: update to more appropriate error
                 return

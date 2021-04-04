@@ -67,7 +67,7 @@ class UserTests: XCTestCase {
 //        }
     }
 
-    func testUserBuyStock() throws {
+    func testUserBuyOneStock() throws {
         let exp = expectation(description: "buy stock")
         user?.buyStock(symbol: "AAPL", numShares: 2, completion: { error, moneySpent in
             if let error = error {
@@ -109,7 +109,151 @@ class UserTests: XCTestCase {
         waitForExpectations(timeout: 5)
         // check that buy is correctly recorded in DB
         
-        print("yuh")
+    }
+    
+    func testUserBuySeveralStocks() throws {
+        var AAPLexp = expectation(description: "buyAAPL")
+        var AMCexp = expectation(description: "buyAMC")
+        
+        user?.buyStock(symbol: "AAPL", numShares: 4, completion: { error, moneySpent in
+            if let error = error {
+                assertionFailure("Error buying Apple stock: \(error)")
+            }
+            
+            XCTAssertNotEqual(moneySpent, 0.0)
+            AAPLexp.fulfill()
+        })
+        
+        // assume that the first purchase went through
+        user?.buyStock(symbol: "AMC", numShares: 10, completion: { error, moneySpent in
+            if let error = error {
+                assertionFailure("Error buying AMC stock: \(error)")
+            }
+            
+            XCTAssertNotEqual(moneySpent, 0.0)
+            AMCexp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 5)
+        
+        // check db to see that AMC and AAPL are in it
+        var dbexp = expectation(description: "check stock in db")
+        var avgAMC: Float?
+        var avgAAPL: Float?
+        
+        self.ref.getData { (error, snapshot) in
+            if let error = error {
+                assertionFailure("Error getting portfolio data: \(error)")
+            } else if snapshot.exists() {
+                let dict = snapshot.value as? NSDictionary // portfolio is key, stock symbols are values
+                let symbols = dict?["Portfolio"] as? NSDictionary // stock symbols are keys
+                let AAPLInfo = symbols?["AAPL"] as? NSDictionary // can get data from here
+                let AMCInfo = symbols?["AMC"] as? NSDictionary
+                
+                guard dict != nil && symbols != nil else {
+                    dump(dict, name: "Dictionary", indent: 5, maxDepth: 100, maxItems: 100)
+                    assertionFailure("One of the parent dicts is nil")
+                    return
+                }
+                
+                guard AAPLInfo != nil else {
+                    assertionFailure("AAPL dict is nil")
+                    dump(dict, name: "Apple", indent: 5, maxDepth: 100, maxItems: 100)
+                    return
+                }
+                
+                guard AMCInfo != nil else {
+                    assertionFailure("AMC dict is nil")
+                    dump(dict, name: "AMC", indent: 5, maxDepth: 100, maxItems: 100)
+                    return
+                }
+                
+                // check AAPL
+                XCTAssertNotNil(avgAAPL = AAPLInfo?["avgPrice"] as? Float, "No average price for APPL")
+                XCTAssertEqual(AAPLInfo?["shares"] as? Float, 4)
+                // check AMC
+                XCTAssertNotNil(avgAMC = AMCInfo?["avgPrice"] as? Float, "No average price for AMC")
+                XCTAssertEqual(AMCInfo?["shares"] as? Float, 10)
+
+                dbexp.fulfill()
+            } else {
+                assertionFailure("Portfolio shares do not exist")
+            }
+        }
+        
+        waitForExpectations(timeout: 5)
+        
+        AAPLexp = expectation(description: "APPL pt2")
+        AMCexp = expectation(description: "AMC pt2")
+        // add new shares to apple and AMC
+        user?.buyStock(symbol: "AAPL", numShares: 10, completion: { error, moneySpent in
+            if let error = error {
+                assertionFailure("Failed to buy APPL stock: \(error)")
+            }
+            
+            XCTAssertNotEqual(moneySpent, 0.0)
+            AAPLexp.fulfill()
+        })
+        
+        user?.buyStock(symbol: "AMC", numShares: 10, completion: { error, moneySpent in
+            if let error = error {
+                assertionFailure("Failed to buy AMC stock: \(error)")
+            }
+            
+            XCTAssertNotEqual(moneySpent, 0.0)
+            AMCexp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 5)
+        
+        dbexp = expectation(description: "db2")
+        // check in db that all values are correct
+        self.ref.getData { (error, snapshot) in
+            if let error = error {
+                assertionFailure("Error getting portfolio data: \(error)")
+            } else if snapshot.exists() {
+                let dict = snapshot.value as? NSDictionary // portfolio is key, stock symbols are values
+                let symbols = dict?["Portfolio"] as? NSDictionary // stock symbols are keys
+                let AAPLInfo = symbols?["AAPL"] as? NSDictionary // can get data from here
+                let AMCInfo = symbols?["AMC"] as? NSDictionary
+                
+                guard dict != nil && symbols != nil else {
+                    dump(dict, name: "Dictionary", indent: 5, maxDepth: 100, maxItems: 100)
+                    assertionFailure("One of the parent dicts is nil")
+                    return
+                }
+                
+                guard AAPLInfo != nil else {
+                    assertionFailure("AAPL dict is nil")
+                    dump(dict, name: "Apple", indent: 5, maxDepth: 100, maxItems: 100)
+                    return
+                }
+                
+                guard AMCInfo != nil else {
+                    assertionFailure("AMC dict is nil")
+                    dump(dict, name: "AMC", indent: 5, maxDepth: 100, maxItems: 100)
+                    return
+                }
+                
+                // TODO: fix average price
+                
+                // check AAPL
+                XCTAssertNotNil(AAPLInfo?["avgPrice"] as? Float, "No average price for APPL")
+                XCTAssertEqual(avgAAPL, AAPLInfo?["avgPrice"] as? Float)
+                XCTAssertEqual(AAPLInfo?["shares"] as? Float, 14)
+
+                // check AMC
+                XCTAssertNotNil(AMCInfo?["avgPrice"] as? Float, "No average price for AMC")
+                XCTAssertEqual(avgAMC, AMCInfo?["avgPrice"] as? Float)
+                XCTAssertEqual(AMCInfo?["shares"] as? Float, 20)
+
+                dbexp.fulfill()
+            } else {
+                assertionFailure("Portfolio shares do not exist")
+            }
+        }
+        
+        waitForExpectations(timeout: 5)
     }
     
     func testUserUpdateCashBalance() throws {
@@ -125,6 +269,7 @@ class UserTests: XCTestCase {
         })
         
         waitForExpectations(timeout: 5)
+        
     }
     
     func testUserSellStock() throws {
