@@ -57,23 +57,31 @@ extension User {
                         print("Error fetching portfolio data: \(error)")
                         completion(error, 0.0)
                         return
-                    } else if snapshot.exists() {
+                    } else if snapshot.exists(){
                         
                         //
                         // TODO: My averaging math is fucky here but idrk why
                         //
                         
                         // and get values and add to it
-                        let dict = (snapshot.value as? NSDictionary)
-                        let portfolioElements = dict?["Portfolio"] as? NSDictionary
-                        let portfolioItem = portfolioElements?[stock.symbol] as? NSDictionary
+                        //print("SNAPSHOT:", snapshot.value)
+                        let dict = (snapshot.value as? NSDictionary) // base dict
+                        let portfolioElements = dict?["Portfolio"] as? NSDictionary // portfolio dict
+                        let portfolioItem = portfolioElements?[stock.symbol!] as? NSDictionary // stock item
+                        
+                        guard portfolioElements != nil && portfolioItem != nil else {
+                            // item not yet in portfolio
+                            self.ref.child("Portfolio").child(stock.symbol!).setValue([
+                                "avgPrice": buyPrice,
+                                "shares": numShares
+                            ])
+                            completion(nil, updatedBalance)
+                            return
+                        }
+                        
                         dump(dict, name: "1Distc", indent: 0, maxDepth: 100, maxItems: 100)
                         dump(portfolioItem, name: "NSDICT", indent: 0, maxDepth: 100, maxItems: 100)
                         dump(portfolioElements, name: "FUCK", indent: 0, maxDepth: 100, maxItems: 100)
-                        guard portfolioItem != nil else {
-                            completion(PurchaseError.unexpected(code: 500), 0.0)
-                            return
-                        }
                         
                         let dataAvgPrice: Float = portfolioItem?["avgPrice"] as! Float
                         let dataShares: Float = portfolioItem?["shares"] as! Float
@@ -119,7 +127,15 @@ extension User {
                 return
             }
             
-            var balance: Float = snapshot.value as? Float ?? 0.0
+            let userDict = snapshot.value as? NSDictionary
+            
+            guard var balance = userDict?["cashbalance"] as? Float else {
+                dump(userDict, name: "Cash Snapshot", indent: 0, maxDepth: 5, maxItems: 5)
+                completion(PurchaseError.notFound, 0.0)
+                return
+            }
+                        
+            print("BALANCE:", balance)
             guard balance != 0.0 else {
                 completion(PurchaseError.insufficientFunds, 0.0)
                 return

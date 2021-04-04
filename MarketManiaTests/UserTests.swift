@@ -82,40 +82,24 @@ class UserTests: XCTestCase {
         // check that user data is correctly stored in database
         let dbexp = expectation(description: "check stock in db")
         
-//        self.ref.getData { (error, snapshot) in
-//            if let error = error {
-//                assertionFailure("Error getting portfolio data: \(error)")
-//            } else if snapshot.exists() {
-//                // check that they have 2 shares of apple
-//                let dict = snapshot.value as? NSDictionary
-//                dump(dict, name: "Snapshot", indent: 5, maxDepth: 100, maxItems: 100)
-//
-//                guard ((dict?["avgPrice"] as? Double ?? -1.0) != -1.0) else {
-//                    assertionFailure("No average price")
-//                    return
-//                }
-//
-//                XCTAssertEqual(dict?["shares"] as! Double, 2.0)
-//                dbexp.fulfill()
-//            } else {
-//                assertionFailure("Portfolio shares do not exist")
-//            }
-//        }
-        
         self.ref.child("Portfolio").child("AAPL").getData { (error, snapshot) in
             if let error = error {
                 assertionFailure("Error getting portfolio data: \(error)")
             } else if snapshot.exists() {
                 // check that they have 2 shares of apple
-                let dict = snapshot.value as? NSDictionary
-                dump(dict, name: "Snapshot", indent: 5, maxDepth: 100, maxItems: 100)
+                let dict = snapshot.value as? NSDictionary // portfolio is key, stock symbols are values
+                let symbols = dict?["Portfolio"] as? NSDictionary // stock symbols are keys
+                let stockInfo = symbols?["AAPL"] as? NSDictionary // can get data from here
+                
+                //dump(dict, name: "Snapshot", indent: 5, maxDepth: 100, maxItems: 100)
 
-                guard ((dict?["avgPrice"] as? Double ?? -1.0) != -1.0) else {
+                guard ((stockInfo?["avgPrice"] as! Float) != -1.0) else {
+                    dump(dict, name: "Snapshot", indent: 5, maxDepth: 100, maxItems: 100)
                     assertionFailure("No average price")
                     return
                 }
 
-                XCTAssertEqual(dict?["shares"] as! Double, 2.0)
+                XCTAssertEqual(stockInfo?["shares"] as! Float, 2.0)
                 dbexp.fulfill()
             } else {
                 assertionFailure("Portfolio shares do not exist")
@@ -129,16 +113,18 @@ class UserTests: XCTestCase {
     }
     
     func testUserUpdateCashBalance() throws {
-        user?.updateCashBalance(delta: 20.0, completion: { error, updatedBalance in
+        let exp = expectation(description: "cash")
+        
+        user?.updateCashBalance(delta: -20.0, completion: { error, updatedBalance in
             if let error = error {
                 assertionFailure("Error updating user cash balance: \(error)")
             }
             
-            guard updatedBalance == 49980.0 else {
-                return
-            }
-            
+            XCTAssertEqual(updatedBalance, 49980.0)
+            exp.fulfill()
         })
+        
+        waitForExpectations(timeout: 5)
     }
     
     func testUserSellStock() throws {
