@@ -256,6 +256,10 @@ class UserTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
     
+    func testUserBuyAndSellStocks() throws {
+        
+    }
+    
     func testUserUpdateCashBalance() throws {
         let exp = expectation(description: "cash")
         
