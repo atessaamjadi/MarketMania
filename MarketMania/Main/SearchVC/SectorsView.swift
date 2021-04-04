@@ -104,6 +104,8 @@ class SectorsView: UICollectionViewCell, UICollectionViewDelegate, UICollectionV
         collectionView2.anchor(sectorsLabel.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.safeAreaLayoutGuide.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 10, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
     }
+    
+    
 }
 
 
