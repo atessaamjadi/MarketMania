@@ -5,6 +5,9 @@
 //  Created by alex on 3/23/21.
 //
 
+import Firebase
+import Foundation
+
 extension User {
     
     // set/update user portfolio info here
@@ -97,6 +100,14 @@ extension User {
         })
     }
     
+    func sellStock(symbol: String, numShares: Float, completion: @escaping (Error?, Float) -> Void) -> Void {
+        // todo
+    }
+    
+    func getPortfolio() {
+        // todo
+    }
+    
     // returns updated cash balance in completion handler
     func updateCashBalance(delta: Float, completion: @escaping (Error?, Float) -> Void) -> Void {
         // get current cash balance
@@ -121,6 +132,22 @@ extension User {
             completion(nil, balance)
             print("cash updated")
         })
+    }
+    
+    //
+    // MARK: WatchList
+    //
+    
+    func addToWatchList() {
+        // todo
+    }
+    
+    func removeFromWatchList() {
+        // todo
+    }
+    
+    func getWatchList() {
+        // todo
     }
     
     

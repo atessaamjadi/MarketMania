@@ -49,7 +49,7 @@ struct User {
         self.ref = Database.database().reference().child("Users").child(uid)
     }
     
-    // basic getters and setters in this class
+    // basic user info getters and setters in this class
     
     
     func addToWatchList(stock: Stock) -> Bool {
