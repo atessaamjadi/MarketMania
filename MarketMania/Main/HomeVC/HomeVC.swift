@@ -22,8 +22,6 @@ class HomeVC: UIViewController {
         
         collectionView.delegate = self
         collectionView.dataSource = self
-        
-        //getStocks(symbols: ["AAPL", "MO"])
     }
     
     //hide the navigation bar with "Home" title
