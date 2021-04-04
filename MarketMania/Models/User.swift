@@ -46,7 +46,7 @@ struct User {
      @param symbol: A single stock symbol (eg: AAPL, FB). Case Insensitive
      @param numShares: any Double > 0.0
      
-     @return amount of money left in balance after transaction
+     @return amount of money left in balance after transaction - return 0.0 if purchase falls through
      TODO: Add error return to completion handlers
      */
     func buyStock(symbol: String, numShares: Double, completion: @escaping (Error?, Double) -> Void) -> Void {
@@ -65,10 +65,10 @@ struct User {
             }
                         
             self.updateCashBalance(delta: -1 * numShares * buyPrice, completion: {
-                updatedBalance in
+                error, updatedBalance in
                 
                 // check if sufficient balance
-                guard updatedBalance >= 0 else {
+                guard updatedBalance > 0 else {
                     print("Unable to purchase shares, not enough money in account")
                     completion(PurchaseError.insufficientFunds, updatedBalance)
                     return
@@ -78,7 +78,7 @@ struct User {
                 self.ref.child("Portfolio").child(stock.symbol!).getData { (error, snapshot) in
                     if let error = error {
                         print("Error fetching portfolio data: \(error)")
-                        completion(PurchaseError.unexpected(code: 500), -1.0)
+                        completion(error, 0.0)
                         return
                     } else if snapshot.exists() {
                         
@@ -87,9 +87,19 @@ struct User {
                         //
                         
                         // and get values and add to it
-                        let dict = snapshot.value as? NSDictionary
-                        let dataAvgPrice: Double = dict?["avgPrice"] as! Double
-                        let dataShares: Double = dict?["shares"] as! Double
+                        let dict = (snapshot.value as? NSDictionary)
+                        let portfolioElements = dict?["Portfolio"] as? NSDictionary
+                        let portfolioItem = portfolioElements?[stock.symbol] as? NSDictionary
+                        dump(dict, name: "1Distc", indent: 0, maxDepth: 100, maxItems: 100)
+                        dump(portfolioItem, name: "NSDICT", indent: 0, maxDepth: 100, maxItems: 100)
+                        dump(portfolioElements, name: "FUCK", indent: 0, maxDepth: 100, maxItems: 100)
+                        guard portfolioItem != nil else {
+                            completion(PurchaseError.unexpected(code: 500), 0.0)
+                            return
+                        }
+                        
+                        let dataAvgPrice: Double = portfolioItem?["avgPrice"] as! Double
+                        let dataShares: Double = portfolioItem?["shares"] as! Double
                         
                         let totVal: Double = (dataAvgPrice * dataShares) + buyPrice
                         let totShares: Double = (dataShares + numShares)
@@ -114,24 +124,27 @@ struct User {
     }
     
     // returns updated cash balance in completion handler
-    func updateCashBalance(delta: Double, completion: @escaping (Double) -> Void) -> Void {
+    func updateCashBalance(delta: Double, completion: @escaping (Error?, Double) -> Void) -> Void {
         // get current cash balance
         self.ref.child("cashbalance").getData(completion: { (error, snapshot) in
             
             if let error = error {
                 print("error updating cash balance: \(error)")
-                completion(0.0)
+                completion(error, 0.0)
                 return
             }
             
-            var balance: Double = snapshot.value as? Double ?? -1.0
-            guard balance != -1.0 else {return}
+            var balance: Double = snapshot.value as? Double ?? 0.0
+            guard balance != 0.0 else {
+                completion(PurchaseError.insufficientFunds, 0.0)
+                return
+            }
             
             balance += delta
             
             // update DB value
             self.ref.child("cashbalance").setValue(balance)
-            completion(balance)
+            completion(nil, balance)
             print("cash updated")
         })
     }
