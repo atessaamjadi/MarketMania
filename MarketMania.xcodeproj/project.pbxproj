@@ -37,6 +37,8 @@
 		65026A3B1642E69A70E739C3 /* Pods_MarketManiaTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8171A198AE89F8EC55AA3D6D /* Pods_MarketManiaTests.framework */; };
 		837C4593260D770900A48428 /* Stock_Sectors.json in Resources */ = {isa = PBXBuildFile; fileRef = 837C4592260D770900A48428 /* Stock_Sectors.json */; };
 		94B5A6B83D062670979734AB /* Pods_MarketMania.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF7D043E7A4ACA1A9C82757 /* Pods_MarketMania.framework */; };
+		AD328603261BB2B700A30C31 /* SocialLeaderboardHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD328602261BB2B700A30C31 /* SocialLeaderboardHead.swift */; };
+		AD328610261BB93A00A30C31 /* UsersListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD32860F261BB93A00A30C31 /* UsersListView.swift */; };
 		ADCE1B86260AC06A00B6CDB0 /* SimpleTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1B85260AC06A00B6CDB0 /* SimpleTextCell.swift */; };
 		ADCE1B8F260AC1C000B6CDB0 /* UpdatePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1B8E260AC1C000B6CDB0 /* UpdatePasswordVC.swift */; };
 		ADCE1BA9260AC21500B6CDB0 /* SimpleTextInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1BA8260AC21500B6CDB0 /* SimpleTextInputCell.swift */; };
@@ -106,6 +108,8 @@
 		8171A198AE89F8EC55AA3D6D /* Pods_MarketManiaTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarketManiaTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		837C4592260D770900A48428 /* Stock_Sectors.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Stock_Sectors.json; sourceTree = "<group>"; };
 		A14E7CFDDDA6AA3CB13E4BC2 /* Pods-MarketMania-MarketManiaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania-MarketManiaUITests.debug.xcconfig"; path = "Target Support Files/Pods-MarketMania-MarketManiaUITests/Pods-MarketMania-MarketManiaUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		AD328602261BB2B700A30C31 /* SocialLeaderboardHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLeaderboardHead.swift; sourceTree = "<group>"; };
+		AD32860F261BB93A00A30C31 /* UsersListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListView.swift; sourceTree = "<group>"; };
 		ADCE1B85260AC06A00B6CDB0 /* SimpleTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTextCell.swift; sourceTree = "<group>"; };
 		ADCE1B8E260AC1C000B6CDB0 /* UpdatePasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePasswordVC.swift; sourceTree = "<group>"; };
 		ADCE1BA8260AC21500B6CDB0 /* SimpleTextInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTextInputCell.swift; sourceTree = "<group>"; };
@@ -260,7 +264,7 @@
 				3BFFAD2B261A5237001A6D11 /* SearchVC */,
 				3BDA4B05260C3A4B00A5DD86 /* HomeVC */,
 				43885CB8260141650002EE45 /* TabBarVC.swift */,
-				43885D1626014ABD0002EE45 /* SocialVC.swift */,
+				AD3285E6261BABC600A30C31 /* SocialVC */,
 				3BDA4B0C260D3E6300A5DD86 /* SectorCategoryVC.swift */,
 				ADCE1B8A260AC0AA00B6CDB0 /* Account */,
 			);
@@ -286,6 +290,16 @@
 				8171A198AE89F8EC55AA3D6D /* Pods_MarketManiaTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AD3285E6261BABC600A30C31 /* SocialVC */ = {
+			isa = PBXGroup;
+			children = (
+				43885D1626014ABD0002EE45 /* SocialVC.swift */,
+				AD32860F261BB93A00A30C31 /* UsersListView.swift */,
+				AD328602261BB2B700A30C31 /* SocialLeaderboardHead.swift */,
+			);
+			path = SocialVC;
 			sourceTree = "<group>";
 		};
 		ADCE1B8A260AC0AA00B6CDB0 /* Account */ = {
@@ -555,6 +569,7 @@
 			files = (
 				3BFFAD38261A5597001A6D11 /* PopularView.swift in Sources */,
 				43885D1C26014AC30002EE45 /* AccountVC.swift in Sources */,
+				AD328603261BB2B700A30C31 /* SocialLeaderboardHead.swift in Sources */,
 				FA839206260A6E1A0058AA6A /* Lounge.swift in Sources */,
 				FA8391E2260A61C70058AA6A /* Stock.swift in Sources */,
 				ADCE1BAE260AC23300B6CDB0 /* ModifyAccount.swift in Sources */,
@@ -571,6 +586,7 @@
 				43885D0D26014A620002EE45 /* HomeVC.swift in Sources */,
 				FA530745260C3302005734C1 /* GlobalFunctions.swift in Sources */,
 				43885CBC260141650002EE45 /* TabBarVC.swift in Sources */,
+				AD328610261BB93A00A30C31 /* UsersListView.swift in Sources */,
 				43885D1226014AB50002EE45 /* SearchVC.swift in Sources */,
 				43885CE9260146DD0002EE45 /* LoginVC.swift in Sources */,
 				43885CE7260146DD0002EE45 /* AuthInputView.swift in Sources */,
