@@ -115,11 +115,51 @@ extension User {
     }
     
     func sellStock(symbol: String, numShares: Float, completion: @escaping (Error?, Float) -> Void) -> Void {
+        
+        // check if user actually has the stock && enough shares
+        //getPortfolio(completion: <#T##(Error?, [PortfolioStock]) -> Void#>)
+        
+        
         // todo
     }
     
-    func getPortfolio() {
-        // todo
+    
+    /**
+     Get portfolio with all the relevant values (symbol, numShares, avgPrice, ...)
+     
+     Returns
+     */
+    func getPortfolio(completion: @escaping (Error?, [PortfolioStock]) -> Void) -> Void {
+        self.ref.getData(completion: { error, snapshot in
+            if let error = error {
+                print("Error fetching portfolio data: \(error)")
+                completion(error, [])
+                return
+            }
+            
+            let userDict = snapshot.value as? NSDictionary
+            let portfolioDict = userDict?["Portfolio"] as? NSDictionary
+            guard portfolioDict != nil else {
+                print("Error: portfolioDict is nil")
+                completion(DBError.noChild, [])
+                return
+            }
+            
+            var stockArray: [PortfolioStock] = []
+            
+            for key in portfolioDict?.allKeys ?? [] {
+                let stockDict = portfolioDict?[key] as? NSDictionary
+                var stock: PortfolioStock = PortfolioStock(symbol: key as! String, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float)
+                
+                stock.symbol = key as? String
+                stock.avgPrice = stockDict?["avgPrice"] as? Float
+                stock.shares = stockDict?["shares"] as? Float
+                
+                stockArray.append(stock)
+            }
+            
+            completion(nil, stockArray)
+        })
     }
     
     // returns updated cash balance in completion handler

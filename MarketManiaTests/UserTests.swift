@@ -257,7 +257,15 @@ class UserTests: XCTestCase {
     }
     
     func testUserBuyAndSellStocks() throws {
-        
+        XCTFail()
+    }
+    
+    func testUserGetPortfolioValue() throws {
+        XCTFail()
+    }
+    
+    func testUserGetCashBalance() throws {
+        XCTFail()
     }
     
     func testUserUpdateCashBalance() throws {
@@ -276,12 +284,109 @@ class UserTests: XCTestCase {
         
     }
     
-    func testUserSellStock() throws {
-        print("yuh")
+    // prereq: buy stocks works
+    func testUserGetPortfolio() throws {
+        // TODO: test empty portfolio
+        
+        
+        let expAAPL = expectation(description: "AAPL")
+        let expMO = expectation(description: "MO")
+        let expGME = expectation(description: "GME")
+        
+        user?.buyStock(symbol: "AAPL", numShares: 75, completion: { error, updatedBalance in
+            // basic checks
+            if let error = error {
+                assertionFailure("Error buying AAPL stock: \(error)")
+            }
+            
+            if updatedBalance == 0.0 {
+                assertionFailure("No money spent in AAPL transaction")
+            }
+            // assume its in db
+            expAAPL.fulfill()
+        })
+        
+        user?.buyStock(symbol: "MO", numShares: 50, completion: { error, updatedBalance in
+            // basic checks
+            if let error = error {
+                assertionFailure("Error buying MO stock: \(error)")
+            }
+            
+            if updatedBalance == 0.0 {
+                assertionFailure("No money spent in MO transaction")
+            }
+            // assume its in db
+            expMO.fulfill()
+        })
+        
+        user?.buyStock(symbol: "GME", numShares: 25, completion: { error, updatedBalance in
+            // basic checks
+            if let error = error {
+                assertionFailure("Error buying GME stock: \(error)")
+            }
+            
+            if updatedBalance == 0.0 {
+                assertionFailure("No money spent in GME transaction")
+            }
+            // assume its in db
+            expGME.fulfill()
+        })
+        
+        waitForExpectations(timeout: 5)
+        
+        // test getting
+        let expGET = expectation(description: "Getting")
+        
+        user?.getPortfolio(completion: { error, portfolioStocks in
+            if let error = error {
+                assertionFailure("Failed to get portfolio stocks: \(error)")
+            }
+            
+            guard portfolioStocks.count == 3 else {
+                dump(portfolioStocks, name: "Portfolio", indent: 0, maxDepth: 10, maxItems: 10)
+                assertionFailure("Portfolio should contain exactly 3 stocks")
+                return
+            }
+            
+            var boolArray: [Bool] = [false, false, false] // AAPL, MO, GME
+            
+            for stock in portfolioStocks {
+                if stock.symbol == "AAPL" {
+                    XCTAssertEqual(stock.shares, 75)
+                    XCTAssertNotEqual(stock.avgPrice, 0)
+                    boolArray[0] = true
+                }
+                
+                else if stock.symbol == "MO" {
+                    XCTAssertEqual(stock.shares, 50)
+                    XCTAssertNotEqual(stock.avgPrice, 0)
+                    boolArray[1] = true
+                }
+                
+                else if stock.symbol == "GME" {
+                    XCTAssertEqual(stock.shares, 25)
+                    XCTAssertNotEqual(stock.avgPrice, 0)
+                    boolArray[2] = true
+                }
+                
+                else {
+                    assertionFailure("Unknown symbol <\(stock.symbol!) returned")
+                }
+            }
+            
+            for b in boolArray {
+                XCTAssert(b)
+            }
+            
+            expGET.fulfill()
+        })
+        
+        waitForExpectations(timeout: 5)
+        
     }
     
-    func testUserGetStocks() throws {
-        print("yuh")
+    func testUserSellStock() throws {
+        XCTFail()
     }
 
     func testPerformanceExample() throws {

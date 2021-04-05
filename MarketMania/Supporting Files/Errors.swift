@@ -21,4 +21,6 @@ enum PurchaseError: Error {
 
 enum DBError: Error {
     case noUID
+    
+    case noChild
 }
