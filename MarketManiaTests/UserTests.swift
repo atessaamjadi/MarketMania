@@ -288,6 +288,24 @@ class UserTests: XCTestCase {
     func testUserGetPortfolio() throws {
         // TODO: test empty portfolio
         
+        let initialExp = expectation(description: "empty")
+        user?.getPortfolio(completion: { error, portfolioStocks in
+            
+            if let error = error {
+                XCTFail("Error getting empty portfolio: \(error)")
+            }
+            
+            else if portfolioStocks.count != 0 {
+                dump(portfolioStocks)
+                XCTFail("Should have received empty portfolio, but didn't")
+            }
+            
+            else {
+                initialExp.fulfill()
+            }
+        })
+        
+        waitForExpectations(timeout: 5)
         
         let expAAPL = expectation(description: "AAPL")
         let expMO = expectation(description: "MO")

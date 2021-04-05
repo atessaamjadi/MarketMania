@@ -137,28 +137,32 @@ extension User {
                 return
             }
             
-            let userDict = snapshot.value as? NSDictionary
-            let portfolioDict = userDict?["Portfolio"] as? NSDictionary
-            guard portfolioDict != nil else {
-                print("Error: portfolioDict is nil")
-                completion(DBError.noChild, [])
-                return
-            }
-            
-            var stockArray: [PortfolioStock] = []
-            
-            for key in portfolioDict?.allKeys ?? [] {
-                let stockDict = portfolioDict?[key] as? NSDictionary
-                var stock: PortfolioStock = PortfolioStock(symbol: key as! String, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float)
+            if snapshot.exists() {
+                let userDict = snapshot.value as? NSDictionary
+                let portfolioDict = userDict?["Portfolio"] as? NSDictionary
+                guard portfolioDict != nil else {
+                    // portfolio is empty/DNE
+                    completion(nil, [])
+                    return
+                }
                 
-                stock.symbol = key as? String
-                stock.avgPrice = stockDict?["avgPrice"] as? Float
-                stock.shares = stockDict?["shares"] as? Float
+                var stockArray: [PortfolioStock] = []
                 
-                stockArray.append(stock)
+                for key in portfolioDict?.allKeys ?? [] {
+                    let stockDict = portfolioDict?[key] as? NSDictionary
+                    var stock: PortfolioStock = PortfolioStock(symbol: key as! String, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float)
+                    
+                    stock.symbol = key as? String
+                    stock.avgPrice = stockDict?["avgPrice"] as? Float
+                    stock.shares = stockDict?["shares"] as? Float
+                    
+                    stockArray.append(stock)
+                }
+                
+                completion(nil, stockArray)
+            } else {
+                completion(nil, [])
             }
-            
-            completion(nil, stockArray)
         })
     }
     
