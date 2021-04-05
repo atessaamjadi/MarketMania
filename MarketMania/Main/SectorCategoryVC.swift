@@ -108,8 +108,38 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         return cell
     }
     
+//    source for selected cell expansion and closure: https://stackoverflow.com/questions/34478329/uicollectionview-enlarge-cell-on-selection
+    
+    var selectedIndexPath: IndexPath!
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView.frame.width/7)
+        //if a cell has been selected
+        if selectedIndexPath != nil {
+            if indexPath == selectedIndexPath {
+                return CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.width)
+            }
+            //size of unselected cell
+            else {
+                return CGSize(width: collectionView.frame.width, height: collectionView.frame.width/7)
+            }
+        }
+        //if a cell has not been selected
+        //size of a unselected cell
+        else {
+            return CGSize(width: collectionView.frame.width, height: collectionView.frame.width/7)
+        }
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //make selected cell back to original size
+        if selectedIndexPath != nil && selectedIndexPath == indexPath{
+            selectedIndexPath = nil
+        }
+        //set selectedIndexPath to selected cell index
+        else {
+            selectedIndexPath = indexPath
+        }
+            collectionView.reloadData()
     }
 }
 
@@ -164,6 +194,8 @@ class SectorCategoryCell: UICollectionViewCell {
     }()
     
     
+    
+    
     func setUpViews() {
         
         contentView.addSubviews(views: [nameLabel, dashLabel,currentPriceLabel, percentChangeLabel,priceChangeLabel])
@@ -174,9 +206,9 @@ class SectorCategoryCell: UICollectionViewCell {
         
         currentPriceLabel.anchor(contentView.topAnchor, left: dashLabel.rightAnchor, bottom: nil, right: nil, topConstant: 20, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        percentChangeLabel.anchor(contentView.topAnchor, left: nil, bottom: priceChangeLabel.topAnchor, right: contentView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        percentChangeLabel.anchor(contentView.topAnchor, left: nil, bottom: nil, right: contentView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 5, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
-        priceChangeLabel.anchor(percentChangeLabel.bottomAnchor, left: nil, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 5, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        priceChangeLabel.anchor(percentChangeLabel.bottomAnchor, left: nil, bottom: nil, right: contentView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
       
        
