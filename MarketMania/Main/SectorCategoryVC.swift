@@ -158,6 +158,8 @@ class SectorCategoryCell: UICollectionViewCell {
         setUpViews()
     }
     
+    //elements seen by unexpanded cell
+    
     let nameLabel: UILabel = {
         let label = UILabel()
         label.add(text: "APPL", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
@@ -193,12 +195,47 @@ class SectorCategoryCell: UICollectionViewCell {
         return label
     }()
     
+    //extra elements seen by expanded cell
+    
+    let fullNameLabel: UILabel = {
+        let label = UILabel()
+        label.add(text: "APPLE", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let descriptionTextView: UITextView = {
+        let text = UITextView()
+        text.text = "Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company"
+        text.isScrollEnabled = false
+        text.font = UIFont(name: "PingFangHK-Regular", size: 10)
+        text.backgroundColor = .clear
+        text.textColor = .black
+        text.textAlignment = .left
+    
+        
+        return text
+    }()
+    
+    //TODO: need to figure out how to make this hidden if the cell is collapsed
+    
+//    let tradeButton: UIButton = {
+//        let btn = UIButton(type: .system)
+//        btn.add(text: "Trade", font: UIFont(boldWithSize: 20), textColor: .black)
+//        btn.layer.borderColor = UIColor.black.cgColor
+//        btn.layer.borderWidth = 2
+//
+//        btn.frame.size.width = 200
+//        btn.frame.size.height = 10
+//        //btn.addTarget(self, action: #selector(handleTrade), for: .touchUpInside)
+//       return btn
+//    }()
     
     
     
     func setUpViews() {
         
-        contentView.addSubviews(views: [nameLabel, dashLabel,currentPriceLabel, percentChangeLabel,priceChangeLabel])
+        contentView.addSubviews(views: [nameLabel, dashLabel, currentPriceLabel, percentChangeLabel, priceChangeLabel, fullNameLabel, descriptionTextView])
         
         nameLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: dashLabel.leftAnchor, topConstant: 20, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
@@ -210,7 +247,11 @@ class SectorCategoryCell: UICollectionViewCell {
         
         priceChangeLabel.anchor(percentChangeLabel.bottomAnchor, left: nil, bottom: nil, right: contentView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
         
+        fullNameLabel.anchor(priceChangeLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, topConstant: 20, leftConstant: 10, bottomConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        descriptionTextView.anchor(fullNameLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 0, leftConstant: 10, bottomConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
       
+//        tradeButton.anchor(nil, left: nil, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 50, rightConstant: 50, widthConstant: 100, heightConstant: 50)
        
        
     }
