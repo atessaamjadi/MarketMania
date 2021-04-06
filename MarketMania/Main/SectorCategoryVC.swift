@@ -36,7 +36,7 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         //creates the back button since SearchVC instantiates SectorCategoryVC as a Nagivation Controller,
         //so it thinks SectorCategoryVC -> SearchVC needs a back button, not vice versa
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(addTapped))
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(addTapped))
         
         
     }

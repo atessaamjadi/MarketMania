@@ -235,6 +235,7 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
         
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectorsView", for: indexPath) as! SectorsView
+            cell.searchVC = self
             return cell
         }
        

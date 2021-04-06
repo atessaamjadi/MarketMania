@@ -11,6 +11,8 @@ class SectorsView: UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     
     var sectorLabels: [String] = []
     
+    var searchVC: SearchVC?
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -107,8 +109,8 @@ class SectorsView: UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     
     //allows each sector cell change view to it's category collection view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let viewController = SectorCategoryVC()
-        window?.rootViewController = UINavigationController(rootViewController: viewController)
+        let sectorCategoryVC = SectorCategoryVC()
+        searchVC?.navigationController?.pushViewController(sectorCategoryVC, animated: true)
     }
     
     
