@@ -21,7 +21,7 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        sectorCategoryLabel.text = selectedSector
+        //sectorCategoryLabel.text = selectedSector
         navigationItem.titleView = sectorCategoryLabel
         
         getCollection(type: "sector", collectionName: selectedSector ?? "", completion: {
@@ -32,7 +32,19 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
             }
         })
         
-
+     
+        //creates the back button since SearchVC instantiates SectorCategoryVC as a Nagivation Controller,
+        //so it thinks SectorCategoryVC -> SearchVC needs a back button, not vice versa
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(addTapped))
+        
+        
+    }
+    
+    
+    @objc func addTapped(){
+        let controller = SearchVC()
+        self.navigationController?.pushViewController(controller, animated: false)
     }
     
     let sectorCategoryLabel: UILabel = {
