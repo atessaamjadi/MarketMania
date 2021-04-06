@@ -80,6 +80,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
         cv.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(cv)
+        cv.backgroundColor = .main_background
         
         NSLayoutConstraint.activate([
                cv.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -128,12 +129,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         if (indexPath.row == 0) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Info", for: indexPath) as! InformationViewCell
             
-            
-            
-            
-            
             //cell.addLabelInOrder(label: name, isBold: true, size: 2)
-            
             
             return cell
         }
@@ -142,16 +138,16 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             // update password
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "Update Password"
-            cell.contentView.backgroundColor = .white
-            cell.textLabel.textColor = .black
+            cell.contentView.backgroundColor = .cell_background
+            cell.textLabel.textColor = .white
             return cell
         }
         
         else if (indexPath.row == 2) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "Update User Info"
-            cell.contentView.backgroundColor = .white
-            cell.textLabel.textColor = .black
+            cell.contentView.backgroundColor = .cell_background
+            cell.textLabel.textColor = .white
 
             return cell
             // payment info
@@ -160,8 +156,8 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         else if (indexPath.row == 3){
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "View Achievements"
-            cell.contentView.backgroundColor = .white
-            cell.textLabel.textColor = .black
+            cell.contentView.backgroundColor = .cell_background
+            cell.textLabel.textColor = .white
 
             return cell
         }
@@ -169,10 +165,10 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "Logout"
-            cell.textLabel.textColor = .black
+            cell.textLabel.textColor = .main_background
             cell.textLabel.textAlignment = .center
             cell.textLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: -10).isActive = true
-            cell.contentView.backgroundColor = .systemRed
+            cell.contentView.backgroundColor = .primary_purple
             return cell
         }
     }
@@ -188,6 +184,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             print("Error signing out: " +  error.localizedDescription)
         }
     }
+    
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             print(indexPath.row + 1)
         
@@ -201,7 +198,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         }
         
         if (indexPath.row == 2) {
-            let vc = ModifyAccount()
+            let vc = ModifyAccountVC()
             navigationController?.pushViewController(vc, animated: true)
         }
         

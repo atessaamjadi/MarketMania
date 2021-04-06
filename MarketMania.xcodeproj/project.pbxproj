@@ -42,7 +42,7 @@
 		ADCE1B86260AC06A00B6CDB0 /* SimpleTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1B85260AC06A00B6CDB0 /* SimpleTextCell.swift */; };
 		ADCE1B8F260AC1C000B6CDB0 /* UpdatePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1B8E260AC1C000B6CDB0 /* UpdatePasswordVC.swift */; };
 		ADCE1BA9260AC21500B6CDB0 /* SimpleTextInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1BA8260AC21500B6CDB0 /* SimpleTextInputCell.swift */; };
-		ADCE1BAE260AC23300B6CDB0 /* ModifyAccount.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1BAD260AC23300B6CDB0 /* ModifyAccount.swift */; };
+		ADCE1BAE260AC23300B6CDB0 /* ModifyAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1BAD260AC23300B6CDB0 /* ModifyAccountVC.swift */; };
 		ADCE1BC8260AC38100B6CDB0 /* InformationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADCE1BC7260AC38100B6CDB0 /* InformationViewCell.swift */; };
 		C984D416CA6458F13BA8F18E /* Pods_MarketMania_MarketManiaUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C189EAB4CF70D74A266F5BF6 /* Pods_MarketMania_MarketManiaUITests.framework */; };
 		FA530745260C3302005734C1 /* GlobalFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA530744260C3302005734C1 /* GlobalFunctions.swift */; };
@@ -113,7 +113,7 @@
 		ADCE1B85260AC06A00B6CDB0 /* SimpleTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTextCell.swift; sourceTree = "<group>"; };
 		ADCE1B8E260AC1C000B6CDB0 /* UpdatePasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePasswordVC.swift; sourceTree = "<group>"; };
 		ADCE1BA8260AC21500B6CDB0 /* SimpleTextInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTextInputCell.swift; sourceTree = "<group>"; };
-		ADCE1BAD260AC23300B6CDB0 /* ModifyAccount.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyAccount.swift; sourceTree = "<group>"; };
+		ADCE1BAD260AC23300B6CDB0 /* ModifyAccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModifyAccountVC.swift; sourceTree = "<group>"; };
 		ADCE1BC7260AC38100B6CDB0 /* InformationViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationViewCell.swift; sourceTree = "<group>"; };
 		B1FB9843286AB6FCB34BAE44 /* Pods-MarketManiaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketManiaTests.debug.xcconfig"; path = "Target Support Files/Pods-MarketManiaTests/Pods-MarketManiaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C189EAB4CF70D74A266F5BF6 /* Pods_MarketMania_MarketManiaUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarketMania_MarketManiaUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -155,7 +155,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3BDA4B05260C3A4B00A5DD86 /* HomeVC */ = {
+		3BDA4B05260C3A4B00A5DD86 /* Home */ = {
 			isa = PBXGroup;
 			children = (
 				43885D0C26014A620002EE45 /* HomeVC.swift */,
@@ -163,17 +163,18 @@
 				3BDA4AFB260C228D00A5DD86 /* TopMovesView.swift */,
 				3BDA4B00260C28AF00A5DD86 /* WatchlistView.swift */,
 			);
-			path = HomeVC;
+			path = Home;
 			sourceTree = "<group>";
 		};
-		3BFFAD2B261A5237001A6D11 /* SearchVC */ = {
+		3BFFAD2B261A5237001A6D11 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				43885D1126014AB50002EE45 /* SearchVC.swift */,
 				3BFFAD3C261A59F2001A6D11 /* SectorsView.swift */,
 				3BFFAD37261A5597001A6D11 /* PopularView.swift */,
+				3BDA4B0C260D3E6300A5DD86 /* SectorCategoryVC.swift */,
 			);
-			path = SearchVC;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		43885C7026013C500002EE45 = {
@@ -261,11 +262,10 @@
 		43885D2026014D620002EE45 /* Main */ = {
 			isa = PBXGroup;
 			children = (
-				3BFFAD2B261A5237001A6D11 /* SearchVC */,
-				3BDA4B05260C3A4B00A5DD86 /* HomeVC */,
 				43885CB8260141650002EE45 /* TabBarVC.swift */,
-				AD3285E6261BABC600A30C31 /* SocialVC */,
-				3BDA4B0C260D3E6300A5DD86 /* SectorCategoryVC.swift */,
+				3BDA4B05260C3A4B00A5DD86 /* Home */,
+				3BFFAD2B261A5237001A6D11 /* Search */,
+				AD3285E6261BABC600A30C31 /* Social */,
 				ADCE1B8A260AC0AA00B6CDB0 /* Account */,
 			);
 			path = Main;
@@ -292,25 +292,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		AD3285E6261BABC600A30C31 /* SocialVC */ = {
+		AD3285E6261BABC600A30C31 /* Social */ = {
 			isa = PBXGroup;
 			children = (
 				43885D1626014ABD0002EE45 /* SocialVC.swift */,
 				AD32860F261BB93A00A30C31 /* UsersListView.swift */,
 				AD328602261BB2B700A30C31 /* SocialLeaderboardHead.swift */,
 			);
-			path = SocialVC;
+			path = Social;
 			sourceTree = "<group>";
 		};
 		ADCE1B8A260AC0AA00B6CDB0 /* Account */ = {
 			isa = PBXGroup;
 			children = (
-				ADCE1B85260AC06A00B6CDB0 /* SimpleTextCell.swift */,
 				43885D1B26014AC30002EE45 /* AccountVC.swift */,
 				ADCE1B8E260AC1C000B6CDB0 /* UpdatePasswordVC.swift */,
+				ADCE1BAD260AC23300B6CDB0 /* ModifyAccountVC.swift */,
+				ADCE1B85260AC06A00B6CDB0 /* SimpleTextCell.swift */,
 				ADCE1BA8260AC21500B6CDB0 /* SimpleTextInputCell.swift */,
 				ADCE1BC7260AC38100B6CDB0 /* InformationViewCell.swift */,
-				ADCE1BAD260AC23300B6CDB0 /* ModifyAccount.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -572,7 +572,7 @@
 				AD328603261BB2B700A30C31 /* SocialLeaderboardHead.swift in Sources */,
 				FA839206260A6E1A0058AA6A /* Lounge.swift in Sources */,
 				FA8391E2260A61C70058AA6A /* Stock.swift in Sources */,
-				ADCE1BAE260AC23300B6CDB0 /* ModifyAccount.swift in Sources */,
+				ADCE1BAE260AC23300B6CDB0 /* ModifyAccountVC.swift in Sources */,
 				43885D05260148980002EE45 /* User.swift in Sources */,
 				ADCE1B8F260AC1C000B6CDB0 /* UpdatePasswordVC.swift in Sources */,
 				ADCE1BA9260AC21500B6CDB0 /* SimpleTextInputCell.swift in Sources */,

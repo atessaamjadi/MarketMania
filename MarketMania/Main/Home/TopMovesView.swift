@@ -130,7 +130,7 @@ class MoverCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: .zero)
         
-        self.backgroundColor = UIColor(hex: "3A3E50")
+        self.backgroundColor = .cell_background
         self.layer.masksToBounds = true
         self.layer.cornerRadius = 5
         

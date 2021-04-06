@@ -44,7 +44,7 @@ class HomeVC: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        cv.backgroundColor = UIColor(hex: "272C37")
+        cv.backgroundColor = .main_background
         cv.translatesAutoresizingMaskIntoConstraints = false
         
         // register cells

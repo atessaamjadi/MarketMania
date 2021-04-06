@@ -7,7 +7,7 @@
 import UIKit
 import Firebase
 
-class ModifyAccount:  UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+class ModifyAccountVC:  UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
     weak var cv: UICollectionView! // this pages collection view
     var cellExpanded: Bool!

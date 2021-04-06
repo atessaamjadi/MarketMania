@@ -48,7 +48,7 @@ class TabBarVC: UITabBarController {
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
         button.addTarget(self, action: #selector(test), for: .touchDown)
-        button.tintColor = UIColor(hex: "5566D1")
+        button.tintColor = .primary_purple
         
         buyButton = UIButton(type: .custom)
         buyButton.frame = CGRect(x: 0, y:0, width: 70, height: 70)
@@ -61,10 +61,10 @@ class TabBarVC: UITabBarController {
         buyButton.contentHorizontalAlignment = .fill
         buyButton.addTarget(self, action: #selector(buyFunc), for: .touchDown)
         buyButton.alpha = 0
-        buyButton.tintColor = UIColor(hex: "5566D1")
+        buyButton.tintColor = .primary_purple
         
         buyButtonLabel = UILabel(frame: CGRect(x: 0, y:0, width: 70, height: 70))
-        buyButtonLabel.add(text: "Buy Stock", font: UIFont(boldWithSize: 16), textColor: UIColor(hex: "5566D1"))
+        buyButtonLabel.add(text: "Buy Stock", font: UIFont(boldWithSize: 16), textColor: .primary_purple)
         buyButtonLabel.center = CGPoint(x: (self.view.center.x * 0.8), y: (self.view.frame.maxY * 0.85) - 40)
         buyButtonLabel.alpha = 0
 
@@ -79,10 +79,10 @@ class TabBarVC: UITabBarController {
         sellButton.contentHorizontalAlignment = .fill
         sellButton.addTarget(self, action: #selector(sellFunc), for: .touchDown)
         sellButton.alpha = 0
-        sellButton.tintColor = UIColor(hex: "5566D1")
+        sellButton.tintColor = .primary_purple
         
         sellButtonLabel = UILabel(frame: CGRect(x: 0, y:0, width: 70, height: 70))
-        sellButtonLabel.add(text: "Sell Stock", font: UIFont(boldWithSize: 16), textColor: UIColor(hex: "5566D1"))
+        sellButtonLabel.add(text: "Sell Stock", font: UIFont(boldWithSize: 16), textColor: .primary_purple)
         sellButtonLabel.center = CGPoint(x: (self.view.center.x * 1.2), y: (self.view.frame.maxY * 0.85) - 40)
         sellButtonLabel.alpha = 0
         
@@ -172,7 +172,7 @@ class TabBarVC: UITabBarController {
     func add(vc: UIViewController, name: String, icon: UIImage) -> UINavigationController {
         vc.tabBarItem = UITabBarItem(title: name, image: icon.withRenderingMode(.alwaysTemplate), selectedImage: nil)
         vc.title = name
-        vc.view.backgroundColor = UIColor(hex: "272C37")
+        vc.view.backgroundColor = .main_background
         vc.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         return UINavigationController(rootViewController: vc)
     }
