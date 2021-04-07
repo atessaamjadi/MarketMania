@@ -113,9 +113,15 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         let stock = sectorStocks[indexPath.row]
         
         cell.nameLabel.text = stock.symbol
-        cell.currentPriceLabel.text = String(stock.latestPrice ?? 0.0)
-        cell.percentChangeLabel.text = String(stock.changePercent ?? 0.0)
-        cell.priceChangeLabel.text = String((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0))
+        cell.currentPriceLabel.text = "$" + String(stock.latestPrice ?? 0.0)
+        cell.percentChangeLabel.text = String(stock.changePercent ?? 0.0) + "%"
+        
+        var str = ""
+        if ((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0) > 0) {
+            str += "+"
+        }
+        str += String((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0))
+        cell.priceChangeLabel.text = str + "$"
         
         return cell
     }
