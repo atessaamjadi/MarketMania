@@ -100,7 +100,7 @@ private func getListOfStocks(urlString: String, completion: @escaping ([Stock]) 
         do {
             // TODO: find way to limit response size to allow for quicker page loading
 //            print("DATA: ", data)
-            print("RESP: ", response)
+  //          print("RESP: ", response)
             let decoder = JSONDecoder()
             ret = try decoder.decode([Stock].self, from: data)
             completion(ret) // this passes the value set in ret ([Stock]) to the callback arg ([Stock])

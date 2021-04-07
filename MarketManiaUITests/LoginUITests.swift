@@ -1,15 +1,14 @@
 //
-//  MarketManiaUITests.swift
+//  LoginUITests.swift
 //  MarketManiaUITests
 //
-//  Created by Thor Larson on 3/16/21.
+//  Created by Connor Hanson on 4/7/21.
 //
 
 import XCTest
-@testable import MarketMania
 
-class MarketManiaUITests: XCTestCase {
-    
+class LoginUITests: XCTestCase {
+
     var app: XCUIApplication!
     // https://developer.apple.com/documentation/xctest/xcuiapplication -> class documentation
     // https://developer.apple.com/documentation/xctest/xcuielement -> actions which app can use
@@ -83,7 +82,8 @@ class MarketManiaUITests: XCTestCase {
     // to pass this test you need to slightly change device settings (ios)
     // Simulator -> I/O -> Keyboard -> Connect Hardware Keyboard should be OFF
     func testValidLogin() throws {
-                        
+        
+                
         let emailInputView = app.otherElements["emailInputView"]
         XCTAssert(emailInputView.isEnabled)
         emailInputView.tap()
