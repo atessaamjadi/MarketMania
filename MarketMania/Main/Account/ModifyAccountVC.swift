@@ -32,7 +32,7 @@ class ModifyAccountVC:  UIViewController, UICollectionViewDataSource, UICollecti
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.cv.backgroundColor = .black
+        self.cv.backgroundColor = .main_background
         self.cv.dataSource = self
         self.cv.delegate = self
 
@@ -58,11 +58,11 @@ class ModifyAccountVC:  UIViewController, UICollectionViewDataSource, UICollecti
         
         if (indexPath.row == 3) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TextCell", for: indexPath) as! SimpleTextCell
-            cell.textLabel.text = "Submit"
-            cell.textLabel.textColor = .black
+            cell.textLabel.text = "Confirm"
+            cell.textLabel.textColor = .main_background
             cell.textLabel.textAlignment = .center
             cell.textLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: -10).isActive = true
-            cell.contentView.backgroundColor = .systemTeal
+            cell.contentView.backgroundColor = .primary_purple
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InputCell", for: indexPath) as! SimpleTextInputCell

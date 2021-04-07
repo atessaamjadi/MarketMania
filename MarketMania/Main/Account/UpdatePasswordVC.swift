@@ -29,7 +29,7 @@ class UpdatePasswordVC: UIViewController, UICollectionViewDataSource, UICollecti
     override func viewDidLoad() {
            super.viewDidLoad()
 
-           self.cv.backgroundColor = .black
+           self.cv.backgroundColor = .main_background
            self.cv.dataSource = self
            self.cv.delegate = self
 
@@ -77,9 +77,9 @@ class UpdatePasswordVC: UIViewController, UICollectionViewDataSource, UICollecti
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyCell", for: indexPath) as! SimpleTextCell
             
             cell.textLabel.text = "Confirm"
-            cell.textLabel.textColor = .black
+            cell.textLabel.textColor = .main_background
             cell.textLabel.textAlignment = .center
-            cell.contentView.backgroundColor = .systemTeal
+            cell.contentView.backgroundColor = .primary_purple
             return cell
         }
     }
