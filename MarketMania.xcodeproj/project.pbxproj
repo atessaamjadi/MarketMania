@@ -55,6 +55,7 @@
 		838FA323261D56CB006F6EFC /* SimpleTextInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838FA311261D56CB006F6EFC /* SimpleTextInputCell.swift */; };
 		838FA324261D56CB006F6EFC /* UpdatePasswordVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838FA312261D56CB006F6EFC /* UpdatePasswordVC.swift */; };
 		838FA325261D56CB006F6EFC /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 838FA313261D56CB006F6EFC /* AccountVC.swift */; };
+		838FA33F261D5A71006F6EFC /* Dumshit in Resources */ = {isa = PBXBuildFile; fileRef = 838FA33E261D5A71006F6EFC /* Dumshit */; };
 		94B5A6B83D062670979734AB /* Pods_MarketMania.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5AF7D043E7A4ACA1A9C82757 /* Pods_MarketMania.framework */; };
 <<<<<<< HEAD
 		AD328603261BB2B700A30C31 /* SocialLeaderboardHead.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD328602261BB2B700A30C31 /* SocialLeaderboardHead.swift */; };
@@ -148,6 +149,7 @@
 		838FA311261D56CB006F6EFC /* SimpleTextInputCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SimpleTextInputCell.swift; sourceTree = "<group>"; };
 		838FA312261D56CB006F6EFC /* UpdatePasswordVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePasswordVC.swift; sourceTree = "<group>"; };
 		838FA313261D56CB006F6EFC /* AccountVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		838FA33E261D5A71006F6EFC /* Dumshit */ = {isa = PBXFileReference; lastKnownFileType = text; path = Dumshit; sourceTree = "<group>"; };
 		A14E7CFDDDA6AA3CB13E4BC2 /* Pods-MarketMania-MarketManiaUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarketMania-MarketManiaUITests.debug.xcconfig"; path = "Target Support Files/Pods-MarketMania-MarketManiaUITests/Pods-MarketMania-MarketManiaUITests.debug.xcconfig"; sourceTree = "<group>"; };
 <<<<<<< HEAD
 		AD328602261BB2B700A30C31 /* SocialLeaderboardHead.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialLeaderboardHead.swift; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 		43885C7026013C500002EE45 = {
 			isa = PBXGroup;
 			children = (
+				838FA33E261D5A71006F6EFC /* Dumshit */,
 				43885C7B26013C500002EE45 /* MarketMania */,
 				43885C9526013C520002EE45 /* MarketManiaTests */,
 				43885CA026013C520002EE45 /* MarketManiaUITests */,
@@ -547,6 +550,7 @@
 				837C4593260D770900A48428 /* Stock_Sectors.json in Resources */,
 				43885C8C26013C520002EE45 /* LaunchScreen.storyboard in Resources */,
 				43885C8926013C520002EE45 /* Assets.xcassets in Resources */,
+				838FA33F261D5A71006F6EFC /* Dumshit in Resources */,
 				43885CC7260144B10002EE45 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
