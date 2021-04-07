@@ -80,7 +80,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             let cashBalance = "Balance: 0"
             let portfolioValue = "Portfolio Value: 0"
             let uid = "ID: \(globalCurrentUser!.uid)"
-            
+            //some comment
             
             cell.addLabelInOrder(label: name, isBold: true, size: 2)
             cell.addLabelInOrder(label: email, isBold: false, size: 1)
