@@ -60,13 +60,13 @@ class LoginVC: UIViewController {
 
                 
             }
-
+            guard let currentUserID = Auth.auth().currentUser?.uid else {return}
             
             let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
 
             tabBarVC.setUpViewControllers()
             self.view.endEditing(true)
-            //self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
     }
     
