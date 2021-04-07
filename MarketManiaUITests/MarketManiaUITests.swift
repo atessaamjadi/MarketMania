@@ -43,7 +43,7 @@ class MarketManiaUITests: XCTestCase {
         // Use this to print the current state of the application and to get a log view of all the elements contained within the current view
         
 //        print("STATE:", app.state)
-        print("DEBUG:", app.debugDescription)
+//        print("DEBUG:", app.debugDescription)
         
         // check that all labels exist
         XCTAssert(app.staticTexts["titleLabel"].exists)
@@ -80,8 +80,45 @@ class MarketManiaUITests: XCTestCase {
         XCTAssert(passwordUnderLine.exists)
     }
     
-    // fails, probably an error on the test side
+    // to pass this test you need to slightly change device settings (ios)
+    // Simulator -> I/O -> Keyboard -> Connect Hardware Keyboard should be OFF
     func testValidLogin() throws {
+                        
+        let emailInputView = app.otherElements["emailInputView"]
+        XCTAssert(emailInputView.isEnabled)
+        emailInputView.tap()
+        emailInputView.textFields.element.typeText("testUI@test.com")
+        
+        let passwordInputView = app.otherElements["passwordInputView"]
+        XCTAssert(passwordInputView.isEnabled)
+        passwordInputView.tap()
+        passwordInputView.secureTextFields.element(boundBy: 0).typeText("test123")
+        
+        app.buttons["signInButton"].tap()
+        
+        
+        print(app.debugDescription)
+
+        // check that all labels exist
+        XCTAssertFalse(app.staticTexts["titleLabel"].exists)
+
+        // check that all inputviews/textfields exist
+        XCTAssertFalse(app.otherElements["emailInputView"].exists)
+        XCTAssertFalse(app.otherElements["passwordInputView"].exists)
+        
+        // check that buttons exist
+        XCTAssertFalse(app.buttons["signInButton"].exists)
+        XCTAssertFalse(app.buttons["signUpButton"].exists)
+        
+        // check that containers exist
+        XCTAssertFalse(app.otherElements["containerView"].exists)
+        XCTAssertFalse(app.otherElements["inputBackgroundView"].exists)
+        
+        // background img
+        XCTAssertFalse(app.images["backgroundImageView"].exists)
+    }
+    
+    func testInvalidLogin() throws {
         
         let emailInputView = app.otherElements["emailInputView"]
         XCTAssert(emailInputView.isEnabled)
@@ -91,15 +128,11 @@ class MarketManiaUITests: XCTestCase {
         let passwordInputView = app.otherElements["passwordInputView"]
         XCTAssert(passwordInputView.isEnabled)
         passwordInputView.tap()
-        passwordInputView.secureTextFields.element.typeText("test123")
+        passwordInputView.secureTextFields.element(boundBy: 0).typeText("wrong_password")
         
         app.buttons["signInButton"].tap()
         
         print(app.debugDescription)
-    }
-    
-    func testInvalidLogin() throws {
-        
     }
 
     func testLaunchPerformance() throws {

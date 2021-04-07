@@ -10,7 +10,7 @@ import UIKit
 class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     var selectedIndex: Int?
-    var selectedSector: String?
+    var selectedSector: String = ""
     var sectorStocks: [Stock] = []
     
     override func viewDidLoad() {
@@ -22,12 +22,14 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         collectionView.dataSource = self
         
         //sectorCategoryLabel.text = selectedSector
+        sectorCategoryLabel.text = selectedSector
         navigationItem.titleView = sectorCategoryLabel
         
-        getCollection(type: "sector", collectionName: selectedSector ?? "", completion: {
+        getCollection(type: "sector", collectionName: selectedSector, completion: {
             response in
             DispatchQueue.main.async {
                 self.sectorStocks = response
+                print("RESP", response)
                 self.collectionView.reloadData()
             }
         })
