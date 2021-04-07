@@ -5,65 +5,11 @@
 //  Created by Mitch Alley on 3/16/21.
 //
 
-/*import UIKit
-import Firebase
 
-class AccountVC: UIViewController {
-    
-    //
-    // MARK: View Lifecycle
-    //
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setUpViews()
-    }
-    
-    //
-    // MARK: Functions
-    //
-    
-    @objc func handleLogout() {
-        do {
-            try Auth.auth().signOut()
-            globalCurrentUser = nil
-            let loginVC = LoginVC()
-            loginVC.modalPresentationStyle = .fullScreen
-            present(loginVC, animated: true, completion: nil)
-        } catch {
-            print("Error signing out: " +  error.localizedDescription)
-        }
-    }
-    
-    //
-    // MARK: UI Setup
-    //
-    
-    lazy var logoutButton: UIButton = {
-        let btn = UIButton(type: .system)
-        btn.setTitle("Logout", for: .normal)
-        btn.addTarget(self, action: #selector(handleLogout), for: .touchUpInside)
-        return btn
-    }()
-    
-    func setUpViews() {
-        self.view.backgroundColor = .yellow
-        
-        self.view.addSubviews(views: [logoutButton])
-        
-        logoutButton.anchorCenterSuperview()
-    }
-    
-    
-}
-*/
-//
-//  AccountVC.swift
-//  BadgerBytes
-//
-//  Created by Thor Larson on 2/18/21.
-//
+
+
+
+
 
 import UIKit
 import Firebase
@@ -129,7 +75,18 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         if (indexPath.row == 0) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Info", for: indexPath) as! InformationViewCell
             
-            //cell.addLabelInOrder(label: name, isBold: true, size: 2)
+            let name = "\(globalCurrentUser!.firstName) \(globalCurrentUser!.lastName)"
+            let email = "Email: \(globalCurrentUser!.email)"
+            let cashBalance = "Balance: 0"
+            let portfolioValue = "Portfolio Value: 0"
+            let uid = "ID: \(globalCurrentUser!.uid)"
+            
+            
+            cell.addLabelInOrder(label: name, isBold: true, size: 2)
+            cell.addLabelInOrder(label: email, isBold: false, size: 1)
+            cell.addLabelInOrder(label: cashBalance, isBold: false, size: 1)
+            cell.addLabelInOrder(label: portfolioValue, isBold: false, size: 1)
+            cell.addLabelInOrder(label: uid, isBold: false, size: 1)
             
             return cell
         }
@@ -249,3 +206,4 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         return UIEdgeInsets.init(top: 8, left: 8, bottom: 8, right: 8)
     }
 }
+
