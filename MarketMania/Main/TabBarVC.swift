@@ -27,6 +27,7 @@ class TabBarVC: UITabBarController {
                 let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
                 tabBarVC.setUpViewControllers()
                 
+                
             }
         }
         // pop up a loading screen modal until all the necessary data is loaded
@@ -47,10 +48,10 @@ class TabBarVC: UITabBarController {
         button.contentVerticalAlignment = .fill
         button.contentHorizontalAlignment = .fill
         button.addTarget(self, action: #selector(test), for: .touchDown)
-        button.tintColor = UIColor(hex: "5566D1")
+        button.tintColor = .primary_purple
         
         buyButton = UIButton(type: .custom)
-        buyButton.frame = CGRect(x: 0, y:0, width: 75, height: 75)
+        buyButton.frame = CGRect(x: 0, y:0, width: 70, height: 70)
         buyButton.center.x = view.center.x
         buyButton.center.y = view.frame.maxY * 0.93
         buyButton.layer.cornerRadius = 0.5 * button.bounds.size.width
@@ -60,12 +61,15 @@ class TabBarVC: UITabBarController {
         buyButton.contentHorizontalAlignment = .fill
         buyButton.addTarget(self, action: #selector(buyFunc), for: .touchDown)
         buyButton.alpha = 0
-        buyButton.tintColor = UIColor(hex: "5566D1")
+        buyButton.tintColor = .primary_purple
         
+        buyButtonLabel = UILabel(frame: CGRect(x: 0, y:0, width: 70, height: 70))
+        buyButtonLabel.add(text: "Buy Stock", font: UIFont(boldWithSize: 16), textColor: .primary_purple)
+        buyButtonLabel.center = CGPoint(x: (self.view.center.x * 0.8), y: (self.view.frame.maxY * 0.85) - 40)
+        buyButtonLabel.alpha = 0
 
-        
         sellButton = UIButton(type: .custom)
-        sellButton.frame = CGRect(x: 0, y:0, width: 75, height: 75)
+        sellButton.frame = CGRect(x: 0, y:0, width: 70, height: 70)
         sellButton.center.x = view.center.x
         sellButton.center.y = view.frame.maxY * 0.93
         sellButton.layer.cornerRadius = 0.5 * button.bounds.size.width
@@ -75,10 +79,17 @@ class TabBarVC: UITabBarController {
         sellButton.contentHorizontalAlignment = .fill
         sellButton.addTarget(self, action: #selector(sellFunc), for: .touchDown)
         sellButton.alpha = 0
-        sellButton.tintColor = UIColor(hex: "5566D1")
+        sellButton.tintColor = .primary_purple
+        
+        sellButtonLabel = UILabel(frame: CGRect(x: 0, y:0, width: 70, height: 70))
+        sellButtonLabel.add(text: "Sell Stock", font: UIFont(boldWithSize: 16), textColor: .primary_purple)
+        sellButtonLabel.center = CGPoint(x: (self.view.center.x * 1.2), y: (self.view.frame.maxY * 0.85) - 40)
+        sellButtonLabel.alpha = 0
         
         self.view.addSubview(buyButton)
+        self.view.addSubview(buyButtonLabel)
         self.view.addSubview(sellButton)
+        self.view.addSubview(sellButtonLabel)
         self.view.addSubview(button)
         
         setUpViewControllers()
@@ -87,6 +98,9 @@ class TabBarVC: UITabBarController {
     var button : UIButton!
     var buyButton : UIButton!
     var sellButton : UIButton!
+    
+    var buyButtonLabel : UILabel!
+    var sellButtonLabel : UILabel!
     
     var buyCenter : CGPoint!
     var sellCenter : CGPoint!
@@ -105,6 +119,8 @@ class TabBarVC: UITabBarController {
                 self.sellButton.alpha = 1
                 self.buyButton.center = CGPoint(x: (self.view.center.x * 0.8), y: (self.view.frame.maxY * 0.85))
                 self.sellButton.center = CGPoint(x: (self.view.center.x * 1.2), y: (self.view.frame.maxY * 0.85))
+                self.buyButtonLabel.alpha = 1
+                self.sellButtonLabel.alpha = 1
             })
         }else{
             sender.setImage(UIImage(systemName: "dollarsign.circle.fill"), for: .normal)
@@ -115,6 +131,8 @@ class TabBarVC: UITabBarController {
                 self.sellButton.alpha = 0
                 self.buyButton.center = CGPoint(x: (self.view.center.x), y: (self.view.frame.maxY * 0.93))
                 self.sellButton.center = CGPoint(x: (self.view.center.x), y: (self.view.frame.maxY * 0.93))
+                self.buyButtonLabel.alpha = 0
+                self.sellButtonLabel.alpha = 0
             })
         }
     }
@@ -154,7 +172,7 @@ class TabBarVC: UITabBarController {
     func add(vc: UIViewController, name: String, icon: UIImage) -> UINavigationController {
         vc.tabBarItem = UITabBarItem(title: name, image: icon.withRenderingMode(.alwaysTemplate), selectedImage: nil)
         vc.title = name
-        vc.view.backgroundColor = UIColor(hex: "272C37")
+        vc.view.backgroundColor = .main_background
         vc.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: self, action: nil)
         return UINavigationController(rootViewController: vc)
     }

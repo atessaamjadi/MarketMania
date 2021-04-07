@@ -28,6 +28,9 @@ extension UIColor {
     class var menu_white: UIColor { return UIColor(hex: "f7f7f7") }
     class var cred: UIColor { return UIColor(hex: "E23E3E") }
 
-
     
+    class var main_background: UIColor { return UIColor(hex: "272C37") }
+    class var cell_background: UIColor { return UIColor(hex: "3A3E50") }
+    class var primary_purple: UIColor { return UIColor(hex: "5566D1") }
+
 }
