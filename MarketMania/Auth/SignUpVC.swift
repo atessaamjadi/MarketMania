@@ -47,10 +47,7 @@ class SignUpVC: UIViewController {
                 alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
                 
                 self.present(alert, animated: true, completion: nil)
-                let when = DispatchTime.now() + 4
-                DispatchQueue.main.asyncAfter(deadline: when){
-                    alert.dismiss(animated: true, completion: nil)
-                }
+               
             }
             
             guard let currentUserID = Auth.auth().currentUser?.uid else {return}
