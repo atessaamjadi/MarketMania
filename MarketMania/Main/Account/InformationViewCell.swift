@@ -2,7 +2,7 @@
 //  InformationViewCell.swift
 //  BadgerBytes
 //
-//  Created by Mitch Alley on 2/25/21.
+//  Created by Mitch Alley on 3/16/21.
 //
 
 import UIKit

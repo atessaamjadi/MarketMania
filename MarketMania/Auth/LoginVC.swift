@@ -66,7 +66,7 @@ class LoginVC: UIViewController {
 
             tabBarVC.setUpViewControllers()
             self.view.endEditing(true)
-            self.dismiss(animated: true, completion: nil)
+            //self.dismiss(animated: true, completion: nil)
         }
     }
     
