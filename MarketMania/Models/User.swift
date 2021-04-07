@@ -23,7 +23,7 @@ struct User {
     let portfolioValue: Float
     var cashBalance: Float
     let percentGain: Float
-    let portfolioStocks: [PortfolioStock]
+    var portfolioStocks: [PortfolioStock]
     
     let watchList: [String] // get stock values by string
     
@@ -41,7 +41,8 @@ struct User {
         self.cashBalance = dictionary["cashBalance"] as? Float ?? -1.0
         self.percentGain = dictionary["percentGain"] as? Float ?? -1.0
         self.watchList = dictionary["watchList"] as? [String] ?? []
-        self.portfolioStocks = dictionary["Portfolio"] as? [PortfolioStock] ?? []
+        self.portfolioStocks = []
+        
         //self.watchList = dictionary["stocks"] as? [Stock] ?? []
         //self.friends = dictionary["friends"] as? [User] ?? []
         //self.stats = dictionary["stats"] as? UserStats ?? UserStats(startAmmount: 50000)//starting dollar ammount

@@ -23,9 +23,11 @@ class TabBarVC: UITabBarController {
             }
         }else{  //TODO - Make a loading screen to remove this, also big performace issue here
             fetchUser {
-                self.view.window?.resignKey()
-                let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
-                tabBarVC.setUpViewControllers()
+                DispatchQueue.main.async {
+                    self.view.window?.resignKey()
+                    let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
+                    tabBarVC.setUpViewControllers()
+                }
                 
                 
             }

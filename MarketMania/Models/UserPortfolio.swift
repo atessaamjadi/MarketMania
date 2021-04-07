@@ -119,6 +119,10 @@ extension User {
         // check if user actually has the stock && enough shares
         //getPortfolio(completion: <#T##(Error?, [PortfolioStock]) -> Void#>)
         
+        getPortfolio(completion: { error, portfolioStocks in
+            
+        })
+        
         
         // todo
     }
@@ -126,6 +130,7 @@ extension User {
     
     /**
      Get portfolio with all the relevant values (symbol, numShares, avgPrice, ...)
+     Returns values that are currently stored in firebase
      
      Returns
      */
@@ -169,7 +174,7 @@ extension User {
     // returns updated cash balance in completion handler
     func updateCashBalance(delta: Float, completion: @escaping (Error?, Float) -> Void) -> Void {
         // get current cash balance
-        self.ref.child("cashbalance").getData(completion: { (error, snapshot) in
+        self.ref.child("cashBalance").getData(completion: { (error, snapshot) in
             
             if let error = error {
                 print("error updating cash balance: \(error)")
@@ -179,7 +184,7 @@ extension User {
             
             let userDict = snapshot.value as? NSDictionary
             
-            guard var balance = userDict?["cashbalance"] as? Float else {
+            guard var balance = userDict?["cashBalance"] as? Float else {
                 dump(userDict, name: "Cash Snapshot", indent: 0, maxDepth: 5, maxItems: 5)
                 completion(PurchaseError.notFound, 0.0)
                 return
@@ -194,7 +199,7 @@ extension User {
             balance += delta
             
             // update DB value
-            self.ref.child("cashbalance").setValue(balance)
+            self.ref.child("cashBalance").setValue(balance)
             completion(nil, balance)
             print("cash updated")
         })

@@ -29,17 +29,19 @@ class UserTests: XCTestCase {
                 print("UUID: ", self.uid)
                 self.ref = Database.database().reference().child("Users").child(self.uid)
                 
-//                self.ref.child("Users").child(self.uid).setValue(nil)
-//                exp.fulfill()
-                
                 // empty user then reset cash balance
                 self.ref.setValue("", withCompletionBlock: { _,_ in
-                    self.ref.child("cashbalance").setValue(50000.0, withCompletionBlock: { (error, dbref) in
+                    self.ref.child("cashBalance").setValue(50000.0, withCompletionBlock: { (error, dbref) in
                         if let error = error {
                             assertionFailure("Error setting up test user: \(error)")
                         }
-                        print("SHIT")
+                        
+                        // now fetch user
                         exp.fulfill()
+                        
+                        
+                        // now fetch user
+                        print("SHIT")
                     })
                     
                     // set something 
@@ -51,20 +53,25 @@ class UserTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 5)
+        
+        let fetchExp = XCTestExpectation(description: "fetch")
+        
+        fetchUser {
+            print("GCD:", globalCurrentUser)
+            
+            fetchExp.fulfill()
+        }
+        
+        wait(for: [fetchExp], timeout: 5)
+        
+        //print("GCD:", globalCurrentUser)
+        
         self.user = User(uid: self.uid, dictionary: ["": ""]) // user with empty dict
         
     }
 
     override func tearDownWithError() throws {
-        // clear the user info each time
-        
-        //self.ref.child("Users").child(uid).setValue("")
-        
-//        do {
-//            try Auth.auth().signOut()
-//        } catch {
-//            assertionFailure("Error signing out: " + error.localizedDescription)
-//        }
+        // TODO
     }
 
     func testUserBuyOneStock() throws {
@@ -265,6 +272,10 @@ class UserTests: XCTestCase {
     }
     
     func testUserGetCashBalance() throws {
+        XCTFail()
+    }
+    
+    func testFetchUser() throws {
         XCTFail()
     }
     

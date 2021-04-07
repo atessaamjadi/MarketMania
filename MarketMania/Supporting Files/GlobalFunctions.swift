@@ -18,7 +18,13 @@ func fetchUser(completion: @escaping () -> ()) {
         
         // Creates dictionary of user information, instatiates new User object
         guard let userDict = snapshot.value as? [String: Any] else {return}
+        print("USERDICT:", userDict)
         globalCurrentUser = User(uid: currentUserUID, dictionary: userDict)
-        completion()
+        
+        globalCurrentUser?.getPortfolio(completion: { error, portfolio in
+            globalCurrentUser?.portfolioStocks = portfolio
+            completion()
+        })
+        //completion()
     }
 }
