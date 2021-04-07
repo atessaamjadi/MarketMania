@@ -110,6 +110,7 @@ class SectorsView: UICollectionViewCell, UICollectionViewDelegate, UICollectionV
     //allows each sector cell change view to it's category collection view
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let sectorCategoryVC = SectorCategoryVC()
+        sectorCategoryVC.selectedSector = sectorLabels[indexPath.row]
         searchVC?.navigationController?.pushViewController(sectorCategoryVC, animated: true)
     }
     

@@ -60,7 +60,7 @@ class LoginVC: UIViewController {
 
                 
             }
-
+            guard let currentUserID = Auth.auth().currentUser?.uid else {return}
             
             let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
 
@@ -127,6 +127,15 @@ class LoginVC: UIViewController {
     }()
     
     func setUpViews() {
+        // set accessibility identifiers for testing -- for each object
+        titleLabel.accessibilityIdentifier = "titleLabel"
+        emailInputView.accessibilityIdentifier = "emailInputView"
+        backgroundImageView.accessibilityIdentifier = "backgroundImageView"
+        containerView.accessibilityIdentifier = "containerView"
+        inputBackgroundView.accessibilityIdentifier = "inputBackgroundView"
+        passwordInputView.accessibilityIdentifier = "passwordInputView"
+        signInButton.accessibilityIdentifier = "signInButton"
+        signUpButton.accessibilityIdentifier = "signUpButton"
         
         self.view.backgroundColor = .gray
         

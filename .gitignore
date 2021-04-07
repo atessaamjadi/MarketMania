@@ -4,3 +4,9 @@
 *.plist
 *.xcuserstate
 *.xcbkptlist
+.DS_Store
+*.xcscheme
+MarketMania/Main/Search/SectorCategoryVC.swift~HEAD
+MarketMania/Main/Search/SectorCategoryVC.swift~HEAD_0
+MarketMania/Main/Search/SectorCategoryVC.swift~user_functionality
+MarketMania/Main/Search/SectorCategoryVC.swift~user_functionality_0

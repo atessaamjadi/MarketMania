@@ -24,41 +24,25 @@ let baseURL: String = testURL
  *
  * @return: Array of stock objects stock objects with all their fields filled out
  */
-func getStocks(symbols: [String], completion: ([Stock]) -> Void) -> Void {
-    
-    let session = URLSession.shared
-    var ret: [Stock] = []
-    
-    for symbol in symbols {
-        let url = URL(string: baseURL + "/stock/" + symbol + "/quote?token=" + tok)!
-        let req = URLRequest(url: url)
-        
-        let task = session.dataTask(with: req as URLRequest, completionHandler: {
-            data, response, error in
-            
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
+func getStocks(symbols: [String], completion: @escaping ([Stock]) -> Void) -> Void {
+    // check if one or many
+    if (symbols.count >= 1) {
+//        let urlString: String = baseURL
+//        // get single
+//    } else if (symbols.count > 1) {
+        var urlString: String = baseURL + "/stock/market/batch?symbols="
+        for stock in symbols {
+            if stock != symbols.first {
+                urlString += ","
             }
-            
-            guard let data = data else {
-                return
-            }
-            
-            do {
-                let decoder = JSONDecoder()
-                let stock = try decoder.decode(Stock.self, from: data)
-                ret.append(stock)
-                
-            } catch let error {
-                print(error.localizedDescription)
-            }
-        })
-        task.resume()
+            urlString += stock
+        }
+        urlString += "&types=quote&token=" + tok
+        getBatchOfStocks(urlString: urlString, completion: completion)
+        // get many
+    } else {
+        // error
     }
-    
-    // pass returned stock array to callback/completion function
-    completion(ret)
 }
 
 func getWinners(completion: @escaping ([Stock]) -> Void) -> Void {
@@ -84,10 +68,10 @@ func getCollection(type: String, collectionName: String, completion: @escaping (
         return
     }
     
-    // TODO: Must URL Encode collectionName
+    let urlEncodedCollection = collectionName.replacingOccurrences(of: " ", with: "%20")
     
     let urlString: String = baseURL + "/stock/market/collection/" + type + "?collectionName=" +
-        collectionName + "&token=" + tok
+        urlEncodedCollection + "&token=" + tok
     return getListOfStocks(urlString: urlString, completion: completion)
 }
 
@@ -115,7 +99,8 @@ private func getListOfStocks(urlString: String, completion: @escaping ([Stock]) 
         
         do {
             // TODO: find way to limit response size to allow for quicker page loading
-            
+//            print("DATA: ", data)
+  //          print("RESP: ", response)
             let decoder = JSONDecoder()
             ret = try decoder.decode([Stock].self, from: data)
             completion(ret) // this passes the value set in ret ([Stock]) to the callback arg ([Stock])
@@ -124,5 +109,46 @@ private func getListOfStocks(urlString: String, completion: @escaping ([Stock]) 
         }
     })
     task.resume()
+}
+
+private func getBatchOfStocks(urlString: String, completion: @escaping ([Stock]) -> Void) -> Void {
+    
+    let session = URLSession.shared
+    let url = URL(string: urlString)!
+    let req = URLRequest(url: url)
+    
+    let task = session.dataTask(with: req as URLRequest, completionHandler: {
+        data, response, error in
+        
+        guard error == nil else {
+            print(error!.localizedDescription)
+            return
+        }
+        
+        guard let data = data else {
+            return
+        }
+        
+        do {
+
+            let decoder = JSONDecoder()
+            var ret: [Stock] = []
+            
+            // structure of batch -> array:[["quote": Stock], ...]
+            let batch: [[String: Stock]] = (try decoder.decode(StockBatch.self, from: data)).array
+//            print("BATCH:", batch)
+            
+            for dictionary in batch {
+                ret.append(dictionary["quote"]!)
+            }
+            completion(ret)
+
+        } catch let error {
+            print("Error decoding JSON Batch: " + error.localizedDescription)
+        }
+    })
+    task.resume()
+
+    
 }
 

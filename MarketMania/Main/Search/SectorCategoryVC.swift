@@ -10,7 +10,7 @@ import UIKit
 class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     var selectedIndex: Int?
-    var selectedSector: String?
+    var selectedSector: String = ""
     var sectorStocks: [Stock] = []
     
     override func viewDidLoad() {
@@ -24,13 +24,14 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         //commented out for now
         
         //sectorCategoryLabel.text = selectedSector
-        
+        sectorCategoryLabel.text = selectedSector
         navigationItem.titleView = sectorCategoryLabel
         
-        getCollection(type: "sector", collectionName: selectedSector ?? "", completion: {
+        getCollection(type: "sector", collectionName: selectedSector, completion: {
             response in
             DispatchQueue.main.async {
                 self.sectorStocks = response
+                print("RESP", response)
                 self.collectionView.reloadData()
             }
         })
@@ -139,9 +140,15 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         let stock = sectorStocks[indexPath.row]
         
         cell.nameLabel.text = stock.symbol
-        cell.currentPriceLabel.text = String(stock.latestPrice ?? 0.0)
-        cell.percentChangeLabel.text = String(stock.changePercent ?? 0.0)
-        cell.priceChangeLabel.text = String((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0))
+        cell.currentPriceLabel.text = "$" + String(stock.latestPrice ?? 0.0)
+        cell.percentChangeLabel.text = String(stock.changePercent ?? 0.0) + "%"
+        
+        var str = ""
+        if ((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0) > 0) {
+            str += "+"
+        }
+        str += String((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0))
+        cell.priceChangeLabel.text = str + "$"
         
         return cell
     }
