@@ -92,7 +92,7 @@ extension User {
                         let dataAvgPrice: Float = portfolioItem?["avgPrice"] as! Float
                         let dataShares: Float = portfolioItem?["shares"] as! Float
                         
-                        let totVal: Float = (dataAvgPrice * dataShares) + buyPrice
+                        let totVal: Float = (dataAvgPrice * dataShares) + (buyPrice * numShares)
                         let totShares: Float = (dataShares + numShares)
                         
                         self.ref.child("Portfolio").child(stock.symbol!).setValue([
@@ -198,6 +198,31 @@ extension User {
             completion(nil, balance)
             print("cash updated")
         })
+    }
+    
+    //Updates the current users portfolio balance
+    func updatePortfolioValue(completion: @escaping (Error?, Float) -> Void) -> Void {
+        var totalValue = cashBalance
+        
+        var userStockNames : [String] = []
+        getPortfolio(completion: {error, myStockList in
+            for stock in myStockList{
+                userStockNames.append(stock.symbol!)
+            }
+            
+            getStocks(symbols: userStockNames, completion: {curStockList in
+                var i = 0
+                for stock in curStockList{
+                    totalValue += stock.latestPrice! * myStockList[i].avgPrice!
+                    i+=1
+                }
+            })
+            
+            ref.child("portfolioValue").setValue(totalValue)
+            completion(nil,totalValue)
+            
+        })
+
     }
     
 }

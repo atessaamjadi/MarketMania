@@ -284,6 +284,22 @@ class UserTests: XCTestCase {
         
     }
     
+    func testUserUpdatePortfolioValue() throws {
+        let exp = expectation(description: "portfolio value")
+        
+        user?.updatePortfolioValue(completion: {error, newVal in
+            if let error = error {
+                assertionFailure("Error updating user cash balance: \(error)")
+            }
+            
+           // XCTAssertEqual(globalCurrentUser?.portfolioValue, newVal)
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 5)
+        
+    }
+    
     // prereq: buy stocks works
     func testUserGetPortfolio() throws {
         // TODO: test empty portfolio
