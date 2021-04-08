@@ -35,6 +35,15 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         searchBar.delegate = self
         self.navigationItem.titleView = searchBar
         
+        getHighestVolume { response in
+            // UI updates are only allowed in main queue
+            DispatchQueue.main.async {
+                //print("winners", response)
+                self.initialStockList = response
+                self.tableView.reloadData()
+            }
+        }
+        
         
         setUpViews()
     }
@@ -49,12 +58,12 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     // MARK: UI Setup
     //
 
-    
-    var dummyData = ["A", "AB", "ABC", "ABCD"]
     var activeSearch: Bool = false
-    var filtered: [String] = []
     var stocks: [Stock] = []
+    var initialStockList: [Stock] = []
+    
     var searchText: String = ""
+    var searchStocksArray: [SearchStock] = []
     
     
     var searchBar: UISearchBar = {
@@ -108,8 +117,23 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         searchBar.becomeFirstResponder()
         searchBar.setShowsCancelButton(true, animated: true)
         activeSearch = true
-        
         tableView.isHidden = false
+        
+//        print("EDITING")
+//
+//        searchStocks(searchString: searchText) { response in
+//            DispatchQueue.main.async {
+//                self.searchStocksArray = response
+//                self.tableView.reloadData()
+//
+//                print(self.searchStocksArray)
+//
+//            }
+//        }
+        
+        
+        
+       
         
     }
     
@@ -130,8 +154,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.setShowsCancelButton(false, animated: false)
-        
-        activeSearch = false
+        activeSearch = true
         
         print(searchText)
         getStocks(symbols: [searchText]) { response in
@@ -145,19 +168,53 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
             }
         }
         
-       activeSearch = false
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        print("self.searchText = ", self.searchText)
+        print("searchText = ", searchText)
+        
+        // if the
+//        if (self.searchText != searchText && searchText.isEmpty == false) {
+            print("SEARCH TEXT CHANGED")
+            
+        // check to make sure string only contains letters
+        var allLetters: Bool = true
+        
+        for chr in searchText {
+            if (!(chr >= "a" && chr <= "z") && !(chr >= "A" && chr <= "Z") && chr != "-") {
+                allLetters = false
+                break
+            }
+        }
+        
+        if (allLetters) {
+            searchStocks(searchString: searchText) { response in
+                DispatchQueue.main.async {
+                    self.searchStocksArray = response
+                    self.tableView.reloadData()
+    
+                    print(self.searchStocksArray)
+    
+                }
+            }
+        } else {
+           searchStocksArray = []
+        }
+//        }
+        
+        
         self.searchText = searchText
         
-        if searchText.isEmpty == false {
-            filtered = dummyData.filter { name in return name.lowercased().contains(searchText.lowercased())}
+        if searchText.isEmpty {
+            activeSearch = false
+            searchStocksArray = []
         }
         else {
-            filtered = dummyData
+            activeSearch = true
         }
+        
+        
         
 //        filtered = dummyData.filter({ (text) -> Bool in
 //            let tmp: NSString = text as NSString
@@ -165,17 +222,17 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
 //            return range.location != NSNotFound
 //        })
         
-        if (filtered.count == 0) {
-            if (searchText.isEmpty == true) {
-                activeSearch = false
-            }
-            else {
-                filtered = []
-                activeSearch = true
-            }
-        } else {
-            activeSearch = true
-        }
+//        if (filtered.count == 0) {
+//            if (searchText.isEmpty == true) {
+//                activeSearch = false
+//            }
+//            else {
+//                filtered = []
+//                activeSearch = true
+//            }
+//        } else {
+//            activeSearch = true
+//        }
         
         self.tableView.reloadData()
     }
@@ -186,20 +243,20 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if (activeSearch) {
-            return filtered.count
+            return searchStocksArray.count
         } else {
-            return dummyData.count
+            return initialStockList.count
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
+        print("ACTIVE SEARCH:", activeSearch)
+        
         if (activeSearch) {
-            cell.textLabel?.text = filtered[indexPath.row]
+            cell.textLabel?.text = searchStocksArray[indexPath.row].symbol
         } else {
-            cell.textLabel?.text = dummyData[indexPath.row]
+            cell.textLabel?.text = initialStockList[indexPath.row].symbol
         }
         
         //make search table view cells black with white text

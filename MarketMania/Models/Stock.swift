@@ -23,6 +23,7 @@ struct Stock: Codable {
     let changePercent: Float?
 }
 
+
 // credit: https://swiftsenpai.com/swift/decode-dynamic-keys-json/
 struct StockBatch: Decodable {
     
@@ -82,4 +83,15 @@ struct PortfolioStock {
         self.shares = shares
         self.avgPrice = avgPrice
     }
+}
+
+struct SearchStock: Decodable {
+    var symbol: String?
+    var cik: String?
+    var securityName: String?
+    var securityType: String?
+    var region: String?
+    var exchange: String?
+    var sector: String?
+    var currency: String?
 }
