@@ -47,9 +47,11 @@ class LoginVC: UIViewController {
             if(Auth.auth().currentUser?.uid != nil) {
                 print("Successfully signed in user with id: " + (Auth.auth().currentUser?.uid)!)
                 fetchUser{
-                    self.view.window?.resignKey()
-                    let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
-                    tabBarVC.setUpViewControllers()
+                    DispatchQueue.main.async {
+                        self.view.window?.resignKey()
+                        let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
+                        tabBarVC.setUpViewControllers()
+                    }
                 }
             } else{
                 let alert = UIAlertController(title: "Error!", message: "Incorrect username or password, please try again.", preferredStyle: .alert)
