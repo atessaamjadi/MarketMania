@@ -273,27 +273,30 @@ extension User {
     
     //Updates the current users portfolio balance
     func updatePortfolioValue(completion: @escaping (Error?, Float) -> Void) -> Void {
+        
+        if(self.portfolioStocks.isEmpty){
+            completion(nil,cashBalance)
+        }
+        
         var totalValue = cashBalance
         
         var userStockNames : [String] = []
-        getPortfolio(completion: {error, myStockList in
-            for stock in myStockList{
-                userStockNames.append(stock.symbol!)
-            }
+        for stock in self.portfolioStocks{
+            userStockNames.append(stock.symbol!)
+        }
             
-            getStocks(symbols: userStockNames, completion: {curStockList in
-                var i = 0
-                for stock in curStockList{
-                    totalValue += stock.latestPrice! * myStockList[i].avgPrice!
-                    i+=1
+        getStocks(symbols: userStockNames, completion: {curStockList in
+            for stock in curStockList{
+                print(stock.symbol ?? "symbol error")
+                for myStock in self.portfolioStocks {
+                    if(myStock.symbol == stock.symbol){
+                        totalValue += stock.latestPrice! * myStock.shares!
+                    }
                 }
-            })
-            
+            }
             ref.child("portfolioValue").setValue(totalValue)
             completion(nil,totalValue)
-            
         })
-
     }
     
 }
