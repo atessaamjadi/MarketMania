@@ -249,7 +249,12 @@ extension User {
                 completion(PurchaseError.notFound, -1.0)
                 return
             }
-                        
+                    
+            if(balance < (delta * -1)){
+                completion(PurchaseError.insufficientFunds, -1.0)
+                return
+            }
+            
             print("BALANCE:", balance)
             guard balance != -1.0 else {
                 completion(PurchaseError.insufficientFunds, -1.0)
