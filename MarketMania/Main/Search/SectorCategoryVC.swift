@@ -7,11 +7,14 @@
 
 import UIKit
 
-class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
 
     var selectedIndex: Int?
     var selectedSector: String = ""
     var sectorStocks: [Stock] = []
+    var filtered: [Stock] = []
+    var activeSearch: Bool = false
+    var searchText: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +28,14 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         sectorCategoryLabel.text = selectedSector
         navigationItem.titleView = sectorCategoryLabel
         
+        searchBar.delegate = self
+        
         getCollection(type: "sector", collectionName: selectedSector, completion: {
             response in
             DispatchQueue.main.async {
                 self.sectorStocks = response
                 print("RESP", response)
+                self.filtered = self.sectorStocks
                 self.collectionView.reloadData()
             }
         })
@@ -82,6 +88,81 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         return cv
     }()
     
+    
+    // search bar functionalities
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.becomeFirstResponder()
+        searchBar.setShowsCancelButton(true, animated: true)
+        activeSearch = true
+        
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: false)
+        activeSearch = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: false)
+        activeSearch = false
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.setShowsCancelButton(false, animated: false)
+        
+        activeSearch = true
+        
+//        print(searchText)
+//        getStocks(symbols: [searchText]) { response in
+//            DispatchQueue.main.async {
+//                self.stocks = response
+//                self.tableView.reloadData()
+//
+//                print(self.stocks[0].companyName! as String)
+//                print(self.stocks[0].symbol! as String)
+//                print(self.stocks[0].latestPrice! as Float)
+//            }
+//        }
+        
+        
+    }
+    
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchText = searchText
+        
+        if searchText.isEmpty == false {
+            self.filtered = self.sectorStocks.filter { stock in return (stock.symbol!.lowercased().contains(searchText.lowercased()))}
+        }
+        else {
+            self.filtered = self.sectorStocks
+        }
+        
+//        filtered = dummyData.filter({ (text) -> Bool in
+//            let tmp: NSString = text as NSString
+//            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
+//            return range.location != NSNotFound
+//        })
+        
+        if (filtered.count == 0) {
+            if (searchText.isEmpty == true) {
+                activeSearch = false
+            }
+            else {
+                filtered = []
+                activeSearch = true
+            }
+        } else {
+            activeSearch = true
+        }
+        
+        self.collectionView.reloadData()
+    }
+    
 
     func setUpViews() {
         
@@ -100,19 +181,26 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (sectorStocks.count != 0) {
+        if (activeSearch) {
+            return filtered.count
+        } else {
             return sectorStocks.count
         }
-        
-        return 20
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectorCategoryCell", for: indexPath) as! SectorCategoryCell
         
-        guard sectorStocks.count != 0 else {return cell}
+        guard filtered.count != 0 else {return cell}
         
-        let stock = sectorStocks[indexPath.row]
+        
+        print("FILTERED COUNT:", filtered.count)
+        print("indexPath.row:", indexPath.row)
+        
+    
+        let stock = filtered[indexPath.row]
+        
+        print("SYMBOL:", stock.symbol)
         
         cell.nameLabel.text = stock.symbol
         cell.currentPriceLabel.text = "$" + String(stock.latestPrice ?? 0.0)
@@ -124,7 +212,8 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         }
         str += String((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0))
         cell.priceChangeLabel.text = str + "$"
-        
+                
+         
         return cell
     }
     
