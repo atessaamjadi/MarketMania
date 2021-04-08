@@ -192,16 +192,9 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "sectorCategoryCell", for: indexPath) as! SectorCategoryCell
         
         guard filtered.count != 0 else {return cell}
-        
-        
-        print("FILTERED COUNT:", filtered.count)
-        print("indexPath.row:", indexPath.row)
-        
     
         let stock = filtered[indexPath.row]
-        
-        print("SYMBOL:", stock.symbol)
-        
+
         cell.nameLabel.text = stock.symbol
         cell.currentPriceLabel.text = "$" + String(stock.latestPrice ?? 0.0)
         cell.percentChangeLabel.text = String(stock.changePercent ?? 0.0) + "%"
