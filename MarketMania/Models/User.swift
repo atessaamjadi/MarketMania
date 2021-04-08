@@ -18,6 +18,7 @@ struct User {
     let email: String
     let firstName: String
     let lastName: String
+    let username: String
     
     // stats
     let portfolioValue: Float
@@ -36,6 +37,7 @@ struct User {
         self.email = dictionary["email"] as? String ?? ""
         self.firstName = dictionary["firstName"] as? String ?? ""
         self.lastName = dictionary["lastName"] as? String ?? ""
+        self.username = dictionary["username"] as? String ?? ""
         
         self.portfolioValue = dictionary["portfolioValue"] as? Float ?? -1.0
         self.cashBalance = dictionary["cashBalance"] as? Float ?? -1.0
