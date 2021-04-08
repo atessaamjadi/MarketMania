@@ -58,6 +58,8 @@ class SocialVC: UIViewController {
 
     func setUpViews() {
         
+        
+        
         view.addSubview(collectionView)
         
         collectionView.fillSuperview()

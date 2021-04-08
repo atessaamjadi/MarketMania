@@ -94,10 +94,10 @@
             filePath = "MarketMania/Main/Social/UsersListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "81"
-            endingLineNumber = "81"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "usersListCell"
+            landmarkType = "3">
             <Locations>
                <Location
                   uuid = "6CD6B2DE-362A-4775-8545-6E4449B171B1 - ec485128f32e7f67"
@@ -158,8 +158,8 @@
             filePath = "MarketMania/Main/Social/SocialVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>

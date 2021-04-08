@@ -45,6 +45,10 @@ class SocialLeaderboardHead: UICollectionViewCell {
     
     func setUpViews() {
         
+        leaderboardLabel.accessibilityIdentifier = "leaderboardLabel"
+        userNameLabel.accessibilityIdentifier = "userNameLabel"
+        tempSarcasticLabel.accessibilityIdentifier = "tempSarcasticLabel"
+        
         contentView.addSubviews(views: [leaderboardLabel, userNameLabel, tempSarcasticLabel])
         
         leaderboardLabel.anchor(contentView.safeAreaLayoutGuide.topAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 35, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
