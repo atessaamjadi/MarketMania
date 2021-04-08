@@ -59,7 +59,6 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     //
 
     var activeSearch: Bool = false
-    var stocks: [Stock] = []
     var initialStockList: [Stock] = []
     
     var searchText: String = ""
@@ -116,7 +115,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.becomeFirstResponder()
         searchBar.setShowsCancelButton(true, animated: true)
-        activeSearch = true
+        activeSearch = false
         tableView.isHidden = false
         
 //        print("EDITING")
@@ -154,19 +153,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.setShowsCancelButton(false, animated: false)
-        activeSearch = true
-        
-        print(searchText)
-        getStocks(symbols: [searchText]) { response in
-            DispatchQueue.main.async {
-                self.stocks = response
-                self.tableView.reloadData()
-                
-                print(self.stocks[0].companyName! as String)
-                print(self.stocks[0].symbol! as String)
-                print(self.stocks[0].latestPrice! as Float)
-            }
-        }
+        activeSearch = false
         
     }
     
@@ -251,7 +238,6 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
-        print("ACTIVE SEARCH:", activeSearch)
         
         if (activeSearch) {
             cell.textLabel?.text = searchStocksArray[indexPath.row].symbol
@@ -266,6 +252,48 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         cell.layer.borderWidth = 0.2
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let stockDetailVC = StockDetailVC()
+
+        print("ACTIVESEARCH:", activeSearch)
+        
+        if (activeSearch) {
+            let tappedStockSymbol = searchStocksArray[indexPath.row].symbol!
+            print("TAPPEDSTOCKSYMBOL:", tappedStockSymbol)
+            
+            getStocks(symbols: [tappedStockSymbol]) { response in
+                DispatchQueue.main.async {
+                    let tappedStock = response[0]
+    //                self.tableView.reloadData()
+                    print("TAPPEDSTOCK:", tappedStock)
+                    
+                    stockDetailVC.stock = tappedStock
+                    
+                    self.navigationController?.pushViewController(stockDetailVC, animated: true)
+                }
+            }
+        } else {
+            let tappedStockSymbol = self.initialStockList[indexPath.row].symbol!
+            print("TAPPEDSTOCKSYMBOL:", tappedStockSymbol)
+            
+            getStocks(symbols: [tappedStockSymbol]) { response in
+                DispatchQueue.main.async {
+                    let tappedStock = response[0]
+    //                self.tableView.reloadData()
+                    print("TAPPEDSTOCK:", tappedStock)
+                    
+                    stockDetailVC.stock = tappedStock
+                    
+                    self.navigationController?.pushViewController(stockDetailVC, animated: true)
+                }
+            }
+        }
+        
+        
+        
+       
     }
     
     
