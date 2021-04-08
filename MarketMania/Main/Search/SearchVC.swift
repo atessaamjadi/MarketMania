@@ -47,6 +47,8 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     var dummyData = ["A", "AB", "ABC", "ABCD"]
     var activeSearch: Bool = false
     var filtered: [String] = []
+    var stocks: [Stock] = []
+    var searchText: String = ""
     
     
     var searchBar: UISearchBar = {
@@ -125,9 +127,24 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         
         activeSearch = false
         
+        print(searchText)
+        getStocks(symbols: [searchText]) { response in
+            DispatchQueue.main.async {
+                self.stocks = response
+                self.tableView.reloadData()
+                
+                print(self.stocks[0].companyName! as String)
+                print(self.stocks[0].symbol! as String)
+                print(self.stocks[0].latestPrice! as Float)
+            }
+        }
+        
+       activeSearch = false
+        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.searchText = searchText
         
         if searchText.isEmpty == false {
             filtered = dummyData.filter { name in return name.lowercased().contains(searchText.lowercased())}
@@ -170,6 +187,8 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
         if (activeSearch) {
             cell.textLabel?.text = filtered[indexPath.row]
@@ -235,6 +254,3 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
        
     }
 }
-
-
-
