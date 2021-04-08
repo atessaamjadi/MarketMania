@@ -22,27 +22,27 @@ extension User {
      @param symbol: A single stock symbol (eg: AAPL, FB). Case Insensitive
      @param numShares: any Double > 0.0
      
-     @return amount of money left in balance after transaction - return 0.0 if purchase falls through
+     @return amount of money left in balance after transaction - return -1.0 if purchase falls through
      TODO: Add error return to completion handlers
      */
     func buyStock(symbol: String, numShares: Float, completion: @escaping (Error?, Float) -> Void) -> Void {
         getStocks(symbols: [symbol], completion: { stockList in // only one item in stocklist
             
             guard stockList.count == 1 else {
-                completion(PurchaseError.unexpected(code: 500), 0.0)
+                completion(PurchaseError.unexpected(code: 500), -1.0)
                 return
             }
             
             let stock = stockList[0]
-            let buyPrice: Float = stock.latestPrice ?? 0.0
+            let buyPrice: Float = stock.latestPrice ?? -1.0
             
             //print("BUYING", stockList)
             guard buyPrice != 0.0 else {
-                completion(PurchaseError.insufficientFunds, 0.0) // TODO: update to more appropriate error
+                completion(PurchaseError.insufficientFunds, -1.0) // TODO: update to more appropriate error
                 return
             }
             guard uid != "" else {
-                completion(DBError.noUID, 0.0)
+                completion(DBError.noUID, -1.0)
                 return
             }
                         
@@ -61,7 +61,7 @@ extension User {
                 self.ref.child("Portfolio").child(stock.symbol!).getData { (error, snapshot) in
                     if let error = error {
                         print("Error fetching portfolio data: \(error)")
-                        completion(error, 0.0)
+                        completion(error, -1.0)
                         return
                     } else if snapshot.exists(){
                         
@@ -85,9 +85,9 @@ extension User {
                             return
                         }
                         
-                        dump(dict, name: "1Distc", indent: 0, maxDepth: 100, maxItems: 100)
-                        dump(portfolioItem, name: "NSDICT", indent: 0, maxDepth: 100, maxItems: 100)
-                        dump(portfolioElements, name: "FUCK", indent: 0, maxDepth: 100, maxItems: 100)
+//                        dump(dict, name: "1Distc", indent: 0, maxDepth: 100, maxItems: 100)
+//                        dump(portfolioItem, name: "NSDICT", indent: 0, maxDepth: 100, maxItems: 100)
+//                        dump(portfolioElements, name: "FUCK", indent: 0, maxDepth: 100, maxItems: 100)
                         
                         let dataAvgPrice: Float = portfolioItem?["avgPrice"] as! Float
                         let dataShares: Float = portfolioItem?["shares"] as! Float
@@ -117,14 +117,73 @@ extension User {
     func sellStock(symbol: String, numShares: Float, completion: @escaping (Error?, Float) -> Void) -> Void {
         
         // check if user actually has the stock && enough shares
-        //getPortfolio(completion: <#T##(Error?, [PortfolioStock]) -> Void#>)
-        
-        getPortfolio(completion: { error, portfolioStocks in
+
+        self.ref.getData(completion: { error, snapshot in
+            if let error = error {
+                print("Error fetching portfolio data: \(error)")
+                completion(error, -1.0)
+                return
+            }
             
+            if snapshot.exists() {
+                let userDict = snapshot.value as? NSDictionary
+                let portfolioDict = userDict?["Portfolio"] as? NSDictionary
+                guard portfolioDict != nil else {
+                    completion(TransactionError.noPortfolio, -1.0)
+                    return
+                }
+                
+                // no shares
+                guard portfolioDict?[symbol] != nil else {
+                    completion(TransactionError.insufficientShares, -1.0)
+                    return
+                }
+                
+                let stockDict = portfolioDict?[symbol] as? NSDictionary
+                let stock = PortfolioStock(symbol: symbol, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float)
+                
+                // check for sufficient shares
+                guard stock.shares! >= numShares else {
+                    completion(TransactionError.insufficientShares, -1.0)
+                    return
+                }
+                
+                // compute transaction amount. WRONG
+                //let transactionAmount = numShares * stock.avgPrice!
+                let updatedShares = stock.shares! - numShares
+                
+                // update shares
+                if (updatedShares == 0) {
+                    self.ref.child("Portfolio").child(symbol).removeValue()
+                } else {
+                    self.ref.child("Portfolio").child(symbol).setValue([
+                        "shares": updatedShares
+                    ])
+                }
+                
+                // get transaction amount
+                getStocks(symbols: [symbol], completion: { stockResp in
+                   
+                    guard stockResp.count == 1 else {
+                        completion(IEXError.StockNotFound, -1.0)
+                        return
+                    }
+                    
+                    let RTStock = stockResp[0] // real time stock
+                    let transactionAmount = RTStock.latestPrice! * numShares
+                    
+                    updateCashBalance(delta: transactionAmount, completion: { error, updatedBalance in
+                        if let error = error {
+                            completion(error, updatedBalance)
+                            return
+                        } else {
+                            completion(nil, updatedBalance)
+                            return
+                        }
+                    })
+                })
+            }
         })
-        
-        
-        // todo
     }
     
     
@@ -147,7 +206,7 @@ extension User {
                 let portfolioDict = userDict?["Portfolio"] as? NSDictionary
                 guard portfolioDict != nil else {
                     // portfolio is empty/DNE
-                    completion(nil, [])
+                    completion(DBError.unexpected, [])
                     return
                 }
                 
@@ -155,11 +214,11 @@ extension User {
                 
                 for key in portfolioDict?.allKeys ?? [] {
                     let stockDict = portfolioDict?[key] as? NSDictionary
-                    var stock: PortfolioStock = PortfolioStock(symbol: key as! String, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float)
+                    let stock: PortfolioStock = PortfolioStock(symbol: key as! String, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float)
                     
-                    stock.symbol = key as? String
-                    stock.avgPrice = stockDict?["avgPrice"] as? Float
-                    stock.shares = stockDict?["shares"] as? Float
+//                    stock.symbol = key as? String
+//                    stock.avgPrice = stockDict?["avgPrice"] as? Float
+//                    stock.shares = stockDict?["shares"] as? Float
                     
                     stockArray.append(stock)
                 }
@@ -172,13 +231,14 @@ extension User {
     }
     
     // returns updated cash balance in completion handler
+    // returns -1.0 if there is an error
     func updateCashBalance(delta: Float, completion: @escaping (Error?, Float) -> Void) -> Void {
         // get current cash balance
         self.ref.child("cashBalance").getData(completion: { (error, snapshot) in
             
             if let error = error {
                 print("error updating cash balance: \(error)")
-                completion(error, 0.0)
+                completion(error, -1.0)
                 return
             }
             
@@ -186,13 +246,13 @@ extension User {
             
             guard var balance = userDict?["cashBalance"] as? Float else {
                 dump(userDict, name: "Cash Snapshot", indent: 0, maxDepth: 5, maxItems: 5)
-                completion(PurchaseError.notFound, 0.0)
+                completion(PurchaseError.notFound, -1.0)
                 return
             }
                         
             print("BALANCE:", balance)
-            guard balance != 0.0 else {
-                completion(PurchaseError.insufficientFunds, 0.0)
+            guard balance != -1.0 else {
+                completion(PurchaseError.insufficientFunds, -1.0)
                 return
             }
             
@@ -200,6 +260,7 @@ extension User {
             
             // update DB value
             self.ref.child("cashBalance").setValue(balance)
+            //globalCurrentUser?.cashBalance = balance
             completion(nil, balance)
             print("cash updated")
         })
