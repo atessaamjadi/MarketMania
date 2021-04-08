@@ -14,6 +14,7 @@ class UserTests: XCTestCase {
     var uid: String = ""
     var user: MarketMania.User?
     var ref: DatabaseReference!
+    var exps: [XCTestExpectation] = []
 
     override func setUpWithError() throws {
         let exp = expectation(description: "login")
@@ -56,10 +57,11 @@ class UserTests: XCTestCase {
         
         let fetchExp = XCTestExpectation(description: "fetch")
         
+        // do something with user
         fetchUser {
-            print("GCD:", globalCurrentUser)
-            
+           // print("GCD:", globalCurrentUser)
             fetchExp.fulfill()
+            self.exps.append(XCTestExpectation(description: "updateGCU"))
         }
         
         wait(for: [fetchExp], timeout: 5)
@@ -76,12 +78,12 @@ class UserTests: XCTestCase {
 
     func testUserBuyOneStock() throws {
         let exp = expectation(description: "buy stock")
-        user?.buyStock(symbol: "AAPL", numShares: 2, completion: { error, moneySpent in
+        user?.buyStock(symbol: "AAPL", numShares: 2, completion: { error, updatedBalance in
             if let error = error {
                 assertionFailure("Failed to buy singular stock: \(error)")
             }
             
-            XCTAssertNotEqual(moneySpent, 0.0)
+            XCTAssertNotEqual(updatedBalance, 0.0)
             exp.fulfill()
         })
         waitForExpectations(timeout: 5)
@@ -114,7 +116,9 @@ class UserTests: XCTestCase {
         }
         
         waitForExpectations(timeout: 5)
-        // check that buy is correctly recorded in DB
+        
+        // check that GCD currently has updated stocks too
+        
         
     }
     
@@ -122,22 +126,22 @@ class UserTests: XCTestCase {
         var AAPLexp = expectation(description: "buyAAPL")
         var AMCexp = expectation(description: "buyAMC")
         
-        user?.buyStock(symbol: "AAPL", numShares: 4, completion: { error, moneySpent in
+        user?.buyStock(symbol: "AAPL", numShares: 4, completion: { error, updatedBalance in
             if let error = error {
                 assertionFailure("Error buying Apple stock: \(error)")
             }
             
-            XCTAssertNotEqual(moneySpent, 0.0)
+            XCTAssertNotEqual(updatedBalance, -1.0)
             AAPLexp.fulfill()
         })
         
         // assume that the first purchase went through
-        user?.buyStock(symbol: "AMC", numShares: 10, completion: { error, moneySpent in
+        user?.buyStock(symbol: "AMC", numShares: 10, completion: { error, updatedBalance in
             if let error = error {
                 assertionFailure("Error buying AMC stock: \(error)")
             }
             
-            XCTAssertNotEqual(moneySpent, 0.0)
+            XCTAssertNotEqual(updatedBalance, -1.0)
             AMCexp.fulfill()
         })
         
@@ -193,21 +197,21 @@ class UserTests: XCTestCase {
         AAPLexp = expectation(description: "APPL pt2")
         AMCexp = expectation(description: "AMC pt2")
         // add new shares to apple and AMC
-        user?.buyStock(symbol: "AAPL", numShares: 10, completion: { error, moneySpent in
+        user?.buyStock(symbol: "AAPL", numShares: 10, completion: { error, updatedBalance in
             if let error = error {
                 assertionFailure("Failed to buy APPL stock: \(error)")
             }
             
-            XCTAssertNotEqual(moneySpent, 0.0)
+            XCTAssertNotEqual(updatedBalance, -1.0)
             AAPLexp.fulfill()
         })
         
-        user?.buyStock(symbol: "AMC", numShares: 10, completion: { error, moneySpent in
+        user?.buyStock(symbol: "AMC", numShares: 10, completion: { error, updatedBalance in
             if let error = error {
                 assertionFailure("Failed to buy AMC stock: \(error)")
             }
             
-            XCTAssertNotEqual(moneySpent, 0.0)
+            XCTAssertNotEqual(updatedBalance, -1.0)
             AMCexp.fulfill()
         })
         
@@ -293,6 +297,9 @@ class UserTests: XCTestCase {
         
         waitForExpectations(timeout: 5)
         
+        // check that user has updated cash in account
+        //wait(for: [exps[0]], timeout: 12)
+        //XCTAssertEqual(globalCurrentUser?.cashBalance, 49980.0)
     }
     
     func testUserUpdatePortfolioValue() throws {
@@ -431,7 +438,37 @@ class UserTests: XCTestCase {
     }
     
     func testUserSellStock() throws {
-        XCTFail()
+        
+        let expSellNone = expectation(description: "sellNone")
+        user?.sellStock(symbol: "AAPL", numShares: 12, completion: { error, updatedBalance in
+            XCTAssertNotNil(error, "No error thrown when trying to oversell portfolio")
+            XCTAssertEqual(updatedBalance, -1.0, "Balance should not change, is \(updatedBalance)")
+            
+            expSellNone.fulfill()
+        })
+        
+        waitForExpectations(timeout: 5)
+        
+        let expBuy = expectation(description: "buy")
+        
+        user?.buyStock(symbol: "AAPL", numShares: 12, completion: { error, updatedBalance in
+            if let error = error {
+                XCTFail("Error: \(error)")
+            }
+            expBuy.fulfill()
+        })
+        
+        waitForExpectations(timeout: 5)
+        let expOverSell = expectation(description: "overselling by one share")
+        
+        user?.sellStock(symbol: "AAPL", numShares: 13, completion: { error, updatedBalance in
+            XCTAssertNotNil(error, "No error thrown when trying to oversell portfolio")
+            XCTAssertEqual(updatedBalance, -1.0, "Balance should not change, is \(updatedBalance)")
+            
+            expOverSell.fulfill()
+        })
+        
+        waitForExpectations(timeout: 5)
     }
 
     func testPerformanceExample() throws {

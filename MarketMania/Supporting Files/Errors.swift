@@ -19,8 +19,22 @@ enum PurchaseError: Error {
     case unexpected(code: Int)
 }
 
+enum TransactionError: Error {
+    case insufficientShares
+    
+    case noPortfolio
+    
+    case unexpected
+}
+
 enum DBError: Error {
     case noUID
     
     case noChild
+    
+    case unexpected
+}
+
+enum IEXError: Error {
+    case StockNotFound
 }

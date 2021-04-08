@@ -49,14 +49,14 @@ class ModifyAccountVC:  UIViewController, UICollectionViewDataSource, UICollecti
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return 5
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let placeHolders = ["First Name", "Last Name", "Email"]
+        let placeHolders = ["First Name", "Last Name", "Username", "Email"]
         
-        if (indexPath.row == 3) {
+        if (indexPath.row == 4) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TextCell", for: indexPath) as! SimpleTextCell
             cell.textLabel.text = "Confirm"
             cell.textLabel.textColor = .main_background
@@ -77,7 +77,7 @@ class ModifyAccountVC:  UIViewController, UICollectionViewDataSource, UICollecti
 
 
     public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if (indexPath.row == 3) {
+        if (indexPath.row == 4) {
             saveItems()
             
             // reset UI
@@ -93,22 +93,26 @@ class ModifyAccountVC:  UIViewController, UICollectionViewDataSource, UICollecti
         if (firstName == ""){firstName = globalCurrentUser?.firstName}
         var lastName = (self.cv.cellForItem(at: [0,1]) as! SimpleTextInputCell).textInput.text
         if (lastName == ""){lastName = globalCurrentUser?.lastName}
-        var email = (self.cv.cellForItem(at: [0,2]) as! SimpleTextInputCell).textInput.text
+        var username = (self.cv.cellForItem(at: [0,2]) as! SimpleTextInputCell).textInput.text
+        if (username == ""){username = globalCurrentUser?.username}
+        var email = (self.cv.cellForItem(at: [0,3]) as! SimpleTextInputCell).textInput.text
         if (email == ""){email = globalCurrentUser?.email}
         
         guard let currentUserID = Auth.auth().currentUser?.uid else {return}
-        let values = ["firstName": firstName!, "lastName": lastName!, "email": email!]
+        let values = ["firstName": firstName, "lastName": lastName, "email": email, "username" :username]
         
 
         Database.database().reference().child("Users").child(currentUserID).updateChildValues(values)
         
-        Auth.auth().currentUser?.updateEmail(to: email!, completion: { (err) in
-            if let err = err {
-                print("Database info error: " + err.localizedDescription)
-            }
-            
-            print("Successfully updated email")
-        })
+        if(email != globalCurrentUser?.email){
+            Auth.auth().currentUser?.updateEmail(to: email!, completion: { (err) in
+                if let err = err {
+                    print("Database info error: " + err.localizedDescription)
+                }
+                
+                print("Successfully updated email")
+            })
+        }
     }
 
 
