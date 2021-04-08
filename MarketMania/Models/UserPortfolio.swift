@@ -58,7 +58,7 @@ extension User {
                 
                 // now check if stock exists in portfolio
                 // Users -> uid -> Portfolio -> [AAPL] -> [avgPrice, shares]
-                self.ref.child("Portfolio").child(stock.symbol!).getData { (error, snapshot) in
+                self.ref.getData { (error, snapshot) in
                     if let error = error {
                         print("Error fetching portfolio data: \(error)")
                         completion(error, -1.0)
@@ -70,7 +70,7 @@ extension User {
                         //
                         
                         // and get values and add to it
-                        //print("SNAPSHOT:", snapshot.value)
+                        // print("SNAPSHOT:", snapshot.value)
                         let dict = (snapshot.value as? NSDictionary) // base dict
                         let portfolioElements = dict?["Portfolio"] as? NSDictionary // portfolio dict
                         let portfolioItem = portfolioElements?[stock.symbol!] as? NSDictionary // stock item
