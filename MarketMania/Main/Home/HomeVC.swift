@@ -94,6 +94,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         
         else if indexPath.section == 1 {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "topMovesView", for: indexPath) as! TopMovesView
+            cell.homeVC = self
             return cell
         }
         
