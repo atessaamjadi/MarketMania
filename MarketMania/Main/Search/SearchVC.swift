@@ -27,7 +27,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         collectionView.delegate = self
         collectionView.dataSource = self
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "MyCell")
+        tableView.register(SearchTableViewCell.self, forCellReuseIdentifier: "searchTableViewCell")
         tableView.delegate = self
         tableView.dataSource = self
         // self.tableView.register(UINib.init(nibName: "UITableViewCell", bundle: nil), forCellReuseIdentifier: "UITableViewCell")
@@ -237,12 +237,46 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "MyCell", for: indexPath as IndexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! SearchTableViewCell
         
+        
+        // if the search bar is not empty, meaning stocks from searchStocksArray are listed
         if (activeSearch) {
-            cell.textLabel?.text = searchStocksArray[indexPath.row].symbol
+            
+            let stockSymbol = searchStocksArray[indexPath.row].symbol!
+            
+            getStocks(symbols: [stockSymbol]) { response in
+                DispatchQueue.main.async {
+                    let stock = response[0]
+                    
+                    cell.nameLabel.text = stock.symbol
+                    cell.currentPriceLabel.text = "$" + String(stock.latestPrice ?? 0.0)
+                    cell.percentChangeLabel.text = String(stock.changePercent ?? 0.0) + "%"
+                    
+                    
+                    
+                    var str = ""
+                    if ((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0) > 0) {
+                        str += "+"
+                    }
+                    str += String((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0))
+                    cell.priceChangeLabel.text = str + "$"
+                }
+            }
+        // if the search bar is empty, meaning stocks from initialStocksList are listed
         } else {
-            cell.textLabel?.text = initialStockList[indexPath.row].symbol
+            let stock = initialStockList[indexPath.row]
+            
+            cell.nameLabel.text = stock.symbol
+            cell.currentPriceLabel.text = "$" + String(stock.latestPrice ?? 0.0)
+            cell.percentChangeLabel.text = String(stock.changePercent ?? 0.0) + "%"
+            
+            var str = ""
+            if ((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0) > 0) {
+                str += "+"
+            }
+            str += String((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0))
+            cell.priceChangeLabel.text = str + "$"
         }
         
         //make search table view cells black with white text
@@ -253,6 +287,10 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         
         return cell
     }
+    
+    
+    
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let stockDetailVC = StockDetailVC()
@@ -266,8 +304,6 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
             getStocks(symbols: [tappedStockSymbol]) { response in
                 DispatchQueue.main.async {
                     let tappedStock = response[0]
-    //                self.tableView.reloadData()
-                    print("TAPPEDSTOCK:", tappedStock)
                     
                     stockDetailVC.stock = tappedStock
                     
@@ -278,17 +314,15 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
             let tappedStockSymbol = self.initialStockList[indexPath.row].symbol!
             print("TAPPEDSTOCKSYMBOL:", tappedStockSymbol)
             
-            getStocks(symbols: [tappedStockSymbol]) { response in
-                DispatchQueue.main.async {
-                    let tappedStock = response[0]
-    //                self.tableView.reloadData()
-                    print("TAPPEDSTOCK:", tappedStock)
+//            getStocks(symbols: [tappedStockSymbol]) { response in
+//                DispatchQueue.main.async {
+//                    let tappedStock = response[0]
                     
-                    stockDetailVC.stock = tappedStock
+                    stockDetailVC.stock = initialStockList[indexPath.row]
                     
                     self.navigationController?.pushViewController(stockDetailVC, animated: true)
-                }
-            }
+//                }
+//            }
         }
         
         
@@ -342,6 +376,119 @@ extension SearchVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSour
             cell.searchVC = self
             return cell
         }
+       
+    }
+}
+
+class SearchTableViewCell: UITableViewCell {
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        backgroundColor = .systemGray5
+        
+        setUpViews()
+    }
+    
+    //elements seen by unexpanded cell
+    
+    let nameLabel: UILabel = {
+        let label = UILabel()
+        label.add(text: "APPL", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let dashLabel: UILabel = {
+        let label = UILabel()
+        label.add(text: " - ", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let currentPriceLabel: UILabel = {
+        let label = UILabel()
+        label.add(text: "$120.62", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let percentChangeLabel: UILabel = {
+        let label = UILabel()
+        label.add(text: "-1.14%", font: UIFont(name: "PingFangHK-Regular", size: 11)!, textColor: .black)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    let priceChangeLabel: UILabel = {
+        let label = UILabel()
+        label.add(text: "-$1,025.60", font: UIFont(name: "PingFangHK-Regular", size: 11)!, textColor: .black)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    //extra elements seen by expanded cell
+    
+//    let fullNameLabel: UILabel = {
+//        let label = UILabel()
+//        label.add(text: "APPLE", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
+//        label.textAlignment = .center
+//        return label
+//    }()
+    
+//    let descriptionTextView: UITextView = {
+//        let text = UITextView()
+//        text.text = "Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company Description of the company"
+//        text.isScrollEnabled = false
+//        text.font = UIFont(name: "PingFangHK-Regular", size: 10)
+//        text.backgroundColor = .clear
+//        text.textColor = .black
+//        text.textAlignment = .left
+//    
+//        
+//        return text
+//    }()
+    
+    //TODO: need to figure out how to make this hidden if the cell is collapsed
+    
+//    let tradeButton: UIButton = {
+//        let btn = UIButton(type: .system)
+//        btn.add(text: "Trade", font: UIFont(boldWithSize: 20), textColor: .black)
+//        btn.layer.borderColor = UIColor.black.cgColor
+//        btn.layer.borderWidth = 2
+//
+//        btn.frame.size.width = 200
+//        btn.frame.size.height = 10
+//        //btn.addTarget(self, action: #selector(handleTrade), for: .touchUpInside)
+//       return btn
+//    }()
+    
+    
+    
+    func setUpViews() {
+        
+        contentView.addSubviews(views: [nameLabel, dashLabel, currentPriceLabel, percentChangeLabel, priceChangeLabel /* fullNameLabel descriptionTextView*/])
+        
+        nameLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: dashLabel.leftAnchor, topConstant: 20, leftConstant: 10, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        dashLabel.anchor(contentView.topAnchor, left: nameLabel.rightAnchor, bottom: nil, right: currentPriceLabel.leftAnchor, topConstant: 20, leftConstant: 2, bottomConstant: 0, rightConstant: 2, widthConstant: 0, heightConstant: 0)
+        
+        currentPriceLabel.anchor(contentView.topAnchor, left: dashLabel.rightAnchor, bottom: nil, right: nil, topConstant: 20, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        percentChangeLabel.anchor(contentView.topAnchor, left: nil, bottom: nil, right: contentView.rightAnchor, topConstant: 10, leftConstant: 0, bottomConstant: 5, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        
+        priceChangeLabel.anchor(percentChangeLabel.bottomAnchor, left: nil, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 5, leftConstant: 0, bottomConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+        
+//        fullNameLabel.anchor(priceChangeLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, topConstant: 20, leftConstant: 10, bottomConstant: 10, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+//        descriptionTextView.anchor(fullNameLabel.bottomAnchor, left: contentView.leftAnchor, bottom: nil, right: contentView.rightAnchor, topConstant: 0, leftConstant: 10, bottomConstant: 10, rightConstant: 10, widthConstant: 0, heightConstant: 0)
+      
+//        tradeButton.anchor(nil, left: nil, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 50, rightConstant: 50, widthConstant: 100, heightConstant: 50)
+       
        
     }
 }
