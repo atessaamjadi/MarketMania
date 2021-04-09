@@ -9,6 +9,7 @@ import XCTest
 
 class SocialUITests: XCTestCase {
 
+    var app: XCUIApplication!
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
 
@@ -25,9 +26,19 @@ class SocialUITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    func testSocialViewsExist() throws {
+        
+        //check that the labels exist
+        XCTAssert(app.otherElements["userListLabel"].exists)
+        XCTAssert(app.otherElements["userListRank"].exists)
+        XCTAssert(app.otherElements["collectionView2"].exists)
+        XCTAssert(app.otherElements["leaderboardLabel"].exists)
+        XCTAssert(app.otherElements["userNameLabel"].exists)
+        XCTAssert(app.otherElements["tempSarcasticLabel"].exists)
+
+        
+
+        
     }
 
 }

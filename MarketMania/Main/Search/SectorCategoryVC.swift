@@ -233,15 +233,27 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        //make selected cell back to original size
-        if selectedIndexPath != nil && selectedIndexPath == indexPath{
-            selectedIndexPath = nil
+        let stockDetailVC = StockDetailVC()
+
+        
+        if (activeSearch) {
+            stockDetailVC.stock = filtered[indexPath.row]
+            self.navigationController?.pushViewController(stockDetailVC, animated: true)
+        } else {
+            stockDetailVC.stock = sectorStocks[indexPath.row]
+            self.navigationController?.pushViewController(stockDetailVC, animated: true)
         }
-        //set selectedIndexPath to selected cell index
-        else {
-            selectedIndexPath = indexPath
-        }
-            collectionView.reloadData()
+        
+        
+//        //make selected cell back to original size
+//        if selectedIndexPath != nil && selectedIndexPath == indexPath{
+//            selectedIndexPath = nil
+//        }
+//        //set selectedIndexPath to selected cell index
+//        else {
+//            selectedIndexPath = indexPath
+//        }
+//            collectionView.reloadData()
     }
 }
 

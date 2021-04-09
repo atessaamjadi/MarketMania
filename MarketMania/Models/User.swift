@@ -55,11 +55,6 @@ struct User {
     
     // basic user info getters and setters in this class
     
-    
-    func addToWatchList(stock: Stock) -> Bool {
-        return false
-    }
-    
     func changePassword(pass: String) -> Bool {
         return false
     }
