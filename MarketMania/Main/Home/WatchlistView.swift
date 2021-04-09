@@ -9,12 +9,23 @@ import UIKit
 
 class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    var watchList: [String] = []
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpViews()
         
         collectionView2.delegate = self
         collectionView2.dataSource = self
+        
+        globalCurrentUser?.getWatchList(observer: { observedList in
+            guard observedList != [] else {return}
+
+            DispatchQueue.main.async {
+                self.watchList = observedList
+                self.collectionView2.reloadData()
+            }
+        })
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -55,11 +66,14 @@ class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 21
+        return watchList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "watchListCell", for: indexPath) as! watchListCell
+        
+        cell.tempLabel.text = watchList[indexPath.row]
+        
         return cell
     }
     
@@ -97,9 +111,9 @@ class watchListCell: UICollectionViewCell {
         self.layer.cornerRadius = 5
         self.backgroundColor = UIColor(hex: "3A3E50")
         
-//        contentView.addSubview(tempLabel)
+        contentView.addSubview(tempLabel)
         
-//        tempLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, topConstant: 5, leftConstant: 5, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        tempLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, topConstant: 5, leftConstant: 5, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
       
        
