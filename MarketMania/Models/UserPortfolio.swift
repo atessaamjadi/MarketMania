@@ -291,12 +291,26 @@ extension User {
                 for myStock in self.portfolioStocks {
                     if(myStock.symbol == stock.symbol){
                         totalValue += stock.latestPrice! * myStock.shares!
+                        
+                        //update percent gain
+                        updatePercentChangeStock(curStock: stock, myStock: myStock)
+                        updatePercentChangeAccount()
                     }
                 }
             }
             ref.child("portfolioValue").setValue(totalValue)
             completion(nil,totalValue)
         })
+    }
+    
+    //Update percent change
+    func updatePercentChangeStock(curStock: Stock, myStock: PortfolioStock) {
+        let percentGain = ((curStock.latestPrice! - myStock.avgPrice!) / myStock.avgPrice!) * 100
+        ref.child("Portfolio").child(myStock.symbol!).child("percentGain").setValue(percentGain)
+    }
+    
+    func updatePercentChangeAccount(){
+        
     }
     
 }
