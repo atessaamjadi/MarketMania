@@ -12,7 +12,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     //
     // MARK: View Lifecycle
     //
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
