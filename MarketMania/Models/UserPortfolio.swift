@@ -294,10 +294,10 @@ extension User {
                         
                         //update percent gain
                         updatePercentChangeStock(curStock: stock, myStock: myStock)
-                        updatePercentChangeAccount()
                     }
                 }
             }
+            updatePercentChangeAccount(newAccountVal: totalValue)
             ref.child("portfolioValue").setValue(totalValue)
             completion(nil,totalValue)
         })
@@ -309,8 +309,9 @@ extension User {
         ref.child("Portfolio").child(myStock.symbol!).child("percentGain").setValue(percentGain)
     }
     
-    func updatePercentChangeAccount(){
-        
+    func updatePercentChangeAccount(newAccountVal: Float){
+        let change = ((newAccountVal - self.startingAmmount) / startingAmmount) * 100
+        ref.child("percentGain").setValue(change)
     }
     
 }

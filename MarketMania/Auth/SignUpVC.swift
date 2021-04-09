@@ -54,7 +54,7 @@ class SignUpVC: UIViewController {
             
             guard let currentUserID = Auth.auth().currentUser?.uid else {return}
         
-            let values = ["firstName": firstName, "lastName": lastName, "email": email, "username": username, "cashBalance" : startingAmmount, "portfolioValue": startingAmmount] as [String : Any]
+            let values = ["firstName": firstName, "lastName": lastName, "email": email, "username": username, "startingAmmount": startingAmmount, "cashBalance" : startingAmmount, "portfolioValue": startingAmmount] as [String : Any]
             
             Database.database().reference().child("Users").child(currentUserID).setValue(values, withCompletionBlock: { (err, ref) in
                 if let err = err {
