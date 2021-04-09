@@ -27,16 +27,9 @@ class SocialUITests: XCTestCase {
     }
 
     func testSocialViewsExist() throws {
-        //check that the head exists
-        XCTAssert(app.staticTexts["SocialLeaderboardHead"].exists)
-
-        //check that fields with user info exist
-        XCTAssert(app.otherElements["UsersListView"].exists)
-        XCTAssert(app.otherElements["usersListCell"].exists)
         
         //check that the labels exist
         XCTAssert(app.otherElements["userListLabel"].exists)
-        XCTAssert(app.otherElements["userListRank"].exists)
         XCTAssert(app.otherElements["userListRank"].exists)
         XCTAssert(app.otherElements["collectionView2"].exists)
         XCTAssert(app.otherElements["leaderboardLabel"].exists)
