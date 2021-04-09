@@ -138,6 +138,10 @@ class IEXTests: XCTestCase {
         
         XCTAssertNotEqual(self.stocks.count, 0, "(Information) Sector stock array is empty")
     }
+    
+    func testIEXSearchStocks() throws {
+        XCTFail()
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.

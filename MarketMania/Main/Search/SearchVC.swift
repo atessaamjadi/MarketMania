@@ -109,31 +109,12 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchBar.becomeFirstResponder()
         searchBar.setShowsCancelButton(true, animated: true)
-        activeSearch = false
         tableView.isHidden = false
-        
-//        print("EDITING")
-//
-//        searchStocks(searchString: searchText) { response in
-//            DispatchQueue.main.async {
-//                self.searchStocksArray = response
-//                self.tableView.reloadData()
-//
-//                print(self.searchStocksArray)
-//
-//            }
-//        }
-        
-        
-        
-       
-        
     }
     
     func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.setShowsCancelButton(false, animated: false)
-        activeSearch = false
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
@@ -147,8 +128,6 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.setShowsCancelButton(false, animated: false)
-        activeSearch = false
-        
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -176,44 +155,22 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
                     self.tableView.reloadData()
     
                     print(self.searchStocksArray)
+                    
+                    self.tableView.reloadData()
     
                 }
             }
         } else {
            searchStocksArray = []
         }
-//        }
-        
-        
+
         self.searchText = searchText
         
         if searchText.isEmpty {
             activeSearch = false
-            searchStocksArray = []
-        }
-        else {
+        } else {
             activeSearch = true
         }
-        
-        
-        
-//        filtered = dummyData.filter({ (text) -> Bool in
-//            let tmp: NSString = text as NSString
-//            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-//            return range.location != NSNotFound
-//        })
-        
-//        if (filtered.count == 0) {
-//            if (searchText.isEmpty == true) {
-//                activeSearch = false
-//            }
-//            else {
-//                filtered = []
-//                activeSearch = true
-//            }
-//        } else {
-//            activeSearch = true
-//        }
         
         self.tableView.reloadData()
     }
@@ -232,8 +189,7 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "searchTableViewCell", for: indexPath as IndexPath) as! SearchTableViewCell
-        
-        
+
         // if the search bar is not empty, meaning stocks from searchStocksArray are listed
         if (activeSearch) {
             
@@ -255,6 +211,9 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
                     }
                     str += String((stock.latestPrice ?? 0.0) - (stock.open ?? 0.0))
                     cell.priceChangeLabel.text = str + "$"
+                    
+                    self.tableView.reloadData()
+                    
                 }
             }
         // if the search bar is empty, meaning stocks from initialStocksList are listed
@@ -283,17 +242,11 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     }
     
     
-    
-    
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let stockDetailVC = StockDetailVC()
-
-        print("ACTIVESEARCH:", activeSearch)
         
         if (activeSearch) {
             let tappedStockSymbol = searchStocksArray[indexPath.row].symbol!
-            print("TAPPEDSTOCKSYMBOL:", tappedStockSymbol)
             
             getStocks(symbols: [tappedStockSymbol]) { response in
                 DispatchQueue.main.async {
@@ -302,28 +255,15 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
                     stockDetailVC.stock = tappedStock
                     
                     self.navigationController?.pushViewController(stockDetailVC, animated: true)
+                    
+                    self.tableView.reloadData()
                 }
             }
         } else {
-            let tappedStockSymbol = self.initialStockList[indexPath.row].symbol!
-            print("TAPPEDSTOCKSYMBOL:", tappedStockSymbol)
-            
-//            getStocks(symbols: [tappedStockSymbol]) { response in
-//                DispatchQueue.main.async {
-//                    let tappedStock = response[0]
-                    
-                    stockDetailVC.stock = initialStockList[indexPath.row]
-                    
-                    self.navigationController?.pushViewController(stockDetailVC, animated: true)
-//                }
-//            }
+            stockDetailVC.stock = initialStockList[indexPath.row]
+            self.navigationController?.pushViewController(stockDetailVC, animated: true)
         }
-        
-        
-        
-       
     }
-    
     
     
     func setUpViews() {
