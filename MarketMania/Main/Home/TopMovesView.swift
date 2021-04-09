@@ -10,6 +10,7 @@ import UIKit
 class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var winners: [Stock] = []
+    var homeVC: HomeVC?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -98,6 +99,12 @@ class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollection
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width/2.5, height: collectionView.frame.width/2.5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let stockDetailVC = StockDetailVC()
+        stockDetailVC.stock = winners[indexPath.row]
+        homeVC?.navigationController?.pushViewController(stockDetailVC, animated: true)
     }
     
 }

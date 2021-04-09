@@ -31,6 +31,8 @@ class SignUpVC: UIViewController {
         
         guard let email = emailInputView.input.text else {return}
         guard let password = passwordInputView.input.text else {return}
+        guard let username = usernameInputView.input.text else {return}
+        guard let startingAmmount = Int(startingAmmountInputView.input.text!) else {return}
         guard let firstName = firstNameInputView.input.text else {return}
         guard let lastName = lastNameInputView.input.text else {return}
         
@@ -47,15 +49,12 @@ class SignUpVC: UIViewController {
                 alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
                 
                 self.present(alert, animated: true, completion: nil)
-                let when = DispatchTime.now() + 4
-                DispatchQueue.main.asyncAfter(deadline: when){
-                    alert.dismiss(animated: true, completion: nil)
-                }
+               
             }
             
             guard let currentUserID = Auth.auth().currentUser?.uid else {return}
         
-            let values = ["firstName": firstName, "lastName": lastName, "email": email]
+            let values = ["firstName": firstName, "lastName": lastName, "email": email, "username": username, "cashBalance" : startingAmmount, "portfolioValue": startingAmmount] as [String : Any]
             
             Database.database().reference().child("Users").child(currentUserID).setValue(values, withCompletionBlock: { (err, ref) in
                 if let err = err {
@@ -73,11 +72,14 @@ class SignUpVC: UIViewController {
                 }
 
                 print("Successfully signed in user with id: " + (Auth.auth().currentUser?.uid)!)
-                fetchUser{
-                    self.view.window?.resignKey()
-                    let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
-                    tabBarVC.setUpViewControllers()
+                fetchUser {
+                    DispatchQueue.main.async {
+                        self.view.window?.resignKey()
+                        let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
+                        tabBarVC.setUpViewControllers()
+                    }
                 }
+
                 
                 
                 let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
@@ -121,11 +123,13 @@ class SignUpVC: UIViewController {
     
     let firstNameInputView = AuthInputView(placeholder: "First name", keyboardType: .namePhonePad, isPassword: false)
     let lastNameInputView = AuthInputView(placeholder: "Last name", keyboardType: .namePhonePad, isPassword: false)
+    let usernameInputView = AuthInputView(placeholder: "Username", keyboardType: .namePhonePad, isPassword: false)
+    let startingAmmountInputView = AuthInputView(placeholder: "Starting Ammount", keyboardType: .numberPad, isPassword: false)
     let emailInputView = AuthInputView(placeholder: "Email", keyboardType: .emailAddress, isPassword: false)
     let passwordInputView = AuthInputView(placeholder: "Password", keyboardType: .default, isPassword: true)
     
     lazy var inputStackView: UIStackView = {
-        let sv = UIStackView(arrangedSubviews: [firstNameInputView, lastNameInputView, emailInputView, passwordInputView])
+        let sv = UIStackView(arrangedSubviews: [firstNameInputView, lastNameInputView, usernameInputView, startingAmmountInputView, emailInputView, passwordInputView])
         sv.axis = .vertical
         sv.distribution = .equalSpacing
         return sv

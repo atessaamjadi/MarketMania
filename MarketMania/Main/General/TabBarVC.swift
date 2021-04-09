@@ -7,12 +7,18 @@
 
 import UIKit
 import Firebase
+import Foundation
 
 class TabBarVC: UITabBarController {
     
     override func viewDidLoad() {
                 
-        let currentUser = Auth.auth().currentUser
+        var currentUser = Auth.auth().currentUser
+        
+        // for testing -- if test adds this argument, the current session is set to nil bringing user to login screen
+        if ProcessInfo.processInfo.arguments.contains("isUITestingLogin") {
+            currentUser = nil
+        }
         
         if currentUser == nil {
             // Waits unitil the tab bar is loaded then runs this code to present the login view controller
@@ -28,10 +34,9 @@ class TabBarVC: UITabBarController {
                     let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
                     tabBarVC.setUpViewControllers()
                 }
-                
-                
             }
         }
+        
         // pop up a loading screen modal until all the necessary data is loaded
 //        DispatchQueue.main.async {
 //            let loadScreenVC = LoadVC()
@@ -141,6 +146,10 @@ class TabBarVC: UITabBarController {
     
     @objc func buyFunc(sender: UIButton){
         //TODO
+        
+        let tradeSearchVC = TradeSearchVC()
+        tradeSearchVC.tradeSearchView.fetchStocks()
+        self.present(UINavigationController(rootViewController: tradeSearchVC), animated: true, completion: nil)
     }
     
     @objc func sellFunc(sender: UIButton){

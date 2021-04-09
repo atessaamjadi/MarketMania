@@ -45,6 +45,56 @@ func getStocks(symbols: [String], completion: @escaping ([Stock]) -> Void) -> Vo
     }
 }
 
+/**
+ * Pass in the search string, i.e. whatever sequence of letters user believes a stock symbol contains
+ *
+ * @return: Array of symbols up to top 10 matches, results are sorted for relevancy by API
+ */
+func searchStocks(searchString: String, completion: @escaping ([SearchStock]) -> Void) -> Void {
+    print("searchStocks:", searchString)
+    
+    if (searchString.count >= 1) {
+        let urlString: String = baseURL + "/search/" +  searchString + "?token=" + tok
+        
+        print(urlString)
+        
+        var ret: [SearchStock] = []
+        
+        let session = URLSession.shared
+        let url = URL(string: urlString)!
+        let req = URLRequest(url: url)
+        
+        let task = session.dataTask(with: req as URLRequest, completionHandler: {
+            data, response, error in
+            
+            guard error == nil else {
+                print(error!.localizedDescription)
+                return
+            }
+            
+            guard let data = data else {
+                print("searchStocks - invalid data")
+                return
+            }
+            
+            do {
+                // TODO: find way to limit response size to allow for quicker page loading
+    //            print("DATA: ", data)
+      //          print("RESP: ", response)
+                let decoder = JSONDecoder()
+                ret = try decoder.decode([SearchStock].self, from: data)
+                completion(ret) // this passes the value set in ret ([Stock]) to the callback arg ([Stock])
+            } catch let error {
+                print("Error decoding JSON: " + error.localizedDescription)
+            }
+        })
+        task.resume()
+    }
+    else {
+        // error
+    }
+}
+
 func getWinners(completion: @escaping ([Stock]) -> Void) -> Void {
     let urlString: String = baseURL + "/stock/market/list/gainers?token=" + tok
     return getListOfStocks(urlString: urlString, completion: completion)
@@ -60,6 +110,11 @@ func getMostActive(completion: @escaping ([Stock]) -> Void) -> Void {
     return getListOfStocks(urlString: urlString, completion: completion)
 }
 
+func getHighestVolume(completion: @escaping ([Stock]) -> Void) -> Void {
+    let urlString: String = baseURL + "/stock/market/list/iexvolume?token=" + tok
+    return getListOfStocks(urlString: urlString, completion: completion)
+}
+
 /**
  Valid Types: sector, tag, list
  */
@@ -68,10 +123,10 @@ func getCollection(type: String, collectionName: String, completion: @escaping (
         return
     }
     
-    // TODO: Must URL Encode collectionName
+    let urlEncodedCollection = collectionName.replacingOccurrences(of: " ", with: "%20")
     
     let urlString: String = baseURL + "/stock/market/collection/" + type + "?collectionName=" +
-        collectionName + "&token=" + tok
+        urlEncodedCollection + "&token=" + tok
     return getListOfStocks(urlString: urlString, completion: completion)
 }
 
@@ -100,7 +155,7 @@ private func getListOfStocks(urlString: String, completion: @escaping ([Stock]) 
         do {
             // TODO: find way to limit response size to allow for quicker page loading
 //            print("DATA: ", data)
-//            print("RESP: ", response)
+  //          print("RESP: ", response)
             let decoder = JSONDecoder()
             ret = try decoder.decode([Stock].self, from: data)
             completion(ret) // this passes the value set in ret ([Stock]) to the callback arg ([Stock])

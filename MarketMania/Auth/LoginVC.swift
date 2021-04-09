@@ -47,9 +47,11 @@ class LoginVC: UIViewController {
             if(Auth.auth().currentUser?.uid != nil) {
                 print("Successfully signed in user with id: " + (Auth.auth().currentUser?.uid)!)
                 fetchUser{
-                    self.view.window?.resignKey()
-                    let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
-                    tabBarVC.setUpViewControllers()
+                    DispatchQueue.main.async {
+                        self.view.window?.resignKey()
+                        let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
+                        tabBarVC.setUpViewControllers()
+                    }
                 }
             } else{
                 let alert = UIAlertController(title: "Error!", message: "Incorrect username or password, please try again.", preferredStyle: .alert)
@@ -60,7 +62,7 @@ class LoginVC: UIViewController {
 
                 
             }
-
+            guard let currentUserID = Auth.auth().currentUser?.uid else {return}
             
             let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
 
@@ -127,6 +129,15 @@ class LoginVC: UIViewController {
     }()
     
     func setUpViews() {
+        // set accessibility identifiers for testing -- for each object
+        titleLabel.accessibilityIdentifier = "titleLabel"
+        emailInputView.accessibilityIdentifier = "emailInputView"
+        backgroundImageView.accessibilityIdentifier = "backgroundImageView"
+        containerView.accessibilityIdentifier = "containerView"
+        inputBackgroundView.accessibilityIdentifier = "inputBackgroundView"
+        passwordInputView.accessibilityIdentifier = "passwordInputView"
+        signInButton.accessibilityIdentifier = "signInButton"
+        signUpButton.accessibilityIdentifier = "signUpButton"
         
         self.view.backgroundColor = .gray
         
