@@ -51,6 +51,10 @@ class UsersListView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     func setUpViews() {
         
+        userListRank.accessibilityIdentifier = "userListRank"
+        userListLabel.accessibilityIdentifier = "userListLabel"
+        collectionView2.accessibilityIdentifier = "collectionView2"
+        
         contentView.addSubviews(views: [userListLabel, userListRank,
                                         collectionView2])
         
