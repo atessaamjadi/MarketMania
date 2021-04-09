@@ -146,6 +146,10 @@ class TabBarVC: UITabBarController {
     
     @objc func buyFunc(sender: UIButton){
         //TODO
+        
+        let tradeSearchVC = TradeSearchVC()
+        tradeSearchVC.tradeSearchView.fetchStocks()
+        self.present(UINavigationController(rootViewController: tradeSearchVC), animated: true, completion: nil)
     }
     
     @objc func sellFunc(sender: UIButton){
