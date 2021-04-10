@@ -74,11 +74,20 @@ class HomeUITests: XCTestCase {
 
     }
     
-    //TODO: tests to see if stock detail elements are there... hard since you check if elements exist via staticTexts
+    //tests if stock detail elements are present
     func testTopMovesStockDetailView() throws {
         
         //click on a mover cell
         XCUIApplication().collectionViews.cells.collectionViews.containing(.cell, identifier: "mover").element.tap()
+        
+        XCTAssert(app.staticTexts["nl"].exists)
+        XCTAssert(app.buttons["ss"].exists)
+        XCTAssert(app.staticTexts["sl"].exists)
+        XCTAssert(app.textViews["tv"].exists)
+        XCTAssert(app.buttons["tb"].exists)
+        XCTAssert(app.buttons["atwl"].exists)
+        
+
         
 //        let nameLbl = app.staticTexts["Apple"]
 //        
