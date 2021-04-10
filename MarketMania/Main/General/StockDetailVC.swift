@@ -69,6 +69,7 @@ class StockDetailVC: UIViewController {
         label.add(text: "Apple", font: UIFont(boldWithSize: 33), textColor: .main_label)
         label.textAlignment = .left
         label.numberOfLines = 1
+        label.accessibilityIdentifier = "nl"
         return label
     }()
     

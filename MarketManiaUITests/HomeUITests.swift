@@ -7,14 +7,15 @@
 
 import XCTest
 
+@testable import MarketMania
+
 class HomeUITests: XCTestCase {
     
     var app: XCUIApplication!
     
-   
-
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        
         
         // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
@@ -51,47 +52,52 @@ class HomeUITests: XCTestCase {
         
         
     }
-    //test to make sure topMoviesView has label
+    //test to make sure topMoviesView has label and is horizontally scrollable
     func testTopMovesView() throws {
 
         let collectionViewsQuery = XCUIApplication().collectionViews
         let todaysWinnerLabel = collectionViewsQuery/*@START_MENU_TOKEN@*/.cells.staticTexts["Today's Winners"]/*[[".cells.staticTexts[\"Today's Winners\"]",".staticTexts[\"Today's Winners\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/
         
+        
+        let hCV = app.collectionViews.cells.collectionViews.containing(.cell, identifier: "mover")
+        
+        //checks if it counts greater than or = to 6 with 2 slides (since this is our default) number of cells
+        hCV.children(matching: .cell).element(boundBy: 0).swipeLeft()
+        var count = hCV.children(matching: .cell).count
+        hCV.children(matching: .cell).element(boundBy: 2).swipeLeft()
+        count += hCV.children(matching: .cell).count
+        
+     
+        XCTAssertGreaterThanOrEqual(count, 6)
         XCTAssertTrue(todaysWinnerLabel.exists)
         
 
     }
     
-    //tests using ORBC stock to see if its "static" stock detail elements are there
+    //TODO: tests to see if stock detail elements are there... hard since you check if elements exist via staticTexts
     func testTopMovesStockDetailView() throws {
-      
         
-        let app = XCUIApplication()
-        app.collectionViews/*@START_MENU_TOKEN@*/.collectionViews.staticTexts["Orbcomm Inc"]/*[[".cells.collectionViews",".cells.staticTexts[\"Orbcomm Inc\"]",".staticTexts[\"Orbcomm Inc\"]",".collectionViews"],[[[-1,3,1],[-1,0,1]],[[-1,2],[-1,1]]],[0,0]]@END_MENU_TOKEN@*/.tap()
-       let nameLabel =  app.staticTexts["Orbcomm Inc"]
+        //click on a mover cell
+        XCUIApplication().collectionViews.cells.collectionViews.containing(.cell, identifier: "mover").element.tap()
         
-        let sectorLabel = app.staticTexts["Sector?"]
-        app.navigationBars["Home"].buttons["Add"].tap()
-        app.buttons["TRADE"].tap()
-
-        XCTAssertTrue(nameLabel.exists)
-        XCTAssertTrue(sectorLabel.exists)
-        XCTAssertTrue(app.buttons["TRADE"].exists)
-        XCTAssertTrue(app.navigationBars["Home"].buttons["Add"].exists)
+//        let nameLbl = app.staticTexts["Apple"]
+//        
+//        XCTAssertTrue(nameLbl.exists)
        
     }
     
-    //tests scroll function of watchList 
+    //tests scroll function of watchList and label
     func testWatchList() throws {
         
         let collectionViewsQuery = XCUIApplication().collectionViews
-        collectionViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["Watchlist"]/*[[".cells.staticTexts[\"Watchlist\"]",".staticTexts[\"Watchlist\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/.tap()
+        let watchListLabel = collectionViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["Watchlist"]/*[[".cells.staticTexts[\"Watchlist\"]",".staticTexts[\"Watchlist\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
         
         
         let horizontalScrollBar1PageCollectionViewsQuery = XCUIApplication().collectionViews.cells.collectionViews.containing(.other, identifier:"Horizontal scroll bar, 1 page")
         horizontalScrollBar1PageCollectionViewsQuery.children(matching: .cell).element(boundBy: 0).swipeUp()
         horizontalScrollBar1PageCollectionViewsQuery.children(matching: .cell).element(boundBy: 2).swipeDown()
         
+        XCTAssertTrue(watchListLabel.exists)
         
     }
     
