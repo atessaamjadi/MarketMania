@@ -69,6 +69,7 @@ class StockDetailVC: UIViewController {
         label.add(text: "Apple", font: UIFont(boldWithSize: 33), textColor: .main_label)
         label.textAlignment = .left
         label.numberOfLines = 1
+        label.accessibilityIdentifier = "nl"
         return label
     }()
     
@@ -78,6 +79,7 @@ class StockDetailVC: UIViewController {
         btn.layer.borderColor = UIColor.subtitle_label.cgColor
         btn.tintColor = .blue
         btn.isEnabled = false
+        btn.accessibilityIdentifier = "ss"
         return btn
     }()
     
@@ -86,6 +88,7 @@ class StockDetailVC: UIViewController {
         label.add(text: "Sector?", font: UIFont(boldWithSize: 20), textColor: .subtitle_label)
         label.textAlignment = .left
         label.numberOfLines = 1
+        label.accessibilityIdentifier = "sl"
         return label
     }()
     
@@ -98,6 +101,7 @@ class StockDetailVC: UIViewController {
         tv.textColor = .main_label
         tv.textAlignment = .left
         tv.font = UIFont(regularWithSize: 17)
+        tv.accessibilityIdentifier = "tv"
         return tv
     }()
     
@@ -109,6 +113,7 @@ class StockDetailVC: UIViewController {
         btn.addTarget(self, action: #selector(handleTrade), for: .touchUpInside)
         btn.layer.cornerRadius = 7
         btn.layer.masksToBounds = true
+        btn.accessibilityIdentifier = "tb"
         return btn
     }()
     
@@ -121,6 +126,7 @@ class StockDetailVC: UIViewController {
         btn.addTarget(self, action: #selector(handleAddToWatchlist), for: .touchUpInside)
         btn.layer.cornerRadius = 5
         btn.layer.masksToBounds = true
+        btn.accessibilityIdentifier = "atwl"
         return btn
     }()
     
