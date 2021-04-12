@@ -147,6 +147,8 @@ class sectorCell: UICollectionViewCell {
 
     func setUpViews() {
         
+        self.accessibilityIdentifier = "sector"
+        
         contentView.addSubview(sectorLabel)
         sectorLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: contentView.bottomAnchor, right: contentView.rightAnchor, topConstant: 10, leftConstant: 10, bottomConstant: 0, rightConstant: 10, widthConstant: 0, heightConstant: 0)
     }

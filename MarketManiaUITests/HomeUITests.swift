@@ -87,12 +87,6 @@ class HomeUITests: XCTestCase {
         XCTAssert(app.buttons["tb"].exists)
         XCTAssert(app.buttons["atwl"].exists)
         
-
-        
-//        let nameLbl = app.staticTexts["Apple"]
-//        
-//        XCTAssertTrue(nameLbl.exists)
-       
     }
     
     //tests scroll function of watchList and label
