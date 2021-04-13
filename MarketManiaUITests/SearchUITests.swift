@@ -141,5 +141,10 @@ class SearchUITests: XCTestCase {
         XCTAssert(app.buttons["atwl"].exists)
             
     }
+    
+    //TODO test SectorCategoryVC search
+    func testCategorySearch() throws {
+        
+    }
 
 }
