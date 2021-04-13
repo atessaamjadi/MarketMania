@@ -107,6 +107,8 @@ class usersListCell: UICollectionViewCell {
         
         backgroundColor = .systemGray2
         
+        self.accessibilityIdentifier = "leaderboard"
+        
         setUpViews()
     }
     

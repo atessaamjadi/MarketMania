@@ -145,6 +145,11 @@ class SearchUITests: XCTestCase {
     //TODO test SectorCategoryVC search
     func testCategorySearch() throws {
         
+        //click on a mover cell
+        app.collectionViews.cells.collectionViews.containing(.cell, identifier: "sector").element.tap()
+        
+        
+        
     }
 
 }

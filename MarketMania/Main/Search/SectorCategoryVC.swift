@@ -56,10 +56,12 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
     var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.searchBarStyle = UISearchBar.Style.prominent
-        sb.placeholder = " Search..."
+        sb.placeholder = "Search..."
         sb.sizeToFit()
         sb.isTranslucent = false
         sb.backgroundColor = .black
+        
+        sb.accessibilityIdentifier = "sb"
         
         return sb
     }()
