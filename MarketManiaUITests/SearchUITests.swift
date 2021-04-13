@@ -87,5 +87,59 @@ class SearchUITests: XCTestCase {
         XCTAssertGreaterThanOrEqual(count, 6)
     
     }
+    
+    //check if sectorCategoryVC is scrollable and contains expected elements
+    func testSectorCategoryCells() throws {
+        
+        let vCV = app.collectionViews.cells.collectionViews.containing(.cell, identifier: "sector")
+        
+        //click on a sector cell
+        vCV.element.tap()
+        
+        let category = app.staticTexts["scl"]
+        
+        let singleCell = app.collectionViews.containing(.cell, identifier: "categoryCell")
+                
+        //checks if scrollable
+        singleCell.children(matching: .cell).element(boundBy: 0).swipeUp()
+        singleCell.children(matching: .cell).element(boundBy: 2).swipeDown()
+        
+        
+        //check if unexpanded cell expected elements exist
+        
+        let name = app.staticTexts["name"]
+        let perc = app.staticTexts["perc"]
+        let price = app.staticTexts["price"]
+        let curr = app.staticTexts["curr"]
+        
+        
+        XCTAssertTrue(category.exists)
+        XCTAssertTrue(name.exists)
+        XCTAssertTrue(perc.exists)
+        XCTAssertTrue(price.exists)
+        XCTAssertTrue(curr.exists)
+    
+    }
+    
+    
+    //check if sector category cell stock detail view contains all expected elements
+    func testCategoryCellStockDetail() throws {
+        
+        
+        //click on a mover cell
+        app.collectionViews.cells.collectionViews.containing(.cell, identifier: "sector").element.tap()
+        
+        //click on a sector category cell
+        app.collectionViews.cells.containing(.staticText, identifier: "name").element(boundBy: 0).tap()
+
+        //check if stock detail elements exist
+        XCTAssert(app.staticTexts["nl"].exists)
+        XCTAssert(app.buttons["ss"].exists)
+        XCTAssert(app.staticTexts["sl"].exists)
+        XCTAssert(app.textViews["tv"].exists)
+        XCTAssert(app.buttons["tb"].exists)
+        XCTAssert(app.buttons["atwl"].exists)
+            
+    }
 
 }
