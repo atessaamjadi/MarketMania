@@ -9,6 +9,8 @@ import UIKit
 
 class UsersListView: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    var numUsers = -1
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUpViews()
@@ -51,6 +53,15 @@ class UsersListView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     func setUpViews() {
         
+        getUserCount(completion: { totalusers in
+            self.numUsers = totalusers
+            DispatchQueue.main.async {
+                self.collectionView2.reloadData()
+                // set ui code
+            }
+            
+        })
+        
         userListRank.accessibilityIdentifier = "userListRank"
         userListLabel.accessibilityIdentifier = "userListLabel"
         collectionView2.accessibilityIdentifier = "collectionView2"
@@ -68,7 +79,9 @@ class UsersListView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 21
+        
+        print(self.numUsers)
+        return self.numUsers
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
