@@ -74,6 +74,9 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         
         sb.sizeToFit()
         sb.isTranslucent = true
+        
+        searchTextField?.accessibilityIdentifier = "stf"
+        
         return sb
     }()
     

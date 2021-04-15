@@ -90,6 +90,7 @@ class PopularView: UICollectionViewCell, UICollectionViewDelegate, UICollectionV
             cell.nameLabel.text = stock.companyName
             cell.moveLabel.text = String((stock.changePercent ?? 0.0)) + "%"
 
+            cell.accessibilityIdentifier = "popular"
             
             return cell
         }

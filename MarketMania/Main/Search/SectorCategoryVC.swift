@@ -48,6 +48,7 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
         let label = UILabel()
         label.add(text: "TECH FOR NOW", font: UIFont(name: "Verdana-BoldItalic", size: 20)!, textColor: .black)
         label.textAlignment = .center
+        label.accessibilityIdentifier = "scl"
         return label
         
     }()
@@ -55,10 +56,12 @@ class SectorCategoryVC: UIViewController, UICollectionViewDataSource, UICollecti
     var searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.searchBarStyle = UISearchBar.Style.prominent
-        sb.placeholder = " Search..."
+        sb.placeholder = "Search..."
         sb.sizeToFit()
         sb.isTranslucent = false
         sb.backgroundColor = .black
+        
+        sb.accessibilityIdentifier = "sb"
         
         return sb
     }()
@@ -295,6 +298,8 @@ class SectorCategoryCell: UICollectionViewCell {
         backgroundColor = .systemGray5
         
         setUpViews()
+        
+        self.accessibilityIdentifier = "categoryCell"
     }
     
     //elements seen by unexpanded cell
@@ -303,6 +308,9 @@ class SectorCategoryCell: UICollectionViewCell {
         let label = UILabel()
         label.add(text: "APPL", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
         label.textAlignment = .center
+        
+        label.accessibilityIdentifier = "name"
+        
         return label
     }()
     
@@ -310,6 +318,7 @@ class SectorCategoryCell: UICollectionViewCell {
         let label = UILabel()
         label.add(text: " - ", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
         label.textAlignment = .center
+        
         return label
     }()
     
@@ -317,6 +326,9 @@ class SectorCategoryCell: UICollectionViewCell {
         let label = UILabel()
         label.add(text: "$120.62", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
         label.textAlignment = .center
+        
+        label.accessibilityIdentifier = "curr"
+        
         return label
     }()
     
@@ -324,6 +336,9 @@ class SectorCategoryCell: UICollectionViewCell {
         let label = UILabel()
         label.add(text: "-1.14%", font: UIFont(name: "PingFangHK-Regular", size: 11)!, textColor: .black)
         label.textAlignment = .center
+        
+        label.accessibilityIdentifier = "perc"
+        
         return label
     }()
     
@@ -331,6 +346,9 @@ class SectorCategoryCell: UICollectionViewCell {
         let label = UILabel()
         label.add(text: "-$1,025.60", font: UIFont(name: "PingFangHK-Regular", size: 11)!, textColor: .black)
         label.textAlignment = .center
+        
+        label.accessibilityIdentifier = "price"
+        
         return label
     }()
     
