@@ -75,11 +75,11 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
         if (indexPath.row == 0) {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Info", for: indexPath) as! InformationViewCell
             
-            let name = "\(globalCurrentUser!.firstName) \(globalCurrentUser!.lastName)"
-            let email = "Email: \(globalCurrentUser!.email)"
+            let name = "\(globalCurrentUser?.firstName ?? "Cannot find user") \(globalCurrentUser?.lastName ?? "Cannot find user")"
+            let email = "Email: \(globalCurrentUser?.email ?? "Cannot find user")"
             let cashBalance = "Balance: 0"
             let portfolioValue = "Portfolio Value: 0"
-            let uid = "ID: \(globalCurrentUser!.uid)"
+            let uid = "ID: \(globalCurrentUser?.uid ?? "Cannot find user")"
             //some comment
             
             cell.addLabelInOrder(label: name, isBold: true, size: 2)
