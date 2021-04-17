@@ -56,10 +56,13 @@ class TradeParentVC: UIViewController {
     // MARK: UI Setup
     //
     
+    // dismisses entire view
+    // TODO: fix size
     lazy var dismissBtn: UIButton = {
         let btn = UIButton(frame: CGRect(x: 0, y: 0, width: 16, height: 16))
         btn.addTarget(self, action: #selector(handleDismiss), for: .touchUpInside)
         btn.setImage(UIImage(named: "dismiss_btn")?.withRenderingMode(.alwaysOriginal), for: .normal)
+        btn.backgroundColor = UIColor(hex: "#808080")
         return btn
     }()
     

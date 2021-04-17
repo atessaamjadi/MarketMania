@@ -8,6 +8,8 @@
 import UIKit
 import Firebase
 
+// screen displaying each stock available to buy
+// navigates to TradeSelectAmountVC
 class TradeSearchView: CUIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
     var searchBar: UISearchBar?
@@ -24,7 +26,6 @@ class TradeSearchView: CUIView, UICollectionViewDelegate, UICollectionViewDataSo
         getWinners { response in
             // UI updates are only allowed in main queue
             DispatchQueue.main.async {
-                //print("winners", response)
                 self.stocks = response
                 self.collectionView.reloadData()
             }

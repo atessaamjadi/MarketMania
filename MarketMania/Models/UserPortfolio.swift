@@ -16,14 +16,12 @@ extension User {
      User buys some amount of a single stock by it's symbol name
      The application returns a single stock quote, and the latest price is checked and saved if valid
      Then save the stock purchase in the user's portfolio with values {symbol: {timeStamp:["buyPrice", "shares"]}}
-     If this is successful, save a receipt by the timestamp as {timestamp: [symbol, buyPrice, shares, action (BUY/SELL)]}
      Then updates the user's cash balance
      
      @param symbol: A single stock symbol (eg: AAPL, FB). Case Insensitive
      @param numShares: any Double > 0.0
      
      @return amount of money left in balance after transaction - return -1.0 if purchase falls through
-     TODO: Add error return to completion handlers
      */
     func buyStock(symbol: String, numShares: Float, completion: @escaping (Error?, Float) -> Void) -> Void {
         getStocks(symbols: [symbol], completion: { stockList in // only one item in stocklist
@@ -37,7 +35,7 @@ extension User {
             let buyPrice: Float = stock.latestPrice ?? -1.0
             
             //print("BUYING", stockList)
-            guard buyPrice != 0.0 else {
+            guard buyPrice != -1.0 else {
                 completion(PurchaseError.insufficientFunds, -1.0) // TODO: update to more appropriate error
                 return
             }
@@ -101,14 +99,7 @@ extension User {
                         ])
                         
                         completion(nil, updatedBalance)
-                    } else {
-                        // item not yet in portfolio
-                        self.ref.child("Portfolio").child(stock.symbol!).setValue([
-                            "avgPrice": buyPrice,
-                            "shares": numShares
-                        ])
-                        completion(nil, updatedBalance)
-                    }
+                    } 
                 }
             })
         })
@@ -133,7 +124,7 @@ extension User {
                     return
                 }
                 
-                // no shares
+                // no portfoluo
                 guard portfolioDict?[symbol] != nil else {
                     completion(TransactionError.insufficientShares, -1.0)
                     return
@@ -230,6 +221,36 @@ extension User {
         })
     }
     
+    func getPortfolio(observer: @escaping (Error?, [PortfolioStock]) -> Void) -> Void {
+        
+        self.ref.child("Portfolio").observe(DataEventType.value, with: { snapshot in
+            
+            if snapshot.exists() {
+                
+                let portDict = snapshot.value as? NSDictionary
+                guard portDict != nil else {
+                    observer(DBError.noChild, [])
+                    return
+                }
+                
+                var stocks: [PortfolioStock] = []
+                
+                // loop thru dictionaries and make them portfoliostocks
+                for key in portDict?.allKeys ?? [] {
+                    let stockDict = portDict?[key] as? NSDictionary
+                    let stock: PortfolioStock = PortfolioStock(symbol: key as! String, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float)
+                    stocks.append(stock)
+                }
+                
+                print("OBSERVER:", stocks)
+                observer(nil, stocks)
+            } else {
+                observer(DBError.notFound, [])
+                // error handling
+            }
+        })
+    }
+    
     // returns updated cash balance in completion handler
     // returns -1.0 if there is an error
     func updateCashBalance(delta: Float, completion: @escaping (Error?, Float) -> Void) -> Void {
@@ -262,6 +283,10 @@ extension User {
             }
             
             balance += delta
+            guard balance >= 0 else {
+                completion(PurchaseError.insufficientFunds, -1.0)
+                return
+            }
             
             // update DB value
             self.ref.child("cashBalance").setValue(balance)

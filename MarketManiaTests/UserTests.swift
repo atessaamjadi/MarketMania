@@ -267,6 +267,18 @@ class UserTests: XCTestCase {
         waitForExpectations(timeout: 5)
     }
     
+    func testUserBuyInsufficientCash() throws {
+        let exp = expectation(description: "exp")
+        
+        user?.buyStock(symbol: "GOOG", numShares: 500000, completion: { error, updatedBalance in
+            XCTAssertNotNil(error, "Shoudl have thrown error, invalid funds but have: \(updatedBalance)")
+            XCTAssertEqual(-1.0, updatedBalance)
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 5)
+    }
+    
     func testUserBuyAndSellStocks() throws {
         XCTFail()
     }

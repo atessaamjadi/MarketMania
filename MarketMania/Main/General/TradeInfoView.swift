@@ -7,6 +7,7 @@
 
 import UIKit
 
+// 
 class TradeInfoView: CUIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var tradeInfo: [Stock] = []

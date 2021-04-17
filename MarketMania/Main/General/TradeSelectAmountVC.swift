@@ -9,15 +9,42 @@
 import UIKit
 import Firebase
 
+// select amount of stocks to buy
+// contains a TradeInfoView
 class TradeSelectAmountVC: TradeParentVC, UITextViewDelegate {
+    
+    var symbol: String = ""
     
     //
     // MARK: Functions
     //
     
     @objc func handleSubmit() {
-        self.view.endEditing(true)
-        self.dismiss(animated: true, completion: nil)
+        // check valid input
+        guard amountTextField.text != "" else {return}
+        
+        // get relevant variables
+        let numBought: Float = Float(amountTextField.text ?? "-1.0") ?? -1.0
+        let symbolBought: String = tradeInfoView.tradeInfo[0].symbol ?? ""
+        
+        globalCurrentUser?.buyStock(symbol: symbolBought, numShares: numBought, completion: {
+            error, _ in
+            
+            if error != nil {
+                // TODO: show popup
+                self.view.endEditing(true)
+                self.dismiss(animated: true, completion: nil)
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.view.endEditing(true)
+                self.dismiss(animated: true, completion: nil)
+            }
+            
+        })
+        
+        
     }
     
     //

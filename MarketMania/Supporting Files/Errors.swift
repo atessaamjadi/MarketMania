@@ -21,17 +21,14 @@ enum PurchaseError: Error {
 
 enum TransactionError: Error {
     case insufficientShares
-    
     case noPortfolio
-    
     case unexpected
 }
 
 enum DBError: Error {
     case noUID
-    
     case noChild
-    
+    case notFound
     case unexpected
 }
 
