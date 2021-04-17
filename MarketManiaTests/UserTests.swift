@@ -470,6 +470,22 @@ class UserTests: XCTestCase {
         
         waitForExpectations(timeout: 5)
     }
+    
+    //
+    // MARK: WATCHLIST TESTS
+    //
+    
+    func testAddToWatchList() throws {
+        //user?.addToWatchList(stock: <#T##Stock#>)
+    }
+    
+    func testGetWatchList() throws {
+        
+    }
+    
+    func testRemoveFromWatchList() throws {
+        
+    }
 
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
