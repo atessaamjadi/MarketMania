@@ -12,17 +12,11 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
     //
     // MARK: View Lifecycle
     //
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.view.backgroundColor = UIColor(hex: "272C37")
-        
-       // self.navigationController?.navigationBar.barTintColor = .red
-
-        //hides the back button since SearchVC instantiates SectorCategoryVC as a Nagivation Controller,
-        //so it thinks SectorCategoryVC -> SearchVC needs a back button
-        self.navigationItem.setHidesBackButton(true, animated: false)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -80,6 +74,9 @@ class SearchVC: UIViewController, UISearchBarDelegate, UITableViewDataSource, UI
         
         sb.sizeToFit()
         sb.isTranslucent = true
+        
+        searchTextField?.accessibilityIdentifier = "stf"
+        
         return sb
     }()
     

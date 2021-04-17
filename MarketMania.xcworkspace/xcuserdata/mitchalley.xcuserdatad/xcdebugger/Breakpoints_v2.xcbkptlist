@@ -94,8 +94,8 @@
             filePath = "MarketMania/Main/Social/UsersListView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
             landmarkName = "unknown"
             landmarkType = "0">
             <Locations>
@@ -178,6 +178,22 @@
             endingLineNumber = "53"
             landmarkName = "collectionView"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B24AECB4-FAB5-4EBF-B768-B48BC4614E0E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "MarketMania/Main/Social/UsersListView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "setUpViews()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

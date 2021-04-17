@@ -49,7 +49,7 @@ class LoginUITests: XCTestCase {
 
         // check that all inputviews/textfields exist
         XCTAssert(app.otherElements["emailInputView"].exists)
-        XCTAssert(app.otherElements["passwordInputVie"].exists)
+        XCTAssert(app.otherElements["passwordInputView"].exists)
         
         // check that buttons exist
         XCTAssert(app.buttons["signInButton"].exists)

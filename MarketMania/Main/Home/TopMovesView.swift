@@ -85,6 +85,8 @@ class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollection
 //        cell.moveLabel.text = String((stock.changePercent ?? 0.0))
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mover", for: indexPath) as! MoverCell
+        
+        cell.accessibilityIdentifier = "mover"
               
         if (winners.count != 0) {
             let stock = winners[indexPath.row]
