@@ -157,7 +157,6 @@ class SearchUITests: XCTestCase {
         
         //since end text and cancel button are built into the searchBar UI, not testing this since the elements are difficult to find
         
-        
     }
 
 }
