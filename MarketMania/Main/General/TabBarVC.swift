@@ -35,6 +35,13 @@ class TabBarVC: UITabBarController {
                     tabBarVC.setUpViewControllers()
                 }
             }
+            
+//            DispatchQueue.main.async {
+//                self.view.window?.resignKey()
+//                let tabBarVC = UIApplication.shared.keyWindow?.rootViewController as! TabBarVC
+//                tabBarVC.setUpViewControllers()
+//            }
+
         }
         
         // pop up a loading screen modal until all the necessary data is loaded

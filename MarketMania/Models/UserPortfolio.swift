@@ -75,9 +75,11 @@ extension User {
                         
                         guard portfolioElements != nil && portfolioItem != nil else {
                             // item not yet in portfolio
+                            let percentGain = ((stock.latestPrice! - (portfolioItem?["avgPrice"] as! Float)) / (portfolioItem?["avgPrice"] as! Float)) * 100
                             self.ref.child("Portfolio").child(stock.symbol!).setValue([
                                 "avgPrice": buyPrice,
-                                "shares": numShares
+                                "shares": numShares,
+                                "percentGain": percentGain
                             ])
                             completion(nil, updatedBalance)
                             return
@@ -92,12 +94,14 @@ extension User {
                         
                         let totVal: Float = (dataAvgPrice * dataShares) + (buyPrice * numShares)
                         let totShares: Float = (dataShares + numShares)
-                        
+                        let percentGain = ((stock.latestPrice! - (portfolioItem?["avgPrice"] as! Float)) / (portfolioItem?["avgPrice"] as! Float)) * 100
+
                         self.ref.child("Portfolio").child(stock.symbol!).setValue([
                             "avgPrice": totVal / totShares,
-                            "shares": totShares
+                            "shares": totShares,
+                            "percentGain": percentGain
                         ])
-                        
+                                                
                         completion(nil, updatedBalance)
                     } 
                 }
@@ -205,7 +209,7 @@ extension User {
                 
                 for key in portfolioDict?.allKeys ?? [] {
                     let stockDict = portfolioDict?[key] as? NSDictionary
-                    let stock: PortfolioStock = PortfolioStock(symbol: key as! String, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float)
+                    let stock: PortfolioStock = PortfolioStock(symbol: key as! String, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float, percentGain: stockDict?["percentGain"] as! Float)
                     
 //                    stock.symbol = key as? String
 //                    stock.avgPrice = stockDict?["avgPrice"] as? Float
@@ -334,6 +338,7 @@ extension User {
         ref.child("Portfolio").child(myStock.symbol!).child("percentGain").setValue(percentGain)
     }
     
+    // overall percent gain
     func updatePercentChangeAccount(newAccountVal: Float){
         let change = ((newAccountVal - self.startingAmmount) / startingAmmount) * 100
         ref.child("percentGain").setValue(change)

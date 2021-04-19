@@ -77,11 +77,18 @@ struct PortfolioStock {
     var symbol: String?
     var shares: Float?
     var avgPrice: Float?
+    var percentGain: Float?
     
     init(symbol: String, shares: Float, avgPrice: Float) {
         self.symbol = symbol
         self.shares = shares
         self.avgPrice = avgPrice
+        self.percentGain = 0.0
+    }
+    
+    init(symbol: String, shares: Float, avgPrice: Float, percentGain: Float) {
+        self.init(symbol: symbol, shares: shares, avgPrice: avgPrice)
+        self.percentGain = percentGain
     }
 }
 

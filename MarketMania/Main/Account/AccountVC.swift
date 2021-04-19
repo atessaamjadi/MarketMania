@@ -56,6 +56,19 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
 
         self.cv.register(SimpleTextCell.self, forCellWithReuseIdentifier: "Simple")
         self.cv.register(InformationViewCell.self, forCellWithReuseIdentifier: "Info")
+        
+        globalCurrentUser?.updatePortfolioValue(completion: {
+            error, _ in
+            
+            if error != nil {
+                // do shit
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.cv.reloadData()
+            }
+        })
         //self.cv.register(AddressCell.self, forCellWithReuseIdentifier: "MyCell")
     }
 
