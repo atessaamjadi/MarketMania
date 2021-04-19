@@ -53,7 +53,71 @@ class AccountUITests: XCTestCase {
         
     }
     
+    //check if the update password elements exist and can type text
+    //for some reason fails if multiple type texts
     func testPassword() throws {
+        let password = app.cells["password"]
+        password.tap()
+        
+        let old = app.cells["old"]
+        old.tap()
+        old.typeText("OLD")
+      
+        
+        let new = app.cells["new"]
+        new.tap()
+        //new.typeText("NEW")
+        
+        let confirmNew = app.cells["confirmNew"]
+        confirmNew.tap()
+        //confirmNew.typeText("CONFIRM")
+        
+
+        let confirm = app.cells["confirm"]
+        
+        
+        XCTAssertTrue(old.exists)
+        XCTAssertTrue(new.exists)
+        XCTAssertTrue(confirmNew.exists)
+        XCTAssertTrue(confirm.exists)
+        
+        confirm.tap()
+
+        
+    }
+    
+    
+    //check if the update update user info elements exist and can type text
+    //for some reason fails if multiple type texts
+    func testUserInfo() throws {
+        
+        let userInfo = app.cells["update"]
+        userInfo.tap()
+        
+        
+        let collectionViewsQuery = XCUIApplication().collectionViews
+        
+        let name = collectionViewsQuery/*@START_MENU_TOKEN@*/.cells.textFields["First Name"]/*[[".cells.textFields[\"First Name\"]",".textFields[\"First Name\"]"],[[[-1,1],[-1,0]]],[1]]@END_MENU_TOKEN@*/
+        name.tap()
+        name.typeText("FIRST")
+        
+        let last = collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["Last Name"]/*[[".cells.textFields[\"Last Name\"]",".textFields[\"Last Name\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        last.tap()
+        let user = collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["Username"]/*[[".cells.textFields[\"Username\"]",".textFields[\"Username\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        user.tap()
+        let email = collectionViewsQuery/*@START_MENU_TOKEN@*/.textFields["Email"]/*[[".cells.textFields[\"Email\"]",".textFields[\"Email\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+        email.tap()
+        let confirm =  collectionViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["Confirm"]/*[[".cells.staticTexts[\"Confirm\"]",".staticTexts[\"Confirm\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
+       
+                
+        XCTAssertTrue(name.exists)
+        XCTAssertTrue(last.exists)
+        XCTAssertTrue(user.exists)
+        XCTAssertTrue(email.exists)
+        XCTAssertTrue(confirm.exists)
+        
+        confirm.tap()
+        
         
         
         

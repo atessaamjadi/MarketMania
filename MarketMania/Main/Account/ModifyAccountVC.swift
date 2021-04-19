@@ -63,6 +63,8 @@ class ModifyAccountVC:  UIViewController, UICollectionViewDataSource, UICollecti
             cell.textLabel.textAlignment = .center
             cell.textLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: -10).isActive = true
             cell.contentView.backgroundColor = .primary_purple
+            
+            
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "InputCell", for: indexPath) as! SimpleTextInputCell

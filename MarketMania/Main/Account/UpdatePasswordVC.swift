@@ -56,6 +56,9 @@ class UpdatePasswordVC: UIViewController, UICollectionViewDataSource, UICollecti
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SimpleText", for: indexPath) as! SimpleTextInputCell
             cell.textInput.isSecureTextEntry = true
             cell.textInput.attributedPlaceholder = NSAttributedString(string: "Old Password", attributes: [.foregroundColor: UIColor.subtitle_label])
+            
+            cell.accessibilityIdentifier = "old"
+            
             return cell
         }
         
@@ -63,6 +66,9 @@ class UpdatePasswordVC: UIViewController, UICollectionViewDataSource, UICollecti
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SimpleText", for: indexPath) as! SimpleTextInputCell
             cell.textInput.isSecureTextEntry = true
             cell.textInput.attributedPlaceholder = NSAttributedString(string: "New Password", attributes: [.foregroundColor: UIColor.subtitle_label])
+            
+            cell.accessibilityIdentifier = "new"
+            
             return cell
         }
         
@@ -70,6 +76,9 @@ class UpdatePasswordVC: UIViewController, UICollectionViewDataSource, UICollecti
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SimpleText", for: indexPath) as! SimpleTextInputCell
             cell.textInput.isSecureTextEntry = true
             cell.textInput.attributedPlaceholder = NSAttributedString(string: "Confirm New Password", attributes: [.foregroundColor: UIColor.subtitle_label])
+            
+            cell.accessibilityIdentifier = "confirmNew"
+            
             return cell
         }
         
@@ -80,6 +89,10 @@ class UpdatePasswordVC: UIViewController, UICollectionViewDataSource, UICollecti
             cell.textLabel.textColor = .main_background
             cell.textLabel.textAlignment = .center
             cell.contentView.backgroundColor = .primary_purple
+            
+            
+            cell.accessibilityIdentifier = "confirm"
+            
             return cell
         }
     }
