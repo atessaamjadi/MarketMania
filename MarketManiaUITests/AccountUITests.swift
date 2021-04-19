@@ -42,13 +42,14 @@ class AccountUITests: XCTestCase {
         
         let password = app.cells["password"]
         let update = app.cells["update"]
-        let acheievements = app.cells["acheievements"]
+        let achievements = app.cells["achievements"]
         let logout = app.cells["logout"]
         
         XCTAssertTrue(accountTitle.exists)
         XCTAssertTrue(usersInfo.exists)
         XCTAssertTrue(password.exists)
         XCTAssertTrue(update.exists)
+        XCTAssertTrue(achievements.exists)
         XCTAssertTrue(logout.exists)
         
     }
