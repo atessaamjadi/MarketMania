@@ -100,6 +100,7 @@ extension HomeVC: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource
         
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "watchListView", for: indexPath) as! WatchlistView
+            cell.homeVC = self
             return cell
         }
     }

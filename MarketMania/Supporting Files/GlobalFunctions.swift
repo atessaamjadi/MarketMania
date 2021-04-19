@@ -28,6 +28,7 @@ func fetchUser(completion: @escaping () -> ()) {
 //            globalCurrentUser = tempGlobalCurrentUser
 //            completion()
 //        })
+
         //completion()
     }
 }

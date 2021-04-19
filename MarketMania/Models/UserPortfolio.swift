@@ -75,7 +75,7 @@ extension User {
                         
                         guard portfolioElements != nil && portfolioItem != nil else {
                             // item not yet in portfolio
-                            let percentGain = ((stock.latestPrice! - (portfolioItem?["avgPrice"] as! Float)) / (portfolioItem?["avgPrice"] as! Float)) * 100
+                            let percentGain = 0.0
                             self.ref.child("Portfolio").child(stock.symbol!).setValue([
                                 "avgPrice": buyPrice,
                                 "shares": numShares,

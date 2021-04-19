@@ -14,6 +14,7 @@ import Firebase
 class TradeSelectAmountVC: TradeParentVC, UITextViewDelegate {
     
     var symbol: String = ""
+    let buying: Bool = true
     
     //
     // MARK: Functions

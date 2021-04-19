@@ -9,7 +9,10 @@ import UIKit
 
 class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    var watchList: [String] = []
+    var UIportfolio: [PortfolioStock] = []
+    
+    var sellable: Bool = false
+    var homeVC: HomeVC?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -19,10 +22,23 @@ class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
         collectionView2.dataSource = self
         
         // updates the collection view each time the list is updated
-        globalCurrentUser?.getWatchList(observer: { observedList in
-            guard observedList != [] else {return}
+//        globalCurrentUser?.getWatchList(observer: { observedList in
+//            guard observedList != [] else {return}
+//            DispatchQueue.main.async {
+//                self.watchList = observedList
+//                self.collectionView2.reloadData()
+//            }
+//        })
+        
+        globalCurrentUser?.getPortfolio(observer: { error, portfolio in
+            if let error = error {
+                // error loading data
+                print("Error loading user portfolio: \(error)")
+                return
+            }
+            
             DispatchQueue.main.async {
-                self.watchList = observedList
+                self.UIportfolio = portfolio
                 self.collectionView2.reloadData()
             }
         })
@@ -38,6 +54,8 @@ class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     @objc func addPressed() {
         print("YUH!")
+        sellable = !sellable
+        self.collectionView2.reloadData()
     }
     
     // ----------------------------------- //
@@ -46,14 +64,14 @@ class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     let watchListLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Watchlist", font: UIFont(boldWithSize: 17), textColor: .white)
+        label.add(text: "Portfolio", font: UIFont(boldWithSize: 17), textColor: .white)
         label.textAlignment = .center
         return label
     }()
         
     lazy var addButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Add", for: .normal)
+        button.setTitle("Sell", for: .normal)
         button.layer.borderColor = UIColor.subtitle_label.cgColor
         button.layer.borderWidth = 1
         button.layer.cornerRadius = 9
@@ -97,19 +115,38 @@ class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return watchList.count
+        return UIportfolio.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "watchListCell", for: indexPath) as! watchListCell
         
-        cell.tempLabel.text = watchList[indexPath.row]
+        if sellable {
+            cell.backgroundColor = UIColor(red: 255, green: 0, blue: 0, alpha: 1)
+        } else {
+            cell.backgroundColor = UIColor(hex: "3A3E50")
+        }
+        
+        cell.tempLabel.text = UIportfolio[indexPath.row].symbol
         
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height/5)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "watchListCell", for: indexPath) as! watchListCell
+        
+        // get name, then PortfolioStock
+        if sellable {
+            let toSell = UIportfolio[indexPath.row]
+            let newVC = TradeSelectAmountVC()
+            homeVC?.navigationController?.present(newVC, animated: true, completion: nil)
+        }
+        
+        
     }
     
 }
@@ -137,7 +174,7 @@ class watchListCell: UICollectionViewCell {
     
     let tempLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "testing", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
+        label.add(text: "testing", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .white)
         label.textAlignment = .center
         return label
     }()
@@ -152,8 +189,9 @@ class watchListCell: UICollectionViewCell {
         self.layer.cornerRadius = 5
         self.backgroundColor = UIColor(hex: "3A3E50")
         
-//        contentView.addSubview(tempLabel)
+        contentView.addSubview(tempLabel)
         
 //        tempLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, topConstant: 5, leftConstant: 5, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        tempLabel.anchorCenterSuperview()
     }
 }
