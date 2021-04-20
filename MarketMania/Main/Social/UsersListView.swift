@@ -10,6 +10,8 @@ import UIKit
 class UsersListView: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var numUsers = -1
+    var cellUsernames: [String] = []
+    var userDict: NSDictionary = [:]
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -17,6 +19,14 @@ class UsersListView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
         
         collectionView2.delegate = self
         collectionView2.dataSource = self
+        //getUsernames(completion: 2)
+        getUsernames() { response in
+            DispatchQueue.main.async {
+                self.cellUsernames = response
+                print(self.cellUsernames)
+            }
+        }
+        //
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,10 +87,44 @@ class UsersListView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
         userListRank.anchor(contentView.topAnchor, left: nil, bottom: collectionView2.topAnchor, right: contentView.rightAnchor, topConstant: 20, leftConstant: 20, bottomConstant: 5, rightConstant: 10, widthConstant: 0, heightConstant: 0)
     }
     
+    func getUsernames(completion: @escaping ([String]) -> Void) -> Void  {
+        var ret: [String] = []
+        ref.child("Users").getData(completion: { error, snapshot in
+            
+            if let error = error {
+                print("Descriptive error: \(error)")
+                return
+            }
+            
+            if snapshot.exists() {
+                let userDict = snapshot.value as? NSDictionary // cast to dictionary we can use
+                let itemsArray: NSArray?   = userDict?.object(forKey: "username") as? NSArray;
+                if let itemsArray = itemsArray
+                {
+                    for _ in itemsArray
+                    {
+                        let usernameId: String? = userDict?.object(forKey: "id") as? String
+                       if (usernameId != nil)
+                       {
+                        print(usernameId)
+                        ret.append(usernameId!)
+                       }
+                     }
+                    print(ret)
+                    completion(ret)
+                }
+
+            } else {
+                // do error handling
+            }
+            
+        })
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        print(self.numUsers)
+        
         return self.numUsers
     }
     
