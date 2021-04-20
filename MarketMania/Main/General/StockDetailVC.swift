@@ -12,7 +12,7 @@ class StockDetailVC: UIViewController {
     var stock: Stock? {
         didSet {
             nameLabel.text = stock?.companyName
-            stockSymbol.add(text: stock?.symbol ?? "", font: UIFont(boldWithSize: 18), textColor: .subtitle_label)
+            stockSymbol.add(text: stock?.symbol ?? "", font: UIFont(boldWithSize: 16), textColor: .subtitle_label)
             descTextView.text = createDescription(stock: stock!)
         }
     }
@@ -66,16 +66,17 @@ class StockDetailVC: UIViewController {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Apple", font: UIFont(boldWithSize: 25), textColor: .main_label)
+        label.add(text: "Apple", font: UIFont(boldWithSize: 30), textColor: .main_label)
         label.textAlignment = .left
         label.numberOfLines = 1
+        label.adjustsFontSizeToFitWidth = true
         label.accessibilityIdentifier = "nl"
         return label
     }()
     
     let stockSymbol: UIButton = {
         let btn = UIButton(type: .system)
-        btn.add(text: "APPL", font: UIFont(boldWithSize: 12), textColor: .main_label)
+        btn.add(text: "APPL", font: UIFont(boldWithSize: 8), textColor: .main_label)
         btn.layer.borderColor = UIColor.subtitle_label.cgColor
         btn.tintColor = .blue
         btn.isEnabled = false
@@ -89,6 +90,7 @@ class StockDetailVC: UIViewController {
         label.textAlignment = .center
         label.numberOfLines = 1
         label.accessibilityIdentifier = "sl"
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     
@@ -144,7 +146,7 @@ class StockDetailVC: UIViewController {
         
         let stackView1 = UIStackView(arrangedSubviews: [nameLabel, sectorLabel])
         stackView1.axis = .horizontal
-        //stackView1.spacing = 20
+        stackView1.spacing = 20
     
 
         view.addSubviews(views: [stackView1, stockSymbol, descTextView, graphPlaceholderView, tradeButton])
