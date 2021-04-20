@@ -106,7 +106,8 @@ class TopMovesView: UICollectionViewCell, UICollectionViewDelegate, UICollection
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let stockDetailVC = StockDetailVC()
         stockDetailVC.stock = winners[indexPath.row]
-        homeVC?.navigationController?.pushViewController(stockDetailVC, animated: true)
+//        homeVC?.navigationController?.pushViewController(stockDetailVC, animated: true)
+        homeVC?.navigationController?.present(stockDetailVC, animated: true, completion: nil)
     }
     
 }

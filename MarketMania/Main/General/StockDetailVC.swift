@@ -66,7 +66,7 @@ class StockDetailVC: UIViewController {
     
     let nameLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Apple", font: UIFont(boldWithSize: 33), textColor: .main_label)
+        label.add(text: "Apple", font: UIFont(boldWithSize: 25), textColor: .main_label)
         label.textAlignment = .left
         label.numberOfLines = 1
         label.accessibilityIdentifier = "nl"
@@ -75,7 +75,7 @@ class StockDetailVC: UIViewController {
     
     let stockSymbol: UIButton = {
         let btn = UIButton(type: .system)
-        btn.add(text: "APPL", font: UIFont(boldWithSize: 18), textColor: .main_label)
+        btn.add(text: "APPL", font: UIFont(boldWithSize: 12), textColor: .main_label)
         btn.layer.borderColor = UIColor.subtitle_label.cgColor
         btn.tintColor = .blue
         btn.isEnabled = false
@@ -85,8 +85,8 @@ class StockDetailVC: UIViewController {
     
     let sectorLabel: UILabel = {
         let label = UILabel()
-        label.add(text: "Sector?", font: UIFont(boldWithSize: 20), textColor: .subtitle_label)
-        label.textAlignment = .left
+        label.add(text: "Sector?", font: UIFont(boldWithSize: 15), textColor: .subtitle_label)
+        label.textAlignment = .center
         label.numberOfLines = 1
         label.accessibilityIdentifier = "sl"
         return label
@@ -100,7 +100,7 @@ class StockDetailVC: UIViewController {
         tv.backgroundColor = .clear
         tv.textColor = .main_label
         tv.textAlignment = .left
-        tv.font = UIFont(regularWithSize: 17)
+        tv.font = UIFont(regularWithSize: 15)
         tv.accessibilityIdentifier = "tv"
         return tv
     }()
@@ -117,18 +117,18 @@ class StockDetailVC: UIViewController {
         return btn
     }()
     
-    lazy var addToWatchlistButton : UIButton = {
-        let btn = UIButton(type: .system)
-        btn.add(text: "Add", font: UIFont(boldWithSize: 18), textColor: .white)
-        btn.layer.borderColor = UIColor.subtitle_label.cgColor
-        btn.backgroundColor = .primary_purple
-        btn.isEnabled = false
-        btn.addTarget(self, action: #selector(handleAddToWatchlist), for: .touchUpInside)
-        btn.layer.cornerRadius = 5
-        btn.layer.masksToBounds = true
-        btn.accessibilityIdentifier = "atwl"
-        return btn
-    }()
+//    lazy var addToWatchlistButton : UIButton = {
+//        let btn = UIButton(type: .system)
+//        btn.add(text: "Add", font: UIFont(boldWithSize: 18), textColor: .white)
+//        btn.layer.borderColor = UIColor.subtitle_label.cgColor
+//        btn.backgroundColor = .primary_purple
+//        btn.isEnabled = false
+//        btn.addTarget(self, action: #selector(handleAddToWatchlist), for: .touchUpInside)
+//        btn.layer.cornerRadius = 5
+//        btn.layer.masksToBounds = true
+//        btn.accessibilityIdentifier = "atwl"
+//        return btn
+//    }()
     
     let graphPlaceholderView: UIView = {
         let vw = UIView()
@@ -140,19 +140,21 @@ class StockDetailVC: UIViewController {
         
         view.backgroundColor = .main_background
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addToWatchlistButton)
+        //navigationItem.rightBarButtonItem = UIBarButtonItem(customView: addToWatchlistButton)
         
-        let stackView1 = UIStackView(arrangedSubviews: [nameLabel, stockSymbol, sectorLabel])
+        let stackView1 = UIStackView(arrangedSubviews: [nameLabel, sectorLabel])
         stackView1.axis = .horizontal
-        stackView1.spacing = 20
+        //stackView1.spacing = 20
     
 
-        view.addSubviews(views: [stackView1, descTextView, graphPlaceholderView, tradeButton])
+        view.addSubviews(views: [stackView1, stockSymbol, descTextView, graphPlaceholderView, tradeButton])
         
-        stackView1.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: nil, topConstant: 30, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 75)
+        stackView1.anchor(view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 50, leftConstant: 10, bottomConstant: 0, rightConstant: 30, widthConstant: 70, heightConstant: 75)
         stackView1.anchorCenterXToSuperview()
         
-        descTextView.anchor(stackView1.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 5, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 175)
+        stockSymbol.anchor(stackView1.bottomAnchor, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 15, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        
+        descTextView.anchor(stockSymbol.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 5, leftConstant: 20, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 175)
         descTextView.anchorCenterXToSuperview()
         
         graphPlaceholderView.anchor(descTextView.bottomAnchor, left: view.leftAnchor, bottom: tradeButton.topAnchor, right: view.rightAnchor, topConstant: 20, leftConstant: 0, bottomConstant: 20, rightConstant: 0, widthConstant: 0, heightConstant: 0)
