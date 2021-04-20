@@ -5,6 +5,10 @@
 //  Created by Atessa Amjadi on 3/24/21.
 //
 
+
+
+//UPDATE THIS WAS CHANGED TO PORTFOLIO
+
 import UIKit
 
 class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -144,6 +148,14 @@ class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
             let toSell = UIportfolio[indexPath.row]
             let newVC = TradeSelectAmountVC()
             homeVC?.navigationController?.present(newVC, animated: true, completion: nil)
+        }
+        
+        // else we want to get details on the selected cell
+        else {
+            let portfolioView = PortfolioDetailVC()
+            portfolioView.portfolio = UIportfolio[indexPath.row]
+            homeVC?.navigationController?.present(portfolioView, animated: true, completion: nil)
+            
         }
         
         

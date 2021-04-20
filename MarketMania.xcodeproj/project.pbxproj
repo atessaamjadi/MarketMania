@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B8182B1262E73BF00D85B2F /* PortfolioDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8182B0262E73BF00D85B2F /* PortfolioDetailVC.swift */; };
 		434DB2F42620CC140042F117 /* TradeCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434DB2F32620CC140042F117 /* TradeCells.swift */; };
 		434DB2F92620CDB90042F117 /* TradeSelectAmountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434DB2F82620CDB90042F117 /* TradeSelectAmountVC.swift */; };
 		43885C7D26013C500002EE45 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43885C7C26013C500002EE45 /* AppDelegate.swift */; };
@@ -87,6 +88,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B8182B0262E73BF00D85B2F /* PortfolioDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDetailVC.swift; sourceTree = "<group>"; };
 		434DB2F32620CC140042F117 /* TradeCells.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeCells.swift; sourceTree = "<group>"; };
 		434DB2F82620CDB90042F117 /* TradeSelectAmountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TradeSelectAmountVC.swift; sourceTree = "<group>"; };
 		43885C7926013C500002EE45 /* MarketMania.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarketMania.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -335,6 +337,7 @@
 				838FA300261D56CB006F6EFC /* TopMovesView.swift */,
 				838FA301261D56CB006F6EFC /* WelcomeView.swift */,
 				838FA303261D56CB006F6EFC /* WatchlistView.swift */,
+				3B8182B0262E73BF00D85B2F /* PortfolioDetailVC.swift */,
 				8307BB34261FF47300340CD2 /* WatchlistSearchVC.swift */,
 			);
 			path = Home;
@@ -629,6 +632,7 @@
 				434DB2F92620CDB90042F117 /* TradeSelectAmountVC.swift in Sources */,
 				838FA239261A6A5D006F6EFC /* UserWatchlist.swift in Sources */,
 				838FA31D261D56CB006F6EFC /* SocialVC.swift in Sources */,
+				3B8182B1262E73BF00D85B2F /* PortfolioDetailVC.swift in Sources */,
 				838FA322261D56CB006F6EFC /* ModifyAccountVC.swift in Sources */,
 				838FA31A261D56CB006F6EFC /* PopularView.swift in Sources */,
 				838FA31E261D56CB006F6EFC /* UsersListView.swift in Sources */,
