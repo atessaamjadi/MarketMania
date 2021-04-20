@@ -138,7 +138,8 @@ class SearchUITests: XCTestCase {
         XCTAssert(app.staticTexts["sl"].exists)
         XCTAssert(app.textViews["tv"].exists)
         XCTAssert(app.buttons["tb"].exists)
-        XCTAssert(app.buttons["atwl"].exists)
+        
+        //XCTAssert(app.buttons["atwl"].exists)
             
     }
     
