@@ -101,6 +101,8 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             cell.addLabelInOrder(label: portfolioValue, isBold: false, size: 1)
             cell.addLabelInOrder(label: username, isBold: false, size: 1)
 
+            cell.accessibilityIdentifier = "userInfo"
+            
             return cell
         }
         
@@ -110,6 +112,9 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             cell.textLabel.text = "Update Password"
             cell.contentView.backgroundColor = .cell_background
             cell.textLabel.textColor = .white
+            
+            cell.accessibilityIdentifier = "password"
+            
             return cell
         }
         
@@ -118,6 +123,8 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             cell.textLabel.text = "Update User Info"
             cell.contentView.backgroundColor = .cell_background
             cell.textLabel.textColor = .white
+            
+            cell.accessibilityIdentifier = "update"
 
             return cell
             // payment info
@@ -128,6 +135,8 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             cell.textLabel.text = "View Achievements"
             cell.contentView.backgroundColor = .cell_background
             cell.textLabel.textColor = .white
+            
+            cell.accessibilityIdentifier = "achievements"
 
             return cell
         }
@@ -139,6 +148,9 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             cell.textLabel.textAlignment = .center
             cell.textLabel.leadingAnchor.constraint(equalTo: cell.leadingAnchor, constant: -10).isActive = true
             cell.contentView.backgroundColor = .primary_purple
+            
+            cell.accessibilityIdentifier = "logout"
+            
             return cell
         }
     }

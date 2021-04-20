@@ -142,13 +142,20 @@ class SearchUITests: XCTestCase {
             
     }
     
-    //TODO test SectorCategoryVC search
+    //test SectorCategoryVC search
     func testCategorySearch() throws {
         
         //click on a mover cell
         app.collectionViews.cells.collectionViews.containing(.cell, identifier: "sector").element.tap()
         
+        //click in search bar
+        let searchbar = app.otherElements.matching(.other, identifier: "sb").searchFields.element
+        searchbar.tap()
         
+        //type text
+        searchbar.typeText("Atessa")
+        
+        //since end text and cancel button are built into the searchBar UI, not testing this since the elements are difficult to find
         
     }
 
