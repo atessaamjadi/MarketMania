@@ -29,9 +29,9 @@ class PortfolioDetailVC: UIViewController  {
     
     func createDescription(portfolio: PortfolioStock) -> String {
         var description = ""
-        description += "Shares: \(portfolio.shares ?? 0)\n"
-        description += "Average price: \(portfolio.avgPrice ?? 0)\n"
-        description += "Percent gain: \(portfolio.percentGain ?? 0)\n"       
+        description += "Shares:  $\(portfolio.shares ?? 0)\n"
+        description += "Average price:  $\(portfolio.avgPrice ?? 0)\n"
+        description += "Percent gain:  \(portfolio.percentGain ?? 0)%\n"
         return description
         
     }
