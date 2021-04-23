@@ -100,11 +100,11 @@ class TabBarVC: UITabBarController {
         sellButtonLabel.center = CGPoint(x: (self.view.center.x * 1.2), y: (self.view.frame.maxY * 0.85) - 40)
         sellButtonLabel.alpha = 0
         
-        self.view.addSubview(buyButton)
-        self.view.addSubview(buyButtonLabel)
-        self.view.addSubview(sellButton)
-        self.view.addSubview(sellButtonLabel)
-        self.view.addSubview(button)
+//        self.view.addSubview(buyButton)
+//        self.view.addSubview(buyButtonLabel)
+//        self.view.addSubview(sellButton)
+//        self.view.addSubview(sellButtonLabel)
+//        self.view.addSubview(button)
         
         setUpViewControllers()
     }
@@ -169,7 +169,7 @@ class TabBarVC: UITabBarController {
         
         let controllersCustomer = [add(vc: HomeVC(), name: "Home", icon: UIImage(named: "home_icon")!),
                                    add(vc: SearchVC(), name: "Search", icon: UIImage(named: "search_icon")!),
-                                   UIViewController(),
+                                   //UIViewController(),
                                    add(vc: SocialVC(), name: "Social", icon: UIImage(named: "social_icon")!),
                                    add(vc: AccountVC(), name: "Account", icon: UIImage(named: "account_icon")!)]
         // Add all view controllers
