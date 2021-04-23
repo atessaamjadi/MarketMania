@@ -102,12 +102,12 @@ class WatchlistView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     func setUpViews() {
         
-        contentView.addSubviews(views: [watchListLabel, addButton, collectionView2])
+        contentView.addSubviews(views: [watchListLabel, collectionView2])
         
         
         watchListLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: collectionView2.topAnchor, right: nil, topConstant: 20, leftConstant: 10, bottomConstant: 5, rightConstant: 20, widthConstant: 0, heightConstant: 0)
         
-        addButton.anchor(contentView.topAnchor, left: nil, bottom: collectionView2.topAnchor, right: contentView.rightAnchor, topConstant: 20, leftConstant: 10, bottomConstant: 5, rightConstant: 20, widthConstant: 40, heightConstant: 40)
+//        addButton.anchor(contentView.topAnchor, left: nil, bottom: collectionView2.topAnchor, right: contentView.rightAnchor, topConstant: 20, leftConstant: 10, bottomConstant: 5, rightConstant: 20, widthConstant: 40, heightConstant: 40)
 
         collectionView2.anchor(watchListLabel.bottomAnchor, left: contentView.leftAnchor, bottom: contentView.safeAreaLayoutGuide.bottomAnchor, right: contentView.rightAnchor, topConstant: 0, leftConstant: 10, bottomConstant: 0, rightConstant: 10, widthConstant: 40, heightConstant: 0)
              

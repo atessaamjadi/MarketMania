@@ -130,16 +130,16 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             // payment info
         }
         
-        else if (indexPath.row == 3){
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
-            cell.textLabel.text = "View Achievements"
-            cell.contentView.backgroundColor = .cell_background
-            cell.textLabel.textColor = .white
-            
-            cell.accessibilityIdentifier = "achievements"
-
-            return cell
-        }
+//        else if (indexPath.row == 3){
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
+//            cell.textLabel.text = "View Achievements"
+//            cell.contentView.backgroundColor = .cell_background
+//            cell.textLabel.textColor = .white
+//
+//            cell.accessibilityIdentifier = "achievements"
+//
+//            return cell
+//        }
             
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Simple", for: indexPath) as! SimpleTextCell
@@ -184,11 +184,11 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
             navigationController?.pushViewController(vc, animated: true)
         }
         
-        if (indexPath.row == 3) {
-            // update Achievements
-            //let vc = ViewAchievementsVC()
-            //navigationController?.pushViewController(vc, animated: true)
-        }
+//        if (indexPath.row == 3) {
+//            // update Achievements
+//            //let vc = ViewAchievementsVC()
+//            //navigationController?.pushViewController(vc, animated: true)
+//        }
             
         // logout
         if (indexPath.row == 4) {
