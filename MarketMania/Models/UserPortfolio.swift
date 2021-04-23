@@ -151,9 +151,7 @@ extension User {
                 if (updatedShares == 0) {
                     self.ref.child("Portfolio").child(symbol).removeValue()
                 } else {
-                    self.ref.child("Portfolio").child(symbol).setValue([
-                        "shares": updatedShares
-                    ])
+                    self.ref.child("Portfolio").child(symbol).child("shares").setValue(updatedShares)
                 }
                 
                 // get transaction amount

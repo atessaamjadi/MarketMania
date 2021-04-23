@@ -14,7 +14,7 @@ import Firebase
 class TradeSelectAmountVC: TradeParentVC, UITextViewDelegate {
     
     var symbol: String = ""
-    let buying: Bool = true
+    var buying: Bool = true
     
     //
     // MARK: Functions
@@ -26,24 +26,55 @@ class TradeSelectAmountVC: TradeParentVC, UITextViewDelegate {
         
         // get relevant variables
         let numBought: Float = Float(amountTextField.text ?? "-1.0") ?? -1.0
-        let symbolBought: String = tradeInfoView.tradeInfo[0].symbol ?? ""
+        let symbolBought: String
         
-        globalCurrentUser?.buyStock(symbol: symbolBought, numShares: numBought, completion: {
-            error, _ in
-            
-            if error != nil {
-                // TODO: show popup
-                self.view.endEditing(true)
-                self.dismiss(animated: true, completion: nil)
-                return
-            }
-            
-            DispatchQueue.main.async {
-                self.view.endEditing(true)
-                self.dismiss(animated: true, completion: nil)
-            }
-            
-        })
+        if tradeInfoView.tradeInfo.count != 0 {
+            symbolBought = tradeInfoView.tradeInfo[0].symbol ?? ""
+        } else {
+            symbolBought = symbol
+        }
+        
+        if (buying) {
+            globalCurrentUser?.buyStock(symbol: symbolBought, numShares: numBought, completion: {
+                error, _ in
+                
+                if error != nil {
+                    // TODO: show popup
+    //                self.view.endEditing(true)
+    //                self.dismiss(animated: true, completion: nil)
+                    return
+                }
+                
+                DispatchQueue.main.async {
+                    self.view.endEditing(true)
+                    self.dismiss(animated: true, completion: nil)
+                    
+                    if self.tradeInfoView.tradeInfo.count == 0 { // bad i know but i just have to gte it to work
+                        (self.presentingViewController as! PortfolioDetailVC).dismiss(animated: true, completion: nil)
+                    }
+                }
+                
+            })
+        } else {
+            globalCurrentUser?.sellStock(symbol: symbolBought, numShares: numBought, completion: {
+                error, _ in
+                    
+                    if let error = error {
+                        // todo - descriptive error message
+                        return
+                    }
+                    
+                DispatchQueue.main.async {
+                    self.view.endEditing(true)
+                    self.dismiss(animated: true, completion: nil)
+                    
+                    if self.tradeInfoView.tradeInfo.count == 0 { // bad i know but i just have to gte it to work
+                        (self.presentingViewController as! PortfolioDetailVC).dismiss(animated: true, completion: nil)
+                    }
+                }
+                
+            })
+        }
         
         
     }

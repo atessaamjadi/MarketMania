@@ -63,18 +63,21 @@ class TradeSearchVC: TradeParentVC {
 
         self.title = "Choose Stock"
         self.view.backgroundColor = .vc_background
-        searchTextField.becomeFirstResponder()
+        //searchTextField.becomeFirstResponder()
         
-        everyoneBtn.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 90, heightConstant: 28)
+//        everyoneBtn.anchor(view.safeAreaLayoutGuide.topAnchor, left: nil, bottom: nil, right: view.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 12, widthConstant: 90, heightConstant: 28)
+//
+//        descLabel.anchor(nil, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 5, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 19)
+//        descLabel.centerYAnchor.constraint(equalTo: everyoneBtn.centerYAnchor).isActive = true
+//
+////        searchTextField.anchor(nil, left: descLabel.rightAnchor, bottom: nil, right: everyoneBtn.leftAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 15, widthConstant: 0, heightConstant: 19)
+////        searchTextField.centerYAnchor.constraint(equalTo: everyoneBtn.centerYAnchor, constant: 0.5).isActive = true
+//
+//        separator.anchor(everyoneBtn.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1)
+//
+//        tradeSearchView.anchor(separator.bottomAnchor, left: view.leftAnchor, bottom: (tradeInfoView.isHidden) ? view.bottomAnchor : self.tradeInfoView.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        descLabel.anchor(nil, left: view.leftAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 5, bottomConstant: 0, rightConstant: 0, widthConstant: 60, heightConstant: 19)
-        descLabel.centerYAnchor.constraint(equalTo: everyoneBtn.centerYAnchor).isActive = true
+        tradeSearchView.anchor(view.topAnchor, left: view.leftAnchor, bottom: (tradeInfoView.isHidden) ? view.bottomAnchor : self.tradeInfoView.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
         
-        searchTextField.anchor(nil, left: descLabel.rightAnchor, bottom: nil, right: everyoneBtn.leftAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 15, widthConstant: 0, heightConstant: 19)
-        searchTextField.centerYAnchor.constraint(equalTo: everyoneBtn.centerYAnchor, constant: 0.5).isActive = true
-        
-        separator.anchor(everyoneBtn.bottomAnchor, left: view.leftAnchor, bottom: nil, right: view.rightAnchor, topConstant: 8, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 1)
-
-        tradeSearchView.anchor(separator.bottomAnchor, left: view.leftAnchor, bottom: (tradeInfoView.isHidden) ? view.bottomAnchor : self.tradeInfoView.topAnchor, right: view.rightAnchor, topConstant: 0, leftConstant: 0, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
     }
 }
