@@ -99,8 +99,8 @@ class LoginVC: UIViewController {
     
     let inputBackgroundView: UIView = {
         let vw = UIView()
-        vw.backgroundColor = .login_input
-        vw.alpha = 0.25
+        vw.backgroundColor = .black
+        vw.alpha = 0.9
         vw.layer.cornerRadius = 8
         return vw
     }()
