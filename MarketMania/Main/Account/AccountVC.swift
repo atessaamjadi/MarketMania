@@ -191,7 +191,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
 //        }
             
         // logout
-        if (indexPath.row == 4) {
+        if (indexPath.row == 3) {
             handleLogout()
         }
         
