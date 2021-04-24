@@ -20,12 +20,21 @@ class UsersListView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
         collectionView2.delegate = self
         collectionView2.dataSource = self
         //getUsernames(completion: 2)
-        getUsernames() { response in
+//        getUsernames() { response in
+//            DispatchQueue.main.async {
+//                self.cellUsernames = response
+//                print(self.cellUsernames)
+//            }
+//        }
+        
+        getTopUsers(completion: { error, users in
+            
             DispatchQueue.main.async {
-                self.cellUsernames = response
-                print(self.cellUsernames)
+                self.cellUsernames = users
+                self.collectionView2.reloadData()
             }
-        }
+            
+        })
         //
     }
     
@@ -123,13 +132,12 @@ class UsersListView: UICollectionViewCell, UICollectionViewDelegate, UICollectio
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        
-        return self.numUsers
+        return self.cellUsernames.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "usersListCell", for: indexPath) as! usersListCell
+        cell.tempLabel.text = cellUsernames[indexPath.row]
         return cell
     }
     
@@ -160,6 +168,7 @@ class usersListCell: UICollectionViewCell {
         let label = UILabel()
         label.add(text: "testing", font: UIFont(name: "PingFangHK-Regular", size: 15)!, textColor: .black)
         label.textAlignment = .center
+        label.textColor = .white
         return label
     }()
     
@@ -169,9 +178,10 @@ class usersListCell: UICollectionViewCell {
         self.layer.cornerRadius = 5
         self.backgroundColor = UIColor(hex: "3A3E50")
         
-//        contentView.addSubview(tempLabel)
+        contentView.addSubview(tempLabel)
         
 //        tempLabel.anchor(contentView.topAnchor, left: contentView.leftAnchor, bottom: nil, right: nil, topConstant: 5, leftConstant: 5, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 0)
+        tempLabel.anchorCenterSuperview()
         
       
        

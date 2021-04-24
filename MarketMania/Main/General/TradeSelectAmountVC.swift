@@ -50,7 +50,7 @@ class TradeSelectAmountVC: TradeParentVC, UITextViewDelegate {
                     self.dismiss(animated: true, completion: nil)
                     
                     if self.tradeInfoView.tradeInfo.count == 0 { // bad i know but i just have to gte it to work
-                        (self.presentingViewController as! PortfolioDetailVC).dismiss(animated: true, completion: nil)
+                        self.presentingViewController?.dismiss(animated: true, completion: nil)
                     }
                 }
                 
@@ -69,7 +69,7 @@ class TradeSelectAmountVC: TradeParentVC, UITextViewDelegate {
                     self.dismiss(animated: true, completion: nil)
                     
                     if self.tradeInfoView.tradeInfo.count == 0 { // bad i know but i just have to gte it to work
-                        (self.presentingViewController as! PortfolioDetailVC).dismiss(animated: true, completion: nil)
+                        self.presentingViewController?.dismiss(animated: true, completion: nil)
                     }
                 }
                 

@@ -80,7 +80,7 @@ class AccountVC: UIViewController, UICollectionViewDataSource, UICollectionViewD
     }
 
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return 4
     }
 
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

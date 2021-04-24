@@ -30,4 +30,43 @@ func getUserCount(completion: @escaping (Int) -> Void) -> Void {
     })
 }
 
+// right now - just gets 10 and strings
+func getTopUsers(completion: @escaping (Error?, [String]) -> Void) -> Void {
+    
+    ref.child("Users").getData(completion:  { error, snapshot in
+        
+        
+        if let error = error {
+            print("Error fetching list of users: \(error)")
+            return
+        }
+        
+        if snapshot.exists() {
+            let allUsers: NSDictionary = snapshot.value! as! NSDictionary
+            var topUsers: [String] = []
+            
+            for key in allUsers.allKeys {
+                if topUsers.count >= 10 {
+                    completion(nil, topUsers)
+                    return
+                }
+                
+                let userDict: NSDictionary = allUsers[key] as! NSDictionary
+                
+                if userDict.object(forKey: "username") != nil {
+                    topUsers.append(userDict["username"] as! String)
+                }
+                            
+            }
+            
+            completion(nil, topUsers)
+        } else {
+            // error
+        }
+        
+    })
+    
+    
+}
+
 
