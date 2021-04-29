@@ -169,7 +169,10 @@ private func getListOfStocks(urlString: String, completion: @escaping ([Stock]) 
 private func getBatchOfStocks(urlString: String, completion: @escaping ([Stock]) -> Void) -> Void {
     
     let session = URLSession.shared
-    let url = URL(string: urlString)!
+    guard let url = URL(string: urlString) else {
+        print("url error")
+        return
+    }
     let req = URLRequest(url: url)
     
     let task = session.dataTask(with: req as URLRequest, completionHandler: {
