@@ -89,6 +89,11 @@ class PopularView: UICollectionViewCell, UICollectionViewDelegate, UICollectionV
             cell.tickerLabel.text = stock.symbol
             cell.nameLabel.text = stock.companyName
             cell.moveLabel.text = String((stock.changePercent ?? 0.0)) + "%"
+            if(stock.changePercent! > 0){
+                cell.moveLabel.textColor = UIColor(hex: "7ABE60")
+            } else {
+                cell.moveLabel.textColor = UIColor(hex: "be6060")
+            }
 
             cell.accessibilityIdentifier = "popular"
             
