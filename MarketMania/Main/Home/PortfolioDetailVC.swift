@@ -73,7 +73,7 @@ class PortfolioDetailVC: UIViewController  {
         var description = ""
         description += "Shares:  \(portfolio.shares ?? 0)\n"
         description += "Average price:  $\(portfolio.avgPrice ?? 0)\n"
-        description += "Percent gain:  \(portfolio.percentGain ?? 0)%\n"
+        description += "Percent gain:  \(String(format: "%.2f",portfolio.percentGain ?? 0))%\n"
         return description
         
     }

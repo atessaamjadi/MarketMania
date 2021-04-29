@@ -240,7 +240,7 @@ extension User {
                 // loop thru dictionaries and make them portfoliostocks
                 for key in portDict?.allKeys ?? [] {
                     let stockDict = portDict?[key] as? NSDictionary
-                    let stock: PortfolioStock = PortfolioStock(symbol: key as! String, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float)
+                    let stock: PortfolioStock = PortfolioStock(symbol: key as! String, shares: stockDict?["shares"] as! Float, avgPrice: stockDict?["avgPrice"] as! Float, percentGain: stockDict?["percentGain"] as! Float)
                     stocks.append(stock)
                 }
                 
