@@ -135,7 +135,6 @@ class SearchUITests: XCTestCase {
         //check if stock detail elements exist
         XCTAssert(app.staticTexts["nl"].exists)
         XCTAssert(app.buttons["ss"].exists)
-        XCTAssert(app.staticTexts["sl"].exists)
         XCTAssert(app.textViews["tv"].exists)
         XCTAssert(app.buttons["tb"].exists)
         

@@ -78,62 +78,7 @@ class LoginUITests: XCTestCase {
         XCTAssert(passwordText.placeholderValue == "Password")
         XCTAssert(passwordUnderLine.exists)
     }
-    
-    // to pass this test you need to slightly change device settings (ios)
-    // Simulator -> I/O -> Keyboard -> Connect Hardware Keyboard should be OFF
-    func testValidLogin() throws {
-        
-                
-        let emailInputView = app.otherElements["emailInputView"]
-        XCTAssert(emailInputView.isEnabled)
-        emailInputView.tap()
-        emailInputView.textFields.element.typeText("testUI@test.com")
-        
-        let passwordInputView = app.otherElements["passwordInputView"]
-        XCTAssert(passwordInputView.isEnabled)
-        passwordInputView.tap()
-        passwordInputView.secureTextFields.element(boundBy: 0).typeText("test123")
-        
-        app.buttons["signInButton"].tap()
-        
-        
-        print(app.debugDescription)
 
-        // check that all labels exist
-        XCTAssertFalse(app.staticTexts["titleLabel"].exists)
-
-        // check that all inputviews/textfields exist
-        XCTAssertFalse(app.otherElements["emailInputView"].exists)
-        XCTAssertFalse(app.otherElements["passwordInputView"].exists)
-        
-        // check that buttons exist
-        XCTAssertFalse(app.buttons["signInButton"].exists)
-        XCTAssertFalse(app.buttons["signUpButton"].exists)
-        
-        // check that containers exist
-        XCTAssertFalse(app.otherElements["containerView"].exists)
-        XCTAssertFalse(app.otherElements["inputBackgroundView"].exists)
-        
-        // background img
-        XCTAssertFalse(app.images["backgroundImageView"].exists)
-    }
-    
-    func testInvalidLogin() throws {
-        
-        let emailInputView = app.otherElements["emailInputView"]
-        XCTAssert(emailInputView.isEnabled)
-        emailInputView.tap()
-        emailInputView.textFields.element.typeText("testUI@test.com")
-        
-        let passwordInputView = app.otherElements["passwordInputView"]
-        XCTAssert(passwordInputView.isEnabled)
-        passwordInputView.tap()
-        passwordInputView.secureTextFields.element(boundBy: 0).typeText("wrong_password")
-        
-        app.buttons["signInButton"].tap()
-        
-        print(app.debugDescription)
-    }
 
     func testLaunchPerformance() throws {
         if #available(macOS 10.15, iOS 13.0, tvOS 13.0, *) {

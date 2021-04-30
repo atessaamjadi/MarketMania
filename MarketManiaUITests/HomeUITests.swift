@@ -82,7 +82,6 @@ class HomeUITests: XCTestCase {
         
         XCTAssert(app.staticTexts["nl"].exists)
         XCTAssert(app.buttons["ss"].exists)
-        XCTAssert(app.staticTexts["sl"].exists)
         XCTAssert(app.textViews["tv"].exists)
         XCTAssert(app.buttons["tb"].exists)
         
@@ -90,21 +89,21 @@ class HomeUITests: XCTestCase {
         
     }
     
-    //TODO: uncomment test below when watch list is visible again
+
     
     //tests scroll function of watchList and label
-//    func testWatchList() throws {
-//
-//        let collectionViewsQuery = XCUIApplication().collectionViews
-//        let watchListLabel = collectionViewsQuery/*@START_MENU_TOKEN@*/.staticTexts["Watchlist"]/*[[".cells.staticTexts[\"Watchlist\"]",".staticTexts[\"Watchlist\"]"],[[[-1,1],[-1,0]]],[0]]@END_MENU_TOKEN@*/
-//
-//
-//        let horizontalScrollBar1PageCollectionViewsQuery = XCUIApplication().collectionViews.cells.collectionViews.containing(.other, identifier:"Horizontal scroll bar, 1 page")
-//        horizontalScrollBar1PageCollectionViewsQuery.children(matching: .cell).element(boundBy: 0).swipeUp()
-//        horizontalScrollBar1PageCollectionViewsQuery.children(matching: .cell).element(boundBy: 2).swipeDown()
-//
-//        XCTAssertTrue(watchListLabel.exists)
-//
-//    }
+    func testWatchList() throws {
+
+        let collectionViewsQuery = XCUIApplication().collectionViews
+        let watchListLabel = collectionViewsQuery.staticTexts["Portfolio"]
+
+
+        let horizontalScrollBar1PageCollectionViewsQuery = XCUIApplication().collectionViews.cells.collectionViews.containing(.other, identifier:"Horizontal scroll bar, 1 page")
+        horizontalScrollBar1PageCollectionViewsQuery.children(matching: .cell).element(boundBy: 0).swipeUp()
+        horizontalScrollBar1PageCollectionViewsQuery.children(matching: .cell).element(boundBy: 2).swipeDown()
+
+        XCTAssertTrue(watchListLabel.exists)
+
+    }
     
 }
